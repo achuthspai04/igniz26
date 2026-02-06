@@ -42,7 +42,12 @@ const Navbar = () => {
             <div className="flex items-center">
                 <div
                     className="flex flex-col leading-none text-right text-[#FFD120] font-black uppercase"
-                    style={{ fontFamily: '"Akira Expanded", "Might Makes Right BB", system-ui, sans-serif' }}
+                    style={{
+                        fontFamily: '"Akira Expanded", "Might Makes Right BB", system-ui, sans-serif',
+                        fontWeight: 900,
+                        textShadow:
+                            '0 0 1px #FFD120, 0 0 1px #FFD120, -0.5px 0 #FFD120, 0.5px 0 #FFD120',
+                    }}
                 >
                     <div className="flex w-full items-center justify-between text-[1.5rem] tracking-[0.18em]">
                         <span>{eventStartDay}</span>
