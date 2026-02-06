@@ -25,6 +25,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/f9ced2222639ca75db5574cba95a22eb?family=Might+Makes+Right+BB"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.cdnfonts.com/css/akira-expanded"
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
