@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import LayeredImage from './LayeredImage';
 
 const Navbar = () => {
     const eventStartDay = '21';
@@ -8,9 +9,10 @@ const Navbar = () => {
 
     return (
         <header
-            className="w-full bg-black flex items-center justify-between px-2 sm:px-4 pt-8 pb-2"
+            className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5"
             style={{ fontFamily: '"Might Makes Right BB", system-ui, sans-serif' }}
         >
+            <div className="w-full max-w-[1600px] mx-auto bg-transparent flex items-center justify-between px-2 sm:px-4 pt-6 pb-2">
             {/* Left: Logo outside navbar */}
             <div className="flex items-center">
                 <Image
@@ -23,8 +25,32 @@ const Navbar = () => {
                 />
             </div>
 
-            {/* Center: Solid yellow navbar stretching between logo and date */}
-            <nav className="flex-1 h-[46px] md:h-[63px] bg-[#FFD120] border-3 border-[#FF8A12] box-border flex items-center mx-2 sm:mx-4 pl-4 sm:pl-6 md:pl-10 pr-4 sm:pr-8 md:pr-10 z-50">
+            {/* Center: Solid yellow navbar with texture overlay */}
+            <nav className="flex-1 h-[46px] md:h-[63px] border-3 border-[#FF8A12] box-border flex items-center mx-2 sm:mx-4 pl-4 sm:pl-6 md:pl-10 pr-4 sm:pr-8 md:pr-10 z-50 relative overflow-hidden">
+                <div className="absolute inset-0">
+                    <LayeredImage
+                        aspectRatio="full"
+                        className="h-full w-full"
+                        layers={[
+                            { content: <div className="absolute inset-0 bg-[#FFD120]" />, zIndex: 0 },
+                            {
+                                content: (
+                                    <div className="absolute inset-0 overflow-hidden flex items-center justify-center">
+                                        <Image
+                                            src="/images/navbartexture.png"
+                                            alt=""
+                                            width={1600}
+                                            height={200}
+                                            className="w-full h-auto object-center translate-y-10"
+                                        />
+                                    </div>
+                                ),
+                                zIndex: 1,
+                                mixBlendMode: 'multiply',
+                            },
+                        ]}
+                    />
+                </div>
                 {/* Navigation Links */}
                 <div className="relative z-10 flex w-full items-center text-[1.5rem] pb-1">
                     <span className="-skew-x-6 cursor-pointer text-black font-semibold uppercase tracking-wide">
@@ -60,6 +86,7 @@ const Navbar = () => {
                         <span>{eventMonth[2]}</span>
                     </div>
                 </div>
+            </div>
             </div>
         </header>
     );
