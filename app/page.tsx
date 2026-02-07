@@ -2,7 +2,8 @@
 
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
-import NextSection from "@/components/NextSection";
+import Countdown from "@/components/Countdown";
+import ProshowSection from "@/components/ProshowSection";
 
 const HERO_LAYERS: LayerConfig[] = [
   {
@@ -90,7 +91,8 @@ export default function Home() {
           <LayeredImage layers={HERO_LAYERS} aspectRatio="full" />
         </main>
       </section>
-      <NextSection />
+      <Countdown />
+      <ProshowSection />
     </div>
   );
 }

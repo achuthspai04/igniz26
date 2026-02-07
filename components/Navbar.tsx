@@ -9,7 +9,7 @@ const Navbar = () => {
 
     return (
         <header
-            className="fixed top-0 left-0 right-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5"
+            className="fixed top-0 left-0 right-0 z-1000 px-4 pt-4 sm:px-6 sm:pt-5"
             style={{ fontFamily: '"Might Makes Right BB", system-ui, sans-serif' }}
         >
             <div className="w-full max-w-[1600px] mx-auto bg-transparent flex items-center justify-between px-2 sm:px-4 pt-6 pb-2">
