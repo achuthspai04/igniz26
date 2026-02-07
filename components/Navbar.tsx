@@ -66,7 +66,7 @@ const Navbar = () => {
                 </nav>
 
                 {/* Right: Date */}
-                <div className="flex items-center">
+                <div className="flex items-center" style={{ fontFamily: '"Akira Expanded", sans-serif' }}>
                     <div className="flex flex-col leading-none text-right text-[#FFD120] font-black uppercase font-akira-expanded">
                         <div className="flex items-center justify-between text-[1.5rem] tracking-[0.18em]">
                             <span>{eventStartDay}</span>

@@ -6,6 +6,7 @@ const PROSHOW_IMAGES = {
   proShow: "/proShow/PRO%20SHOW.png",
   red: "/proShow/ProShowLogo.png",
   texture: "/images/asset_texture%201.svg",
+  proShowOutline: "/proShow/PRO SHOW OUTLINE.png",
 };
 
 export default function ProshowSection() {
@@ -55,6 +56,16 @@ export default function ProshowSection() {
           height={448}
           sizes="50vw"
           className="w-[50vw] h-auto object-contain"
+        />
+      </div>
+      <div className="absolute inset-0 z-100 flex items-center justify-center pointer-events-none select-none">
+        <Image
+          src={PROSHOW_IMAGES.proShowOutline}
+          alt="PRO SHOW"
+          width={560}
+          height={448}
+          sizes="50vw"
+          className="w-[50vw] h-auto object-contain translate-y-2"
         />
       </div>
       {/* Layer 3: Ellipse 50 – anchored to bottom */}
