@@ -24,3 +24,13 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.font-might-makes-right {
+  font-family: "Might Makes Right BB", system-ui, sans-serif;
+}
+
+.font-akira-expanded {
+  font-family: "Akira Expanded", "Might Makes Right BB", system-ui, sans-serif;
+  font-weight: 900;
+  text-shadow: 0 0 1px #FFD120, 0 0 1px #FFD120, -0.5px 0 #FFD120, 0.5px 0 #FFD120;
+}
