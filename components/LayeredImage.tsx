@@ -1,7 +1,11 @@
 "use client";
 
-import type { ReactNode, CSSProperties } from "react";
+import { useRef, useEffect, type ReactNode, type CSSProperties } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export type LayerConfig = {
   src?: string;
@@ -26,6 +30,21 @@ export type LayerConfig = {
   /** Extra Tailwind/custom classes for the layer wrapper */
   className?: string;
   priority?: boolean;
+  /** GSAP from animation: animates from the given values (e.g. y: -100) with optional delay/duration */
+  gsapFrom?: { y?: number; x?: number; delay?: number; duration?: number };
+  /** GSAP ScrollTrigger: animates layer with gsap.to when trigger element enters viewport */
+  scrollTrigger?: {
+    /** CSS selector for the element that triggers the animation when in view */
+    triggerSelector: string;
+    /** gsap.to() vars, e.g. { x: -1000 } */
+    to: gsap.TweenVars;
+    /** ScrollTrigger start, e.g. "top center" (default: "top center") */
+    start?: string;
+    /** ScrollTrigger end, e.g. "bottom top" – defines scroll range for scrub */
+    end?: string;
+    /** Tie animation progress to scroll (true = smooth, or number for delay in sec) */
+    scrub?: boolean | number;
+  };
 };
 
 type LayeredImageProps = {
@@ -34,6 +53,73 @@ type LayeredImageProps = {
   aspectRatio?: string | "full";
   className?: string;
 };
+
+function AnimatedLayer({
+  gsapFrom,
+  className = "",
+  style,
+  children,
+}: {
+  gsapFrom: NonNullable<LayerConfig["gsapFrom"]>;
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!ref.current) return;
+    gsap.from(ref.current, {
+      ...(gsapFrom.y !== undefined && { y: gsapFrom.y }),
+      ...(gsapFrom.x !== undefined && { x: gsapFrom.x }),
+      delay: gsapFrom.delay ?? 0,
+      duration: gsapFrom.duration ?? 1,
+    });
+  }, [gsapFrom]);
+  return (
+    <div ref={ref} className={className} style={style}>
+      {children}
+    </div>
+  );
+}
+
+function ScrollTriggerLayer({
+  scrollTrigger: st,
+  className = "",
+  style,
+  children,
+}: {
+  scrollTrigger: NonNullable<LayerConfig["scrollTrigger"]>;
+  className?: string;
+  style?: CSSProperties;
+  children?: ReactNode;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    const triggerEl = document.querySelector(st.triggerSelector);
+    if (!el || !triggerEl) return;
+    const tween = gsap.to(el, {
+      ...st.to,
+      scrollTrigger: {
+        trigger: triggerEl,
+        start: st.start ?? "top center",
+        end: st.end,
+        scrub: st.scrub,
+      },
+    });
+    return () => {
+      tween.kill();
+      ScrollTrigger.getAll().forEach((s) => {
+        if (s.trigger === triggerEl) s.kill();
+      });
+    };
+  }, [st]);
+  return (
+    <div ref={ref} className={className} style={style}>
+      {children}
+    </div>
+  );
+}
 
 export default function LayeredImage({
   layers,
@@ -57,41 +143,38 @@ export default function LayeredImage({
         .map((layer, i) => {
           const scale = layer.scale ?? 1;
           const useSizeForScale = scale > 1;
-          return (
-          <div
-            key={`${layer.src}-${i}`}
-            className={`absolute pointer-events-none select-none ${layer.className ?? ""} ${!useSizeForScale ? "inset-0" : ""}`}
-            style={{
-              zIndex: layer.zIndex,
-              opacity: layer.opacity,
-              mixBlendMode: layer.mixBlendMode,
-              ...(useSizeForScale
-                ? {
-                    width: `${scale * 100}%`,
-                    height: `${scale * 100}%`,
-                    left: "50%",
-                    top: "50%",
-                    transform: [
-                      "translate(-50%, -50%)",
-                      layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
-                      layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
-                    ]
-                      .filter(Boolean)
-                      .join(" "),
-                  }
-                : {
-                    inset: 0,
-                    transform: [
-                      layer.scale != null && `scale(${layer.scale})`,
-                      layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
-                      layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
-                    ]
-                      .filter(Boolean)
-                      .join(" ") || undefined,
-                  }),
-            }}
-          >
-            {layer.content != null ? (
+          const layerClassName = `absolute pointer-events-none select-none ${layer.className ?? ""} ${!useSizeForScale ? "inset-0" : ""}`;
+          const layerStyle = {
+            zIndex: layer.zIndex,
+            opacity: layer.opacity,
+            mixBlendMode: layer.mixBlendMode,
+            ...(useSizeForScale
+              ? {
+                  width: `${scale * 100}%`,
+                  height: `${scale * 100}%`,
+                  left: "50%",
+                  top: "50%",
+                  transform: [
+                    "translate(-50%, -50%)",
+                    layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
+                    layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
+                  ]
+                    .filter(Boolean)
+                    .join(" "),
+                }
+              : {
+                  inset: 0,
+                  transform: [
+                    layer.scale != null && `scale(${layer.scale})`,
+                    layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
+                    layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
+                  ]
+                    .filter(Boolean)
+                    .join(" ") || undefined,
+                }),
+          };
+          const layerContent =
+            layer.content != null ? (
               layer.content
             ) : layer.src != null ? (
               <Image
@@ -106,8 +189,35 @@ export default function LayeredImage({
                 }}
                 priority={layer.priority}
               />
-            ) : null}
-          </div>
+            ) : null;
+          if (layer.gsapFrom) {
+            return (
+              <AnimatedLayer
+                key={`${layer.src}-${i}`}
+                gsapFrom={layer.gsapFrom}
+                className={layerClassName}
+                style={layerStyle}
+              >
+                {layerContent}
+              </AnimatedLayer>
+            );
+          }
+          if (layer.scrollTrigger) {
+            return (
+              <ScrollTriggerLayer
+                key={`${layer.src}-${i}`}
+                scrollTrigger={layer.scrollTrigger}
+                className={layerClassName}
+                style={layerStyle}
+              >
+                {layerContent}
+              </ScrollTriggerLayer>
+            );
+          }
+          return (
+            <div key={`${layer.src}-${i}`} className={layerClassName} style={layerStyle}>
+              {layerContent}
+            </div>
           );
         })}
     </div>

@@ -29,6 +29,14 @@ const HERO_LAYERS: LayerConfig[] = [
     zIndex: 30,
     objectFit: "none",
     scale: 7.0,
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { opacity: 0},
+      start: "top bottom",
+      end: "bottom 70%",
+      scrub: true,
+    }, 
+    
   },
   {
     src: "/images/asset_2 1.svg",
@@ -36,6 +44,13 @@ const HERO_LAYERS: LayerConfig[] = [
     zIndex: 35,
     objectFit: "cover",
     priority: true,
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { y: -1000 },
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
   },
   {
     src: "/images/asset_3 1.svg",
@@ -43,6 +58,13 @@ const HERO_LAYERS: LayerConfig[] = [
     zIndex: 35,
     objectFit: "cover",
     priority: true,
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { y: -1000 },
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
   },
   // {
   //   zIndex: 36,
@@ -50,10 +72,19 @@ const HERO_LAYERS: LayerConfig[] = [
   // },
   {
     src: "/images/bolts 3.svg",
-    alt: "Igniz 1",
+    alt: "Bolts",
     zIndex: 38,
     objectFit: "cover",
+    objectPosition: "center",
     priority: true,
+    className: "w-full min-w-full",
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { y: -1000},
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
   },
   {
     src: "/images/asset_texture 1.svg",
@@ -69,6 +100,13 @@ const HERO_LAYERS: LayerConfig[] = [
     zIndex: 40,
     objectFit: "cover",
     priority: true,
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { y: -1000, scale: 1.5 , duration: 2 },
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    },
   },
   {
     src: "/images/2026.svg",
@@ -78,6 +116,13 @@ const HERO_LAYERS: LayerConfig[] = [
     scale: 0.1,
     translateY: "85%",
     objectFit: "contain",
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { y: -1000 },
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    }, 
   },
 ];
 
@@ -91,6 +136,8 @@ export default function Home() {
           <LayeredImage layers={HERO_LAYERS} aspectRatio="full" />
         </main>
       </section>
+      <div data-scroll-trigger="hello-section">
+      </div>
       <Countdown />
       <ProshowSection />
     </div>

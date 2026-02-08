@@ -1,4 +1,11 @@
+"use client";
+
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const PROSHOW_IMAGES = {
   ellipse: "/proShow/Ellipse%2050.png",
@@ -10,8 +17,40 @@ const PROSHOW_IMAGES = {
 };
 
 export default function ProshowSection() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const picRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!sectionRef.current || !picRef.current) return;
+
+    const tl = gsap.fromTo(
+      picRef.current,
+      { y: -1000},
+      {
+        y: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top bottom",
+          end: "bottom 70%",
+          scrub: true,
+        },
+      }
+    );
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach((s) => {
+        if (s.trigger === sectionRef.current) s.kill();
+      });
+    };
+  }, []);
+
   return (
-    <section className="relative w-full min-h-screen aspect-[1708/1353] flex flex-col bg-[#1A0000] overflow-hidden isolate">
+    <section
+      ref={sectionRef}
+      className="relative w-full min-h-screen aspect-[1708/1353] flex flex-col bg-[#1A0000] overflow-hidden isolate"
+    >
       {/* Layer 1: RED 1 – back (tinted red: mask + multiply) */}
       <div className="absolute inset-0 z-[1] flex items-center justify-center pointer-events-none select-none">
         <div
@@ -79,8 +118,11 @@ export default function ProshowSection() {
           className="w-full h-auto object-cover object-bottom"
         />
       </div>
-      {/* Layer 4: pic – anchored to bottom (front) */}
-      <div className="absolute inset-x-0 bottom-0 z-30 w-full flex justify-center pointer-events-none select-none">
+      {/* Layer 4: pic – anchored to bottom (front), GSAP scroll-in from x:100 */}
+      <div
+        ref={picRef}
+        className="absolute inset-x-0 bottom-0 z-30 w-full flex justify-center pointer-events-none select-none"
+      >
         <Image
           src={PROSHOW_IMAGES.pic}
           alt="Pro Show"

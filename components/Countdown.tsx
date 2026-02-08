@@ -1,6 +1,43 @@
+"use client";
+
+import { useRef, useEffect } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Countdown() {
+  const boltLeftRef = useRef<HTMLDivElement>(null);
+  const boltRightRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const triggerEl = document.querySelector("[data-scroll-trigger='hello-section']");
+    if (!triggerEl || !boltLeftRef.current || !boltRightRef.current) return;
+
+    const fromVars = { scale: 5, y: -300 };
+    const toVars = { scale: 1, y: 0 };
+    const scrollTriggerConfig = {
+      trigger: triggerEl,
+      start: "top bottom",
+      end: "bottom top",
+      scrub: true,
+    };
+
+    const tl = gsap.fromTo(
+      [boltLeftRef.current, boltRightRef.current],
+      fromVars,
+      { ...toVars, scrollTrigger: scrollTriggerConfig }
+    );
+
+    return () => {
+      tl.kill();
+      ScrollTrigger.getAll().forEach((s) => {
+        if (s.trigger === triggerEl) s.kill();
+      });
+    };
+  }, []);
+
   return (
     <section className="relative w-full min-h-screen h-screen flex flex-col items-center justify-center bg-[#1A0000] overflow-hidden">
       {/* Texture overlay – top layer (background-image so mix-blend-multiply works) */}
@@ -13,7 +50,7 @@ export default function Countdown() {
         }}
       />
       {/* Bolt left – 58vw wide, height auto */}
-      <div className="absolute left-0 top-[15vh] w-[58vw] pointer-events-none select-none z-10">
+      <div ref={boltLeftRef} className="absolute left-0 top-[15vh] w-[50vw] pointer-events-none select-none z-10">
         <Image
           src="/images/bolt%20left.png"
           alt=""
@@ -24,7 +61,7 @@ export default function Countdown() {
         />
       </div>
       {/* Bolt right – 58vw wide, height auto */}
-      <div className="absolute right-0 top-[15vh] w-[58vw] pointer-events-none select-none z-10">
+      <div ref={boltRightRef} className="absolute right-0 top-[15vh] w-[50vw] pointer-events-none select-none z-10">
         <Image
           src="/images/bolt%20right.png"
           alt=""

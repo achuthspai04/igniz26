@@ -34,3 +34,7 @@ body {
   font-weight: 900;
   text-shadow: 0 0 1px #FFD120, 0 0 1px #FFD120, -0.5px 0 #FFD120, 0.5px 0 #FFD120;
 }
+
+#box {
+  color: black;
+}
