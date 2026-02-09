@@ -86,11 +86,13 @@ function ScrollTriggerLayer({
   scrollTrigger: st,
   className = "",
   style,
+  staticTransform,
   children,
 }: {
   scrollTrigger: NonNullable<LayerConfig["scrollTrigger"]>;
   className?: string;
   style?: CSSProperties;
+  staticTransform?: string;
   children?: ReactNode;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -116,8 +118,21 @@ function ScrollTriggerLayer({
     };
   }, [st]);
   return (
-    <div ref={ref} className={className} style={{ ...style, willChange: "transform" }}>
-      {children}
+    <div
+      ref={ref}
+      className={className}
+      style={{ ...style, willChange: "transform" }}
+    >
+      <div
+        style={{
+          transform: staticTransform,
+          width: "100%",
+          height: "100%",
+          position: "relative",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -145,35 +160,49 @@ export default function LayeredImage({
           const scale = layer.scale ?? 1;
           const useSizeForScale = scale > 1;
           const layerClassName = `absolute pointer-events-none select-none ${layer.className ?? ""} ${!useSizeForScale ? "inset-0" : ""}`;
-          const layerStyle = {
+
+          // Calculate transform string
+          const transformString = (
+            useSizeForScale
+              ? [
+                "translate(-50%, -50%)",
+                layer.translateX != null &&
+                `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
+                layer.translateY != null &&
+                `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
+              ]
+              : [
+                layer.scale != null && `scale(${layer.scale})`,
+                layer.translateX != null &&
+                `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
+                layer.translateY != null &&
+                `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
+              ]
+          )
+            .filter(Boolean)
+            .join(" ");
+
+          const baseStyle: CSSProperties = {
             zIndex: layer.zIndex,
             opacity: layer.opacity,
             mixBlendMode: layer.mixBlendMode,
             ...(useSizeForScale
               ? {
-                  width: `${scale * 100}%`,
-                  height: `${scale * 100}%`,
-                  left: "50%",
-                  top: "50%",
-                  transform: [
-                    "translate(-50%, -50%)",
-                    layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
-                    layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
-                  ]
-                    .filter(Boolean)
-                    .join(" "),
-                }
+                width: `${scale * 100}%`,
+                height: `${scale * 100}%`,
+                left: "50%",
+                top: "50%",
+              }
               : {
-                  inset: 0,
-                  transform: [
-                    layer.scale != null && `scale(${layer.scale})`,
-                    layer.translateX != null && `translateX(${typeof layer.translateX === "number" ? `${layer.translateX}px` : layer.translateX})`,
-                    layer.translateY != null && `translateY(${typeof layer.translateY === "number" ? `${layer.translateY}px` : layer.translateY})`,
-                  ]
-                    .filter(Boolean)
-                    .join(" ") || undefined,
-                }),
+                inset: 0,
+              }),
           };
+
+          const layerStyleWithTransform = {
+            ...baseStyle,
+            transform: transformString || undefined,
+          };
+
           const layerContent =
             layer.content != null ? (
               layer.content
@@ -197,7 +226,7 @@ export default function LayeredImage({
                 key={`${layer.src}-${i}`}
                 gsapFrom={layer.gsapFrom}
                 className={layerClassName}
-                style={layerStyle}
+                style={layerStyleWithTransform}
               >
                 {layerContent}
               </AnimatedLayer>
@@ -209,14 +238,19 @@ export default function LayeredImage({
                 key={`${layer.src}-${i}`}
                 scrollTrigger={layer.scrollTrigger}
                 className={layerClassName}
-                style={layerStyle}
+                style={baseStyle}
+                staticTransform={transformString}
               >
                 {layerContent}
               </ScrollTriggerLayer>
             );
           }
           return (
-            <div key={`${layer.src}-${i}`} className={layerClassName} style={layerStyle}>
+            <div
+              key={`${layer.src}-${i}`}
+              className={layerClassName}
+              style={layerStyleWithTransform}
+            >
               {layerContent}
             </div>
           );

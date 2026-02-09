@@ -1,11 +1,14 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
 import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
+import EventSection from "@/components/EventSection";
 import LoadingScreen from "@/components/LoadingScreen";
+import About from "./about/page";
 
 const HERO_LAYERS: LayerConfig[] = [
   {
@@ -33,12 +36,12 @@ const HERO_LAYERS: LayerConfig[] = [
     scale: 7.0,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { opacity: 0},
+      to: { opacity: 0 },
       start: "top bottom",
       end: "bottom 70%",
       scrub: true,
-    }, 
-    
+    },
+
   },
   {
     src: "/images/asset_2 1.svg",
@@ -82,7 +85,7 @@ const HERO_LAYERS: LayerConfig[] = [
     className: "w-full min-w-full",
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000},
+      to: { y: -1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -97,10 +100,11 @@ const HERO_LAYERS: LayerConfig[] = [
     mixBlendMode: "multiply",
   },
   {
-    src: "/images/48466.png",
+    src: "/images/48466.svg",
     alt: "Igniz 1",
     zIndex: 40,
-    objectFit: "cover",
+    scale: 0.5,
+    objectFit: "none",
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
@@ -124,7 +128,7 @@ const HERO_LAYERS: LayerConfig[] = [
       start: "top bottom",
       end: "bottom top",
       scrub: true,
-    }, 
+    },
   },
 ];
 
@@ -146,6 +150,28 @@ export default function Home() {
       </div>
       <Countdown />
       <ProshowSection />
+      <section className="w-full min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center w-full">
+          <Image
+            src="/events/CULTURALS HEADING.svg"
+            alt="Culturals"
+            width={400}
+            height={80}
+            className="w-full max-w-2xl object-contain"
+          />
+          <div className="w-full h-[50vh]">
+            <EventSection fillParent />
+          </div>
+          <Image
+            src="/events/LOAD.svg"
+            alt=""
+            width={200}
+            height={60}
+            className="w-full max-w-md object-contain"
+          />
+        </div>
+      </section>
+      <About />
     </div>
   );
 }

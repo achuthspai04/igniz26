@@ -5,11 +5,12 @@
   --foreground: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@font-face {
+  font-family: "Akira Expanded";
+  src: url("/fonts/AkiraExpanded.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,6 +26,15 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+.font-dmSans{
+  font-family: var(--font-dmSans);
+}
+
+.font-blackHanSans{
+  font-family: var(--font-blackHanSans);
+}
+
+
 .font-might-makes-right {
   font-family: "Might Makes Right BB", system-ui, sans-serif;
 }
@@ -37,4 +47,13 @@ body {
 
 #box {
   color: black;
+}
+
+/* Hide scrollbar while keeping scroll behavior */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }

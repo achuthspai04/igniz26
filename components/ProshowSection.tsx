@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PROSHOW_IMAGES = {
-  ellipse: "/proShow/Ellipse%2050.png",
+  ellipse: "/proShow/proshow cta.png",
   pic: "/proShow/pic.png",
   proShow: "/proShow/PRO%20SHOW.png",
   red: "/proShow/ProShowLogo.png",
@@ -31,9 +31,9 @@ export default function ProshowSection() {
         if (!entries[0]?.isIntersecting || tl) return;
         tl = gsap.fromTo(
           pic,
-          { y: -700, force3D: true,scale: 1.5 },
+          { y: -700, force3D: true },
           {
-            y: 0, scale: 1,
+            y: 0,
             force3D: true,
             ease: "none",
             scrollTrigger: {

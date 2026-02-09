@@ -1,5 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import LayeredImage from './LayeredImage';
 
 const Navbar = () => {
@@ -53,12 +54,17 @@ const Navbar = () => {
                     </div>
 
                     <div className="relative z-10 flex w-full items-center text-[1.5rem] pb-1">
-                        <span className="-skew-x-6 cursor-pointer text-black font-semibold uppercase tracking-wide">
+                        <Link
+                            href="/"
+                            className="-skew-x-6 cursor-pointer text-black font-semibold uppercase tracking-wide"
+                        >
                             Home
-                        </span>
+                        </Link>
 
                         <div className="ml-auto flex items-center gap-6 sm:gap-8 md:gap-12 text-black font-semibold uppercase tracking-wide">
-                            <span className="-skew-x-6 cursor-pointer">About Us</span>
+                            <Link href="/about" className="-skew-x-6 cursor-pointer">
+                                About Us
+                            </Link>
                             <span className="-skew-x-6 cursor-pointer">Tickets</span>
                         </div>
                     </div>
