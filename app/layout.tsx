@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, DM_Sans, Black_Han_Sans } from "next/font/google";
 import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import localFont from 'next/font/local'
+import Footer from "@/components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -58,6 +59,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${blackHanSans.variable} ${dmSans.variable} antialiased`}
       >
         {children}
+        <Footer/>
       </body>
     </html>
   );
