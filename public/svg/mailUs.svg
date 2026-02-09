@@ -1,0 +1,22 @@
+<svg width="339" height="94" viewBox="0 0 339 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mail us - grp" filter="url(#filter0_dg_571_124)">
+<path id="MAil US" d="M28.7482 59.2955V24.5698H45.6976L59.2365 41.9326L72.8011 24.5698H89.7247V59.2955H76.1859V40.77L62.6212 59.2955H55.8517L42.2871 40.77V59.2955H28.7482ZM113.744 34.6723L108.964 44.9298H118.498L113.744 34.6723ZM87.0541 59.3471L105.683 24.6215H121.78L140.409 59.3471H125.164L122.426 53.4045H105.037L102.298 59.3471H87.0541ZM137.764 24.5698H151.303V59.2955H137.764V24.5698ZM154.781 24.5698H168.32V48.2887H195.424V59.2955H154.781V24.5698ZM248.786 42.3719V24.5698H262.35V43.2245C262.402 56.35 251.654 60.1223 238.631 60.1481C225.609 60.1223 214.861 56.35 214.913 43.2245V24.5698H228.451V42.3719C228.4 48.082 233.076 49.0638 238.631 49.1413C244.161 49.0638 248.863 48.082 248.786 42.3719ZM276.707 36.0159C276.707 37.5403 280.918 37.747 286.37 38.0053C296.059 38.4963 309.675 39.168 309.649 47.8753C309.649 57.7969 298.281 60.1481 286.086 60.1481C273.916 60.1223 263.814 58.6495 262.522 47.8753H276.707C278.257 50.5624 281.848 51.26 286.086 51.26C290.297 51.26 295.465 50.5624 295.465 47.8753C295.465 46.3509 291.253 46.1183 285.801 45.8599C276.112 45.369 262.496 44.6973 262.522 36.0159C262.522 26.0943 273.89 23.7172 286.086 23.7172C298.255 23.7947 308.358 25.1641 309.649 36.0159H295.465C293.914 33.2771 290.323 32.6311 286.086 32.6311C281.874 32.6311 276.707 33.2512 276.707 36.0159Z" fill="#FFD120"/>
+</g>
+<defs>
+<filter id="filter0_dg_571_124" x="-0.000120163" y="4.72069e-05" width="338.424" height="93.927" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="5.03093"/>
+<feGaussianBlur stdDeviation="14.3741"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 0.541176 0 0 0 0 0.0705882 0 0 0 0.35 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_571_124"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_571_124" result="shape"/>
+<feTurbulence type="fractalNoise" baseFrequency="1.3913930654525757 1.3913930654525757" numOctaves="3" seed="1318" />
+<feDisplacementMap in="shape" scale="2.8748166561126709" xChannelSelector="R" yChannelSelector="G" result="displacedImage" width="100%" height="100%" />
+<feMerge result="effect2_texture_571_124">
+<feMergeNode in="displacedImage"/>
+</feMerge>
+</filter>
+</defs>
+</svg>
