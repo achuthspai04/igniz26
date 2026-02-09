@@ -1,10 +1,12 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
 import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
+import EventSection from "@/components/EventSection";
 import LoadingScreen from "@/components/LoadingScreen";
 
 const HERO_LAYERS: LayerConfig[] = [
@@ -146,6 +148,27 @@ export default function Home() {
       </div>
       <Countdown />
       <ProshowSection />
+      <section className="w-full min-h-screen flex items-center justify-center">
+        <div className="flex flex-col items-center w-full">
+          <Image
+            src="/events/CULTURALS HEADING.svg"
+            alt="Culturals"
+            width={400}
+            height={80}
+            className="w-full max-w-2xl object-contain"
+          />
+          <div className="w-full h-[50vh]">
+            <EventSection fillParent />
+          </div>
+          <Image
+            src="/events/LOAD.svg"
+            alt=""
+            width={200}
+            height={60}
+            className="w-full max-w-md object-contain"
+          />
+        </div>
+      </section>
     </div>
   );
 }
