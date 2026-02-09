@@ -9,8 +9,7 @@ const Navbar = () => {
 
     return (
         <header
-            className="fixed top-0 left-0 right-0 z-1000 px-4 pt-4 sm:px-6 sm:pt-5"
-            style={{ fontFamily: '"Might Makes Right BB", system-ui, sans-serif' }}
+            className="fixed top-0 left-0 right-0 z-1000 px-4 pt-4 sm:px-6 sm:pt-5 font-might-makes-right"
         >
             <div className="w-full max-w-[1600px] mx-auto bg-transparent flex items-center justify-between px-2 sm:px-4 pt-6 pb-2">
 
@@ -66,7 +65,7 @@ const Navbar = () => {
                 </nav>
 
                 {/* Right: Date */}
-                <div className="flex items-center" style={{ fontFamily: '"Akira Expanded", sans-serif' }}>
+                <div className="flex items-center">
                     <div className="flex flex-col leading-none text-right text-[#FFD120] font-black uppercase font-akira-expanded">
                         <div className="flex items-center justify-between text-[1.5rem] tracking-[0.18em]">
                             <span>{eventStartDay}</span>
