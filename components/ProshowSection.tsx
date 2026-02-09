@@ -21,27 +21,39 @@ export default function ProshowSection() {
   const picRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (!sectionRef.current || !picRef.current) return;
+    const section = sectionRef.current;
+    const pic = picRef.current;
+    if (!section || !pic) return;
 
-    const tl = gsap.fromTo(
-      picRef.current,
-      { y: -1000},
-      {
-        y: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top bottom",
-          end: "bottom 70%",
-          scrub: true,
-        },
-      }
+    let tl: gsap.core.Tween | null = null;
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0]?.isIntersecting || tl) return;
+        tl = gsap.fromTo(
+          pic,
+          { y: -700, force3D: true,scale: 1.5 },
+          {
+            y: 0, scale: 1,
+            force3D: true,
+            ease: "none",
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom 90%",
+              scrub: 0.15,
+            },
+          }
+        );
+      },
+      { rootMargin: "150% 0px", threshold: 0 }
     );
+    io.observe(section);
 
     return () => {
-      tl.kill();
+      io.disconnect();
+      tl?.kill();
       ScrollTrigger.getAll().forEach((s) => {
-        if (s.trigger === sectionRef.current) s.kill();
+        if (s.trigger === section) s.kill();
       });
     };
   }, []);
@@ -118,10 +130,11 @@ export default function ProshowSection() {
           className="w-full h-auto object-cover object-bottom"
         />
       </div>
-      {/* Layer 4: pic – anchored to bottom (front), GSAP scroll-in from x:100 */}
+      {/* Layer 4: pic – anchored to bottom (front), GSAP scroll-in; will-change for GPU layer */}
       <div
         ref={picRef}
         className="absolute inset-x-0 bottom-0 z-30 w-full flex justify-center pointer-events-none select-none"
+        style={{ willChange: "transform" }}
       >
         <Image
           src={PROSHOW_IMAGES.pic}

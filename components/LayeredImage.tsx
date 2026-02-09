@@ -100,6 +100,7 @@ function ScrollTriggerLayer({
     if (!el || !triggerEl) return;
     const tween = gsap.to(el, {
       ...st.to,
+      force3D: true,
       scrollTrigger: {
         trigger: triggerEl,
         start: st.start ?? "top center",
@@ -115,7 +116,7 @@ function ScrollTriggerLayer({
     };
   }, [st]);
   return (
-    <div ref={ref} className={className} style={style}>
+    <div ref={ref} className={className} style={{ ...style, willChange: "transform" }}>
       {children}
     </div>
   );

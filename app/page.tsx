@@ -1,9 +1,11 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
 import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const HERO_LAYERS: LayerConfig[] = [
   {
@@ -102,7 +104,7 @@ const HERO_LAYERS: LayerConfig[] = [
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000, scale: 1.5 , duration: 2 },
+      to: { y: -1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -127,8 +129,12 @@ const HERO_LAYERS: LayerConfig[] = [
 ];
 
 export default function Home() {
+  const [assetsReady, setAssetsReady] = useState(false);
+  const handleLoadComplete = useCallback(() => setAssetsReady(true), []);
+
   return (
     <div className="relative w-full overflow-x-hidden bg-[#1A0000] min-h-screen">
+      {!assetsReady && <LoadingScreen onComplete={handleLoadComplete} />}
       <Navbar />
       {/* Section 1: Hero — 100vh */}
       <section className="relative w-full min-h-screen h-screen flex flex-col">
