@@ -8,6 +8,7 @@ import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
 import EventSection from "@/components/EventSection";
 import LoadingScreen from "@/components/LoadingScreen";
+import About from "./about/page";
 
 const HERO_LAYERS: LayerConfig[] = [
   {
@@ -35,12 +36,12 @@ const HERO_LAYERS: LayerConfig[] = [
     scale: 7.0,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { opacity: 0},
+      to: { opacity: 0 },
       start: "top bottom",
       end: "bottom 70%",
       scrub: true,
-    }, 
-    
+    },
+
   },
   {
     src: "/images/asset_2 1.svg",
@@ -84,7 +85,7 @@ const HERO_LAYERS: LayerConfig[] = [
     className: "w-full min-w-full",
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000},
+      to: { y: -1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -99,10 +100,11 @@ const HERO_LAYERS: LayerConfig[] = [
     mixBlendMode: "multiply",
   },
   {
-    src: "/images/48466.png",
+    src: "/images/48466.svg",
     alt: "Igniz 1",
     zIndex: 40,
-    objectFit: "cover",
+    scale: 0.5,
+    objectFit: "none",
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
@@ -126,7 +128,7 @@ const HERO_LAYERS: LayerConfig[] = [
       start: "top bottom",
       end: "bottom top",
       scrub: true,
-    }, 
+    },
   },
 ];
 
@@ -169,6 +171,7 @@ export default function Home() {
           />
         </div>
       </section>
+      <About />
     </div>
   );
 }
