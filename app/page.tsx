@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
@@ -153,22 +154,24 @@ export default function Home() {
       <section className="w-full min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center w-full">
           <Image
-            src="/events/CULTURALS HEADING.svg"
+            src="/events/cultural events heading.webp"
             alt="Culturals"
             width={400}
             height={80}
             className="w-full max-w-2xl object-contain"
           />
-          <div className="w-full h-[50vh]">
-            <EventSection fillParent />
+          <div className="w-full">
+            <EventSection />
           </div>
-          <Image
-            src="/events/LOAD.svg"
-            alt=""
-            width={200}
-            height={60}
-            className="w-full max-w-md object-contain"
-          />
+          <Link href="/Culturals">
+            <Image
+              src="/events/LOAD.svg"
+              alt="Register"
+              width={200}
+              height={60}
+              className="w-full max-w-md object-contain cursor-pointer hover:opacity-80 transition-opacity"
+            />
+          </Link>
         </div>
       </section>
       <About />
