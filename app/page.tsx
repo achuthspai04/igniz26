@@ -153,14 +153,14 @@ export default function Home() {
       <section className="w-full min-h-screen flex items-center justify-center">
         <div className="flex flex-col items-center w-full">
           <Image
-            src="/events/CULTURALS HEADING.svg"
+            src="/events/cultural events heading.webp"
             alt="Culturals"
             width={400}
             height={80}
             className="w-full max-w-2xl object-contain"
           />
-          <div className="w-full h-[50vh]">
-            <EventSection fillParent />
+          <div className="w-full">
+            <EventSection />
           </div>
           <Image
             src="/events/LOAD.svg"
