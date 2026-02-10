@@ -52,7 +52,11 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
-          href="https://fonts.cdnfonts.com/css/akira-expanded"
+          href="https://fonts.cdnfonts.com/css/akira-expanded"        
+        />
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/88ab5e9510bcfe27031d652730e5952f?family=Quanta+Grotesk+Pro"
         />
       </head>
       <body
