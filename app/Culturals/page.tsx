@@ -1,0 +1,56 @@
+"use client";
+
+import Image from "next/image";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import CulturalEventCard from "@/components/CulturalEventCard";
+
+const CULTURAL_EVENTS = [
+    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition" },
+    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition" },
+    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show" },
+    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition" },
+    { id: 5, src: "/culturals/solo_music.webp", alt: "Solo Music Competition" },
+    { id: 6, src: "/culturals/shot_choreo.webp", alt: "Spot Choreography" },
+    { id: 7, src: "/culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
+    { id: 8, src: "/culturals/quiz.webp", alt: "Quiz Competition" },
+    { id: 9, src: "/culturals/band.webp", alt: "Band" },
+];
+
+export default function CulturalsMainPage() {
+    return (
+        <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col">
+            <Navbar />
+
+            {/* Main Content */}
+            <main className="flex-1 flex flex-col items-center pt-32 md:pt-40 pb-16 px-4 sm:px-6 md:px-8 relative">
+
+                {/* Heading */}
+                <div className="relative z-10 w-full max-w-2xl mb-8 md:mb-12">
+                    <Image
+                        src="/events/cultural events heading.webp"
+                        alt="Cultural Events"
+                        width={800}
+                        height={160}
+                        className="w-full object-contain"
+                        priority
+                    />
+                </div>
+
+                {/* Event Grid */}
+                <div className="relative z-10 w-full max-w-[90vw] md:max-w-6xl grid grid-cols-2 md:grid-cols-3 gap-x-0 -my-4 md:-my-8" style={{ rowGap: 0 }}>
+                    {CULTURAL_EVENTS.map((event) => (
+                        <CulturalEventCard
+                            key={event.id}
+                            src={event.src}
+                            alt={event.alt}
+                            imageStyle={(event as any).imageStyle}
+                        />
+                    ))}
+                </div>
+            </main>
+
+            <Footer />
+        </div>
+    );
+}

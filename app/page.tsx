@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import LayeredImage, { type LayerConfig } from "@/components/LayeredImage";
@@ -162,13 +163,15 @@ export default function Home() {
           <div className="w-full">
             <EventSection />
           </div>
-          <Image
-            src="/events/LOAD.svg"
-            alt=""
-            width={200}
-            height={60}
-            className="w-full max-w-md object-contain"
-          />
+          <Link href="/Culturals">
+            <Image
+              src="/events/LOAD.svg"
+              alt="Register"
+              width={200}
+              height={60}
+              className="w-full max-w-md object-contain cursor-pointer hover:opacity-80 transition-opacity"
+            />
+          </Link>
         </div>
       </section>
       <About />
