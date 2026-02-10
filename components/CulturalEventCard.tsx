@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 
 type CulturalEventCardProps = {
     src: string;
@@ -25,9 +26,9 @@ export default function CulturalEventCard({ src, alt, href, imageStyle }: Cultur
 
     if (href) {
         return (
-            <a href={href} className="block">
+            <Link href={href} className="block">
                 {content}
-            </a>
+            </Link>
         );
     }
 

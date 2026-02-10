@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
 import CulturalEventCard from "@/components/CulturalEventCard";
 
 const CULTURAL_EVENTS = [
-    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition" },
-    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition" },
-    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show" },
-    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition" },
+    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition", href: "/culturals/abhinaya" },
+    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition", href: "/culturals/Beatstorm" },
+    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show", href: "/culturals/Aurelia" },
+    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition", href: "/culturals/Echoes_in_frame" },
     { id: 5, src: "/culturals/solo_music.webp", alt: "Solo Music Competition" },
     { id: 6, src: "/culturals/shot_choreo.webp", alt: "Spot Choreography" },
     { id: 7, src: "/culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
@@ -19,7 +19,7 @@ const CULTURAL_EVENTS = [
 
 export default function CulturalsMainPage() {
     return (
-        <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col">
+        <div className="relative w-full overflow-clip bg-[#2B0000] min-h-screen flex flex-col">
             <Navbar />
 
             {/* Main Content */}
@@ -44,13 +44,14 @@ export default function CulturalsMainPage() {
                             key={event.id}
                             src={event.src}
                             alt={event.alt}
+                            href={(event as any).href}
                             imageStyle={(event as any).imageStyle}
                         />
                     ))}
                 </div>
             </main>
 
-            <Footer />
+
         </div>
     );
 }
