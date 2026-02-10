@@ -81,7 +81,7 @@ export default function EventSection() {
       <div
         ref={scrollContainerRef}
         onScroll={handleScroll}
-        className="relative z-10 w-full flex items-end overflow-x-auto scrollbar-hide px-4 md:px-0 pointer-events-auto"
+        className="relative z-10 w-full flex items-end overflow-x-auto overflow-y-hidden touch-pan-y scrollbar-hide px-4 md:px-0 pointer-events-auto"
       >
         <div className="flex -space-x-8 md:-space-x-20 pl-[5vw] pr-[5vw] items-end">
           {displayEvents.map((event, index) => (
