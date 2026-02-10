@@ -23,10 +23,11 @@ export default function Footer() {
     ]
   return (
     <footer 
-        className={`relative bg-[#2B0000] overflow-hidden`}
+        className={`relative bg-[#2B0000] overflow-hidden h-[36rem]`}
         style={{
             borderTop: "12px solid transparent",
-            borderImage:"url('/svg/footerBorderLine.svg') 30 round"
+            borderImage:"url('/svg/footerBorderLine.svg') 30 round",
+            fontFamily: '"Akira Expanded", "Sans-serif',
         }}
     >
       {/* texture overlay */}
@@ -38,7 +39,7 @@ export default function Footer() {
         />
 
         <div 
-            className="relative z-10 max-w-7xl mx-auto px-8 py-16 text-center" 
+            className="relative z-10 max-w-7xl mx-auto px-8 py-8 text-center" 
             style={{
                 fontFamily: '"Akira Expanded", "Sans-serif',
                 fontWeight: 900,
@@ -85,20 +86,62 @@ export default function Footer() {
             />
         </div>
 
-        <div className="mt-10 text-sm text-white/90">
-          <p className="text-2xl">IGNIZ26. ALL RIGHTS RESERVED</p>
+        <div className="mt-0 text-sm text-white/90 flex flex-col items-center">
+            <Image
+                src="/svg/arr.svg"
+                width={600}
+                height={600}
+                alt="IGNIZ26 ALL RIGHTS RESERVED"
+            />
           <div className="flex justify-center gap-2 mt-2 text-3xl text-white">
             <span className="cursor-pointer">
-                <FontAwesomeIcon icon={faInstagram} />
+                <Image
+                    src="/svg/igIcon.svg"
+                    width={40}
+                    height={40}
+                    alt="Instagram"
+                />
             </span>
             <span className="cursor-pointer">
-                <FontAwesomeIcon icon={faFacebook}/>
+                <Image
+                    src="/svg/fbIcon.svg"
+                    width={40}
+                    height={40}
+                    alt="Instagram"
+                />            
             </span>
           </div>
-          <div className="mt-4 text-white/50 space-y-0 flex flex-col items-center justify-center">
-            <Link href="/" className="hover:scale-110 duration-400 text-md">TERMS AND CONDITIONS</Link>
-            <Link href="/" className="hover:scale-110 duration-400 text-md">RETURN POLICY</Link>
-            <Link href="/" className="hover:scale-110 duration-400 text-md">PRIVACY POLICY</Link>
+          <div className="mt-4 text-white/50 space-y-1 flex flex-col items-center justify-center font-akira-expanded">
+            <Link 
+                href="/tandc" 
+                className="hover:scale-110 duration-400 text-md"
+                style={{
+                    fontFamily: '"Akira Expanded Demo"',
+                }}
+            >
+                <Image
+                    src="/svg/termsAndConditions.svg"
+                    width={250}
+                    height={250}
+                    alt="Terms and Conditions"
+                />
+            </Link>
+            <Link href="/return-policy" className="hover:scale-110 duration-400 text-md">
+                 <Image
+                    src="/svg/ReturnPolicy.svg"
+                    width={150}
+                    height={150}
+                    alt="Terms and Conditions"
+                />
+            </Link>
+            <Link href="/privacy-policy" className="hover:scale-110 duration-400 text-md">
+                <Image
+                    src="/svg/PrivacyPolicy.svg"
+                    width={150}
+                    height={150}
+                    alt="Privacy Policy"
+                />
+            </Link>
           </div>
         </div>
       </div>
