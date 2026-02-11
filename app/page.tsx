@@ -172,6 +172,13 @@ export default function Home() {
   return (
     <div className="relative w-full overflow-x-hidden bg-[#1A0000] min-h-screen">
       {!assetsReady && <LoadingScreen onComplete={handleLoadComplete} />}
+      <div
+        style={{
+          opacity: assetsReady ? 1 : 0,
+          visibility: assetsReady ? "visible" : "hidden",
+          transition: "opacity 0.4s ease-in-out",
+        }}
+      >
       <Navbar />
       {/* Section 1: Hero — 100vh */}
       <section className="relative w-full min-h-screen h-screen flex flex-col">
@@ -207,6 +214,7 @@ export default function Home() {
         </div>
       </section>
       <About />
+      </div>
     </div>
   );
 }
