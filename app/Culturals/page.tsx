@@ -13,8 +13,8 @@ const CULTURAL_EVENTS = [
     { id: 5, src: "/Culturals/solo_music.webp", alt: "Solo Music Competition" },
     { id: 6, src: "/Culturals/shot_choreo.webp", alt: "Spot Choreography" },
     { id: 7, src: "/Culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
-    { id: 8, src: "/culturals/quiz.webp", alt: "Quiz Competition" },
-    { id: 9, src: "/culturals/band.webp", alt: "Band" },
+    { id: 8, src: "/Culturals/quiz.webp", alt: "Quiz Competition" },
+    { id: 9, src: "/Culturals/band.webp", alt: "Band" },
 ];
 
 export default function CulturalsMainPage() {
