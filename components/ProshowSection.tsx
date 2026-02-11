@@ -8,7 +8,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const PROSHOW_IMAGES = Object.freeze({
-  ellipse: "/proShow/proshow cta (1).svg",
+  ellipse: "/proShow/proshow cta.svg",
   pic: "/proShow/pic.png",
   proShow: "/proShow/PRO%20SHOW.png",
   red: "/proShow/ProShowLogo.png",
@@ -123,17 +123,41 @@ export default function ProshowSection() {
         />
       </div>
       {/* Layer 3: Ellipse 50 – anchored to bottom */}
-      <div
-        className="ellipse-wrapper absolute inset-x-0 -bottom-[2%] sm:-bottom-[3%] md:-bottom-[8%] lg:-bottom-[5%] z-50 w-[90%] sm:w-[80%] md:w-[65%] mx-auto pointer-events-none select-none"
-      >
-        <Image
-          src={PROSHOW_IMAGES.ellipse}
-          alt=""
-          width={1920}
-          height={400}
-          sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, 65vw"
-          className="w-full h-auto object-contain object-bottom"
-        />
+      <div className="ellipse-wrapper absolute inset-x-0 -bottom-[1%] sm:-bottom-[1%] md:-bottom-[2%] lg:-bottom-[3.7%] z-50 w-[85%] sm:w-[75%] md:w-[60%] mx-auto pointer-events-none select-none">
+        {/* Isolated container prevents multiply blend from leaking to parent */}
+        <div className="relative w-full" style={{ isolation: "isolate" }}>
+          {/* CTA image – base layer */}
+          <Image
+            src={PROSHOW_IMAGES.ellipse}
+            alt=""
+            width={1920}
+            height={400}
+            sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, 65vw"
+            className="relative w-full h-auto object-contain object-bottom"
+          />
+          {/* Navbar texture overlay with multiply – masked to CTA shape via mask-image */}
+          <div
+            className="absolute inset-0 [mix-blend-mode:multiply]"
+            style={{
+              maskImage: "url(/proShow/proshow%20cta.svg)",
+              WebkitMaskImage: "url(/proShow/proshow%20cta.svg)",
+              maskSize: "100% 100%",
+              WebkitMaskSize: "90% 100%",
+              maskRepeat: "no-repeat",
+              WebkitMaskRepeat: "no-repeat",
+              maskPosition: "center bottom",
+              WebkitMaskPosition: "center bottom",
+            }}
+          >
+            <Image
+              src="/images/navbartexture.png"
+              alt=""
+              width={1600}
+              height={200}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
       </div>
       {/* Layer 4: pic – anchored to bottom (front), GSAP scroll-in; will-change for GPU layer */}
       <div

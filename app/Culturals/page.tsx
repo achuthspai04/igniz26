@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-
+import PageLoader from "@/components/PageLoader";
 import CulturalEventCard from "@/components/CulturalEventCard";
 
 const CULTURAL_EVENTS = [
@@ -17,41 +17,48 @@ const CULTURAL_EVENTS = [
     { id: 9, src: "/culturals/band.webp", alt: "Band", href: "/Culturals/Melodinz" },
 ];
 
+const PRELOAD_ASSETS = [
+    "/events/cultural events heading.webp",
+    ...CULTURAL_EVENTS.map((e) => e.src),
+];
+
 export default function CulturalsMainPage() {
     return (
-        <div className="relative w-full overflow-clip bg-[#2B0000] min-h-screen flex flex-col">
-            <Navbar />
+        <PageLoader assets={PRELOAD_ASSETS}>
+            <div className="relative w-full overflow-clip bg-[#2B0000] min-h-screen flex flex-col">
+                <Navbar />
 
-            {/* Main Content */}
-            <main className="flex-1 flex flex-col items-center pt-32 md:pt-40 pb-16 px-4 sm:px-6 md:px-8 relative">
+                {/* Main Content */}
+                <main className="flex-1 flex flex-col items-center pt-32 md:pt-40 pb-16 px-4 sm:px-6 md:px-8 relative">
 
-                {/* Heading */}
-                <div className="relative z-10 w-full max-w-2xl mb-8 md:mb-12">
-                    <Image
-                        src="/events/cultural events heading.webp"
-                        alt="Cultural Events"
-                        width={800}
-                        height={160}
-                        className="w-full object-contain"
-                        priority
-                    />
-                </div>
-
-                {/* Event Grid */}
-                <div className="relative z-10 w-full max-w-[90vw] md:max-w-6xl grid grid-cols-2 md:grid-cols-3 gap-x-0 -my-4 md:-my-8" style={{ rowGap: 0 }}>
-                    {CULTURAL_EVENTS.map((event) => (
-                        <CulturalEventCard
-                            key={event.id}
-                            src={event.src}
-                            alt={event.alt}
-                            href={(event as any).href}
-                            imageStyle={(event as any).imageStyle}
+                    {/* Heading */}
+                    <div className="relative z-10 w-full max-w-2xl mb-8 md:mb-12">
+                        <Image
+                            src="/events/cultural events heading.webp"
+                            alt="Cultural Events"
+                            width={800}
+                            height={160}
+                            className="w-full object-contain"
+                            priority
                         />
-                    ))}
-                </div>
-            </main>
+                    </div>
+
+                    {/* Event Grid */}
+                    <div className="relative z-10 w-full max-w-[90vw] md:max-w-6xl grid grid-cols-2 md:grid-cols-3 gap-x-0 -my-4 md:-my-8" style={{ rowGap: 0 }}>
+                        {CULTURAL_EVENTS.map((event) => (
+                            <CulturalEventCard
+                                key={event.id}
+                                src={event.src}
+                                alt={event.alt}
+                                href={(event as any).href}
+                                imageStyle={(event as any).imageStyle}
+                            />
+                        ))}
+                    </div>
+                </main>
 
 
-        </div>
+            </div>
+        </PageLoader>
     );
 }

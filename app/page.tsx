@@ -9,6 +9,8 @@ import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
 import EventSection from "@/components/EventSection";
 import LoadingScreen from "@/components/LoadingScreen";
+import WorkshopsSection from "@/components/WorkshopsSection";
+import EntertainmentSection from "@/components/EntertainmentSection";
 import About from "./about/page";
 
 const HERO_LAYERS: LayerConfig[] = [
@@ -117,7 +119,7 @@ const HERO_LAYERS: LayerConfig[] = [
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000 },
+      to: { x: 1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -133,7 +135,7 @@ const HERO_LAYERS: LayerConfig[] = [
     objectFit: "contain",
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000 },
+      to: { x: 1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -172,41 +174,45 @@ export default function Home() {
   return (
     <div className="relative w-full overflow-x-hidden bg-[#1A0000] min-h-screen">
       {!assetsReady && <LoadingScreen onComplete={handleLoadComplete} />}
-      <Navbar />
-      {/* Section 1: Hero — 100vh */}
-      <section className="relative w-full min-h-screen h-screen flex flex-col">
-        <main className="relative w-full flex-1 min-h-0">
-          <LayeredImage layers={heroLayers} aspectRatio="full" />
-        </main>
-      </section>
-      <div data-scroll-trigger="hello-section">
-      </div>
-      <Countdown />
-      <ProshowSection />
-      <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
-        <div className="flex flex-col items-center w-full">
-          <Image
-            src="/events/cultural events heading.webp"
-            alt="Culturals"
-            width={400}
-            height={80}
-            className="w-full max-w-2xl object-contain"
-          />
-          <div className="w-full">
-            <EventSection />
-          </div>
-          <Link href="/Culturals">
-            <Image
-              src="/events/LOAD.svg"
-              alt="Register"
-              width={200}
-              height={60}
-              className="w-full max-w-md object-contain cursor-pointer hover:opacity-80 transition-opacity"
-            />
-          </Link>
+      <div
+        style={{
+          opacity: assetsReady ? 1 : 0,
+          visibility: assetsReady ? "visible" : "hidden",
+          transition: "opacity 0.4s ease-in-out",
+        }}
+      >
+        <Navbar />
+        {/* Section 1: Hero — 100vh */}
+        <section className="relative w-full min-h-screen h-screen flex flex-col">
+          <main className="relative w-full flex-1 min-h-0">
+            <LayeredImage layers={heroLayers} aspectRatio="full" />
+          </main>
+        </section>
+        <div data-scroll-trigger="hello-section">
         </div>
-      </section>
-      <About />
+        <Countdown />
+        <ProshowSection />
+        <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
+          <div className="flex flex-col items-center w-full">
+            <div className="w-full">
+              <EventSection />
+            </div>
+            <Link href="/Culturals">
+              <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
+                <Image
+                  src="/events/eventpages/register.svg"
+                  alt="Register"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
+        </section>
+        <About />
+        <WorkshopsSection />
+        <EntertainmentSection />
+      </div>
     </div>
   );
 }
