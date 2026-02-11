@@ -9,6 +9,8 @@ import Countdown from "@/components/Countdown";
 import ProshowSection from "@/components/ProshowSection";
 import EventSection from "@/components/EventSection";
 import LoadingScreen from "@/components/LoadingScreen";
+import WorkshopsSection from "@/components/WorkshopsSection";
+import EntertainmentSection from "@/components/EntertainmentSection";
 import About from "./about/page";
 
 const HERO_LAYERS: LayerConfig[] = [
@@ -117,7 +119,7 @@ const HERO_LAYERS: LayerConfig[] = [
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000 },
+      to: { x: 1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -133,7 +135,7 @@ const HERO_LAYERS: LayerConfig[] = [
     objectFit: "contain",
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
-      to: { y: -1000 },
+      to: { x: 1000 },
       start: "top bottom",
       end: "bottom top",
       scrub: true,
@@ -205,8 +207,29 @@ export default function Home() {
             />
           </Link>
         </div>
-      </section>
-      <About />
+        <Countdown />
+        <ProshowSection />
+        <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
+          <div className="flex flex-col items-center w-full">
+            <div className="w-full">
+              <EventSection />
+            </div>
+            <Link href="/Culturals">
+              <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
+                <Image
+                  src="/events/eventpages/register.svg"
+                  alt="Register"
+                  fill
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
+        </section>
+        <About />
+        <WorkshopsSection />
+        <EntertainmentSection />
+      </div>
     </div>
   );
 }
