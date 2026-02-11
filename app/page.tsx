@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
@@ -13,12 +13,19 @@ import About from "./about/page";
 
 const HERO_LAYERS: LayerConfig[] = [
   {
-    src: "/images/bgstar.png",
+    src: "/images/bgstar.svg",
     alt: "Star background",
     zIndex: 10,
     objectFit: "none",
     scale: 1.0,
     translateY: "-8%",
+    scrollTrigger: {
+      triggerSelector: "[data-scroll-trigger='hello-section']",
+      to: { opacity: 0 },
+      start: "top bottom",
+      end: "bottom 70%",
+      scrub: true,
+    },
   },
   {
     src: "/images/logo.svg",
@@ -30,11 +37,12 @@ const HERO_LAYERS: LayerConfig[] = [
     opacity: 0.15,
   },
   {
-    src: "/images/carn 1.svg",
+    src: "/images/carn 1.svg.svg",
     alt: "Carn layer",
     zIndex: 30,
     objectFit: "none",
     scale: 7.0,
+    opacity: 0.4,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
       to: { opacity: 0 },
@@ -105,7 +113,7 @@ const HERO_LAYERS: LayerConfig[] = [
     alt: "Igniz 1",
     zIndex: 40,
     scale: 0.5,
-    objectFit: "none",
+    objectFit: "contain",
     priority: true,
     scrollTrigger: {
       triggerSelector: "[data-scroll-trigger='hello-section']",
@@ -137,6 +145,30 @@ export default function Home() {
   const [assetsReady, setAssetsReady] = useState(false);
   const handleLoadComplete = useCallback(() => setAssetsReady(true), []);
 
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
+
+  const heroLayers = useMemo(() => {
+    return HERO_LAYERS.map(layer => {
+      if (layer.src === "/images/carn 1.svg.svg" && isMobile) {
+        return {
+          ...layer,
+          scale: 3.5, // Reduce from 7x to 3.5x on mobile to save GPU memory
+          scrollTrigger: {
+            ...layer.scrollTrigger!,
+            from: { opacity: 0.5 },
+          },
+        };
+      }
+      return layer;
+    });
+  }, [isMobile]);
+
   return (
     <div className="relative w-full overflow-x-hidden bg-[#1A0000] min-h-screen">
       {!assetsReady && <LoadingScreen onComplete={handleLoadComplete} />}
@@ -144,14 +176,14 @@ export default function Home() {
       {/* Section 1: Hero — 100vh */}
       <section className="relative w-full min-h-screen h-screen flex flex-col">
         <main className="relative w-full flex-1 min-h-0">
-          <LayeredImage layers={HERO_LAYERS} aspectRatio="full" />
+          <LayeredImage layers={heroLayers} aspectRatio="full" />
         </main>
       </section>
       <div data-scroll-trigger="hello-section">
       </div>
       <Countdown />
       <ProshowSection />
-      <section className="w-full min-h-screen flex items-center justify-center">
+      <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
         <div className="flex flex-col items-center w-full">
           <Image
             src="/events/cultural events heading.webp"

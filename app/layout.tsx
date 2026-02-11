@@ -3,6 +3,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import localFont from 'next/font/local'
 import Footer from "@/components/Footer";
+import SmoothScrollWrapper from "@/components/SmoothScrollWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -56,14 +57,24 @@ export default function RootLayout({
         />
         <link
           rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/16d5b3ff3b7d315066ef040db2c92106?family=Lumad+Free"
+        />
+        <link
+          rel="stylesheet"
           href="https://db.onlinewebfonts.com/c/88ab5e9510bcfe27031d652730e5952f?family=Quanta+Grotesk+Pro"
+        />
+        <link
+          rel="stylesheet"
+          href="https://db.onlinewebfonts.com/c/0527d4e74f677604a98934e82e1c522e?family=Quanta+Grotesk+Pro+Black+Ita"
         />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${blackHanSans.variable} ${dmSans.variable} antialiased`}
       >
-        {children}
-        <Footer/>
+        <SmoothScrollWrapper>
+          {children}
+          <Footer/>
+        </SmoothScrollWrapper>
       </body>
     </html>
   );
