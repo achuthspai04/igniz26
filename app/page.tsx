@@ -207,29 +207,10 @@ export default function Home() {
             />
           </Link>
         </div>
-        <Countdown />
-        <ProshowSection />
-        <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
-          <div className="flex flex-col items-center w-full">
-            <div className="w-full">
-              <EventSection />
-            </div>
-            <Link href="/Culturals">
-              <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
-                <Image
-                  src="/events/eventpages/register.svg"
-                  alt="Register"
-                  fill
-                  className="object-contain"
-                />
-              </div>
-            </Link>
-          </div>
-        </section>
-        <About />
-        <WorkshopsSection />
-        <EntertainmentSection />
-      </div>
+      </section>
+      <About />
+      <WorkshopsSection />
+      <EntertainmentSection />
     </div>
   );
 }

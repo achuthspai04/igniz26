@@ -46,7 +46,7 @@ export default function EntertainmentSection() {
                 <Link href="#">
                     <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
                         <Image
-                            src="/events/eventpages/register.svg"
+                            src="/events/eventpages/register.webp"
                             alt="Register"
                             fill
                             className="object-contain"
