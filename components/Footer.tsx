@@ -7,17 +7,17 @@ export default function Footer() {
     const navLinks = [
         {
             src:"mailUs.svg",
-            href:"/",
+            href:"mailto:info@igniz.live",
             alt:"Mail Us"
         },
         {
             src:"contactUs.svg",
-            href:"/",
+            href:"https://wa.me/919645097445",
             alt:"Contact Us"
         },
         {
             src:"locateUs.svg",
-            href:"/",
+            href:"https://maps.app.goo.gl/eGQX1PSKMRP9UNq96",
             alt:"Locate Us"
         }
     ]

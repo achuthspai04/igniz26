@@ -1,9 +1,11 @@
 import Navbar from "@/components/Navbar";
 import Image from "next/image"
+import ScrollToTop from "@/components/ScrollToTop";
 
 export default function TermsAndConditions() {
   return (
     <div className="w-full px-32 py-48 bg-[#2B0000] relative h-auto">
+      <ScrollToTop />
       <Navbar/>
       <Image
         src="/svg/tandc.svg"

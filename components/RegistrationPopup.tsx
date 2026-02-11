@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Image from "next/image";
 import gsap from "gsap";
 
@@ -45,29 +46,47 @@ export default function RegistrationPopup({
     ticketOptions = defaultTickets,
     eventName,
 }: RegistrationPopupProps) {
-    const [selectedTicket, setSelectedTicket] = useState<string>(ticketOptions[0]?.id || "");
+    const [selectedTicket, setSelectedTicket] = useState<string>(() => {
+        const goldTicket = ticketOptions.find(t => t.type === 'gold');
+        return goldTicket?.id || ticketOptions[0]?.id || "";
+    });
     const [formData, setFormData] = useState({ name: "", phone: "", email: "" });
     const popupRef = useRef<HTMLDivElement>(null);
     const overlayRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 
-    // Initialize selected ticket when options change
+    // Initialize selected ticket when options change - prioritize golden pass
     useEffect(() => {
         if (ticketOptions.length > 0 && !ticketOptions.find(t => t.id === selectedTicket)) {
-            setSelectedTicket(ticketOptions[0].id);
+            const goldTicket = ticketOptions.find(t => t.type === 'gold');
+            setSelectedTicket(goldTicket?.id || ticketOptions[0].id);
         }
     }, [ticketOptions, selectedTicket]);
 
     useEffect(() => {
         if (isOpen) {
+            // Lock body scroll
+            document.body.style.overflow = 'hidden';
+            
             // Animation In
             if (overlayRef.current) gsap.to(overlayRef.current, { opacity: 1, duration: 0.3, ease: "power2.out" });
             if (popupRef.current) {
                 gsap.fromTo(
                     popupRef.current,
                     { scale: 0.8, opacity: 0, y: 50 },
-                    { scale: 1, opacity: 1, y: 0, duration: 0.5, ease: "back.out(1.5)" }
+                    { 
+                        scale: 1, 
+                        opacity: 1, 
+                        y: 0, 
+                        duration: 0.5, 
+                        ease: "back.out(1.5)"
+                    }
                 );
             }
+
+            return () => {
+                document.body.style.overflow = '';
+            };
         }
     }, [isOpen]);
 
@@ -92,8 +111,11 @@ export default function RegistrationPopup({
 
     if (!isOpen) return null;
 
-    return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4 font-sans text-black overflow-y-auto py-10">
+    const popupContent = (
+        <div 
+            ref={containerRef}
+            className="fixed inset-0 z-[9999] flex items-start justify-center px-4 font-sans text-black overflow-y-auto pt-20 md:pt-24 pb-10"
+        >
             {/* Overlay */}
             <div
                 ref={overlayRef}
@@ -104,7 +126,7 @@ export default function RegistrationPopup({
             {/* Popup Card */}
             <div
                 ref={popupRef}
-                className="relative w-full max-w-sm bg-[#FFD700] p-4 md:p-6 rounded-[2rem] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] opacity-0"
+                className="relative w-full max-w-sm bg-[#FFD700] p-3 md:p-4 rounded-[2rem] border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] opacity-0"
             >
                 {/* Background Texture with Opacity */}
                 <div
@@ -130,8 +152,8 @@ export default function RegistrationPopup({
 
                 <div className="relative z-10">
                     {/* LOGO Header */}
-                    <div className="text-center mb-4 relative flex flex-col items-center">
-                        <div className="relative w-48 h-16 md:w-64 md:h-20">
+                    <div className="text-center mb-1 relative flex flex-col items-center">
+                        <div className="relative w-48 h-12 md:w-64 md:h-16">
                             <Image
                                 src="/events/eventpages/popup/IGNIZ%201.webp"
                                 alt="IGNIZ 2026"
@@ -140,7 +162,7 @@ export default function RegistrationPopup({
                             />
                         </div>
 
-                        <div className="relative w-full h-24 md:h-32 mt-2">
+                        <div className="relative w-full h-20 md:h-24 mt-0">
                             <Image
                                 src="/events/eventpages/popup/1.event title7 (1).webp"
                                 alt="REGISTER"
@@ -151,7 +173,7 @@ export default function RegistrationPopup({
                     </div>
 
                     {/* Form Fields */}
-                    <div className="space-y-3 text-sm md:text-base font-bold uppercase tracking-tight">
+                    <div className="space-y-2 text-sm md:text-base font-bold uppercase tracking-tight">
                         <div>
                             <label className="block mb-1 tracking-wide font-bold text-[#2B0000]">NAME :</label>
                             <input
@@ -183,7 +205,7 @@ export default function RegistrationPopup({
 
                     {/* Ticket Selection Area */}
                     {ticketOptions.length > 0 && (
-                        <div className="mt-6 grid grid-cols-2 gap-3">
+                        <div className="mt-4 grid grid-cols-2 gap-3">
                             {[...ticketOptions].sort((a, b) => a.type === 'gold' ? -1 : 1).map((ticket) => (
                                 <div
                                     key={ticket.id}
@@ -248,4 +270,6 @@ export default function RegistrationPopup({
             </div>
         </div>
     );
+
+    return createPortal(popupContent, document.body);
 }
