@@ -68,7 +68,7 @@ export default function AbhinayaRegisterPage() {
                     <div className="lg:hidden relative flex items-center justify-center mb-8">
                         <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                             <Image
-                                src="/events/eventpages/1.svg"
+                                src="/events/eventpages/1.webp"
                                 alt="Classical Dancer"
                                 fill
                                 className="object-contain"
@@ -81,7 +81,7 @@ export default function AbhinayaRegisterPage() {
                         <div className="space-y-6 md:space-y-8 lg:col-span-7">
                             <div className="w-full">
                                 <Image
-                                    src="/events/eventpages/1-text.svg"
+                                    src="/events/eventpages/1-text.webp"
                                     alt="Competition Description"
                                     width={800}
                                     height={300}
@@ -103,7 +103,7 @@ export default function AbhinayaRegisterPage() {
                                     className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer"
                                 >
                                     <Image
-                                        src="/events/eventpages/register.svg"
+                                        src="/events/eventpages/register.webp"
                                         alt="Register"
                                         width={300}
                                         height={100}
@@ -117,7 +117,7 @@ export default function AbhinayaRegisterPage() {
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
                             <div className="relative w-[350px] h-[470px] xl:w-[450px] xl:h-[600px]">
                                 <Image
-                                    src="/events/eventpages/1.svg"
+                                    src="/events/eventpages/1.webp"
                                     alt="Classical Dancer"
                                     fill
                                     className="object-contain"

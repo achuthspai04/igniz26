@@ -110,7 +110,7 @@ export default function RegistrationPopup({
                 <div
                     className="absolute inset-0 rounded-[2rem] opacity-30 pointer-events-none"
                     style={{
-                        backgroundImage: "url('/events/eventpages/popup/TEXTURE%20UP2%201.svg')",
+                        backgroundImage: "url('/events/eventpages/popup/TEXTURE%20UP2%201.webp')",
                         backgroundSize: "cover",
                         backgroundRepeat: "no-repeat",
                         backgroundPosition: "center"
@@ -133,7 +133,7 @@ export default function RegistrationPopup({
                     <div className="text-center mb-4 relative flex flex-col items-center">
                         <div className="relative w-48 h-16 md:w-64 md:h-20">
                             <Image
-                                src="/events/eventpages/popup/IGNIZ%201.svg"
+                                src="/events/eventpages/popup/IGNIZ%201.webp"
                                 alt="IGNIZ 2026"
                                 fill
                                 className="object-contain drop-shadow-md"
@@ -142,7 +142,7 @@ export default function RegistrationPopup({
 
                         <div className="relative w-full h-24 md:h-32 mt-2">
                             <Image
-                                src="/events/eventpages/popup/1.event title7 (1).png"
+                                src="/events/eventpages/popup/1.event title7 (1).webp"
                                 alt="REGISTER"
                                 fill
                                 className="object-contain"
@@ -193,7 +193,7 @@ export default function RegistrationPopup({
                                     {/* Ticket Card */}
                                     <div className="relative w-full h-20 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-1">
                                         <Image
-                                            src={ticket.type === 'silver' ? '/events/eventpages/popup/silver.svg' : '/events/eventpages/popup/golden.svg'}
+                                            src={ticket.type === 'silver' ? '/events/eventpages/popup/silver.webp' : '/events/eventpages/popup/golden.webp'}
                                             alt={ticket.name}
                                             fill
                                             className={`object-contain ${ticket.type === 'gold' ? 'scale-115' : ''}`}
