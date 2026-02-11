@@ -1,5 +1,9 @@
 import Image from "next/image";
 
+const ABOUT_HEADING_STYLE = {
+  textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
+} as const;
+
 export default function About() {
   return (
     <div className="relative min-h-[auto] md:min-h-screen w-full bg-[#1A0000] overflow-hidden">
@@ -52,7 +56,10 @@ export default function About() {
         <div className="grid gap-16">
           {/* ABOUT SSET */}
           <section className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide">
+            <h2
+              className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide"
+              style={ABOUT_HEADING_STYLE}
+            >
               ABOUT SSET
             </h2>
             <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
@@ -62,7 +69,10 @@ export default function About() {
 
           {/* ABOUT IGNIZ */}
           <section className="space-y-4">
-            <h2 className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide">
+            <h2
+              className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide"
+              style={ABOUT_HEADING_STYLE}
+            >
               ABOUT IGNIZ
             </h2>
             <div className="space-y-6 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>

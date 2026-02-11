@@ -40,6 +40,10 @@ const PRELOAD_ASSETS = [
   "/culturals/mr_mrs.webp",
   "/culturals/quiz.webp",
   "/culturals/shot_choreo.webp",
+  // Workshops
+  "/images/event-1-red.svg",
+  "/images/event-2.svg",
+  "/events/eventpages/register.svg",
   // About section
   "/images/TEXTURE%20UP.png",
 ];

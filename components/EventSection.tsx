@@ -128,6 +128,20 @@ export default function EventSection() {
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A0000]/20 via-transparent to-[#1A0000]/80" />
       </div>
 
+      {/* Cultural Events Heading */}
+      <div className="relative z-10 text-center mb-6">
+        <h2
+          className="font-akira-expanded text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
+          style={{
+            textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
+            fontFamily: '"Akira Expanded", sans-serif',
+          }}
+        >
+          <span className="block md:inline">Cultural</span>{" "}
+          <span className="block md:inline">Events</span>
+        </h2>
+      </div>
+
       {/* Horizontal Scroll Container */}
       <div
         ref={scrollContainerRef}
