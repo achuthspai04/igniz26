@@ -101,7 +101,6 @@ export default function EventSection() {
     <section
       ref={sectionRef}
       className="relative w-full flex flex-col items-center justify-center overflow-hidden py-10"
-      style={{ contain: "layout style paint" }}
     >
       {/* Background Texture — CSS-only on mobile for perf, Image on desktop */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none bg-[#1A0000]">
@@ -141,7 +140,6 @@ export default function EventSection() {
             <div
               key={`${event.id}-${index}`}
               className="relative flex-shrink-0 flex flex-col items-center w-[80vw] sm:w-[60vw] md:w-[33vw] group"
-              style={{ contentVisibility: "auto", containIntrinsicSize: "80vw 80vw" }}
             >
               {/* Image — the WebP already includes the yellow circle background */}
               <div className="relative w-full aspect-square flex items-center justify-center transition-transform duration-500 group-hover:scale-105 bg-transparent">
