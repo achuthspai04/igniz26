@@ -195,7 +195,7 @@ export default function Home() {
           <div className="w-full">
             <EventSection />
           </div>
-          <Link href="/Culturals">
+          <Link href="/culturals">
             <Image
               src="/events/LOAD.svg"
               alt="Register"
