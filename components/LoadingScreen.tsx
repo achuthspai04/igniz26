@@ -5,7 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 /** All critical image/assets used on the home page – preload for smooth first view */
 const PRELOAD_ASSETS = [
   // Hero (LayeredImage)
-  "/images/bgstar.png",
+  "/images/bgstar.svg",
   "/images/logo.svg",
   "/images/carn 1.svg",
   "/images/asset_2 1.svg",
@@ -17,7 +17,6 @@ const PRELOAD_ASSETS = [
   // Countdown
   "/images/bolt%20left.png",
   "/images/bolt%20right.png",
-  "/images/COUNTDOWN.svg",
   // Navbar
   "/images/navbarlogo.svg",
   "/images/navbartexture.png",

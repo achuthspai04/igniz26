@@ -6,15 +6,15 @@ import Navbar from "@/components/Navbar";
 import CulturalEventCard from "@/components/CulturalEventCard";
 
 const CULTURAL_EVENTS = [
-    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition", href: "/culturals/abhinaya" },
-    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition", href: "/culturals/Beatstorm" },
-    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show", href: "/culturals/Aurelia" },
-    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition", href: "/culturals/Echoes_in_frame" },
-    { id: 5, src: "/culturals/solo_music.webp", alt: "Solo Music Competition" },
-    { id: 6, src: "/culturals/shot_choreo.webp", alt: "Spot Choreography" },
-    { id: 7, src: "/culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
-    { id: 8, src: "/culturals/quiz.webp", alt: "Quiz Competition" },
-    { id: 9, src: "/culturals/band.webp", alt: "Band" },
+    { id: 1, src: "/Culturals/classical_dance.webp", alt: "Classical Dance Competition", href: "/culturals/abhinaya" },
+    { id: 2, src: "/Culturals/d2r.webp", alt: "Hip-Hop Dance Competition", href: "/culturals/Beatstorm" },
+    { id: 3, src: "/Culturals/fashion_show.webp", alt: "Fashion Show", href: "/culturals/Aurelia" },
+    { id: 4, src: "/Culturals/short_film.webp", alt: "Short Film Competition", href: "/culturals/Echoes_in_frame" },
+    { id: 5, src: "/Culturals/solo_music.webp", alt: "Solo Music Competition" },
+    { id: 6, src: "/Culturals/shot_choreo.webp", alt: "Spot Choreography" },
+    { id: 7, src: "/Culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
+    { id: 8, src: "/Culturals/quiz.webp", alt: "Quiz Competition" },
+    { id: 9, src: "/Culturals/band.webp", alt: "Band" },
 ];
 
 export default function CulturalsMainPage() {
