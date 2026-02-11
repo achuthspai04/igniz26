@@ -2,9 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function VoiceOfIgnizRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "VOICE OF IGNIZ PASS",
+            price: 150,
+            type: "silver",
+            description: "ACCESS TO VOICE OF IGNIZ COMPETITION\nREGISTRATION: 150 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -43,30 +64,30 @@ export default function VoiceOfIgnizRegisterPage() {
                         VOICE OF IGNIZ
                     </h1>
 
-                   {/* Mobile: Image appears right after heading */}
-                                       <div className="lg:hidden relative flex items-center justify-center mb-8">
-                                           <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
-                                               <Image
-                                                   src="/events/eventpages/5.svg"
-                                                   alt="Voice of Igniz"
-                                                   fill
-                                                   className="object-contain"
-                                               />
-                                           </div>
-                                       </div>
-                   
-                                       {/* Content Grid */}
-                                       <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                                           <div className="space-y-6 md:space-y-8 lg:col-span-7">
-                                               <div className="w-full">
-                                                   <Image
-                                                       src="/events/eventpages/5-text.svg"
-                                                       alt="Competition Description"
-                                                       width={800}
-                                                       height={300}
-                                                       className="w-full h-auto"
-                                                   />
-                                               </div>
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/5.webp"
+                                alt="Voice of Igniz"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Grid */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                        <div className="space-y-6 md:space-y-8 lg:col-span-7">
+                            <div className="w-full">
+                                <Image
+                                    src="/events/eventpages/5-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
+                                />
+                            </div>
 
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE :10:30-12:30PM</p>
@@ -76,18 +97,18 @@ export default function VoiceOfIgnizRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
                                 >
                                     <Image
-                                        src="/events/eventpages/register.svg"
+                                        src="/events/eventpages/register.webp"
                                         alt="Register"
                                         width={300}
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -95,7 +116,7 @@ export default function VoiceOfIgnizRegisterPage() {
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
                             <div className="relative w-[350px] h-[470px] xl:w-[450px] xl:h-[600px]">
                                 <Image
-                                    src="/events/eventpages/5.svg"
+                                    src="/events/eventpages/5.webp"
                                     alt="Voice of Igniz"
                                     fill
                                     className="object-contain"
@@ -109,7 +130,7 @@ export default function VoiceOfIgnizRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Time Limit: 3-7 mins, any extensions in time will result in direct disqualifications.</li> 
+                        <li>1. Time Limit: 3-7 mins, any extensions in time will result in direct disqualifications.</li>
                         <li>2. The event is exclusively for vocalists and not for solo instrumentalists.</li>
                         <li>3. The genre of music can be English, Malayalam and Hindi.</li>
                         <li>4. No editing or mixing is allowed in the audio.</li>
@@ -179,12 +200,20 @@ export default function VoiceOfIgnizRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                       <p>Parvathy Prakash : +91  8089011979</p>
-                       <p>Anushika K : +91 8075140810</p>
+                        <p>Parvathy Prakash : +91  8089011979</p>
+                        <p>Anushika K : +91 8075140810</p>
                     </div>
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="VOICE OF IGNIZ"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
         </div >
     );
 }

@@ -2,31 +2,60 @@ import Image from "next/image";
 
 export default function About() {
   return (
-    <div className="relative min-h-screen w-full bg-[#0a0a0a] overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 z-0">
-        <Image
-          src="/about/Mask group.svg"
-          alt=""
-          fill
-          className="object-cover opacity-80 mix-blend-screen"
-          priority
+    <div className="relative min-h-[auto] md:min-h-screen w-full bg-[#1A0000] overflow-hidden">
+      {/* Background Texture */}
+      <div
+        className="absolute inset-0 z-[2] pointer-events-none"
+        style={{
+          backgroundImage: `url('/images/asset_texture%201.svg')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          mixBlendMode: 'screen',
+          opacity: 0.15,
+        }}
+      />
+
+      {/* Slanting Background Box */}
+      <div
+        className="absolute z-[1] -rotate-6 pointer-events-none"
+        style={{
+          top: '-15%',
+          left: '-55%',
+          width: '210%',
+          height: '130%',
+        }}
+      >
+        <div className="absolute inset-0 bg-[#3B0000]" />
+        <div
+          className="absolute inset-0 opacity-80 mix-blend-multiply"
+          style={{
+            backgroundImage: `url('/images/TEXTURE%20UP.png')`,
+            backgroundSize: 'contain',
+            backgroundRepeat: 'repeat',
+            backgroundPosition: 'center',
+          }}
         />
       </div>
 
       {/* Decorative Triangles */}
-      <div className="absolute top-0 left-0 w-full h-48 bg-[#2B0000] z-0 pointer-events-none" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
-      <div className="absolute bottom-0 right-0 w-full h-48 bg-[#2B0000] z-0 pointer-events-none" style={{ clipPath: 'polygon(100% 100%, 100% 0, 0 100%)' }}></div>
+      <div className="absolute top-0 left-0 w-full h-24 md:h-48 bg-[#2B0000] z-0 pointer-events-none" style={{ clipPath: 'polygon(0 0, 100% 0, 0 100%)' }}></div>
+      <div className="absolute bottom-0 right-0 w-full h-24 md:h-48 bg-[#2B0000] z-0 pointer-events-none" style={{ clipPath: 'polygon(100% 100%, 100% 0, 0 100%)' }}></div>
+
+      {/* Top gradient – blends into section above */}
+      <div className="absolute top-0 left-0 w-full h-32 md:h-48 z-[3] pointer-events-none bg-gradient-to-b from-[#1A0000] to-transparent" />
+      {/* Bottom gradient – blends into section below */}
+      <div className="absolute bottom-0 left-0 w-full h-32 md:h-48 z-[3] pointer-events-none bg-gradient-to-t from-[#1A0000] to-transparent" />
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto px-6 py-12 md:py-24 max-w-5xl flex flex-col justify-center min-h-screen">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-12 md:py-24 max-w-5xl flex flex-col justify-center min-h-screen">
         <div className="grid gap-16">
           {/* ABOUT SSET */}
           <section className="space-y-4">
             <h2 className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide">
               ABOUT SSET
             </h2>
-            <p className="text-white/90 text-sm md:text-base leading-relaxed md:leading-loose text-justify font-sans">
+            <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
               The SCMS School of Engineering and Technology (SSET) is envisioned as a premier institution providing exceptional technology-related education. SSET focuses on the holistic development of students, emphasizing ethical values and preparing them to meet the evolving diverse needs of the industry and the challenges posed by society. The institution fosters innovation, critical thinking, and interdisciplinary learning to nurture competent professionals and responsible global citizens.
             </p>
           </section>
@@ -36,7 +65,7 @@ export default function About() {
             <h2 className="text-4xl md:text-5xl font-akira-expanded text-[#FFD120] uppercase tracking-wide">
               ABOUT IGNIZ
             </h2>
-            <div className="space-y-6 text-white/90 text-sm md:text-base leading-relaxed md:leading-loose text-justify font-sans">
+            <div className="space-y-6 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
               <p>
                 IGNIZ is the flagship techno-cultural fest of SCMS School of Engineering and Technology (SSET) and one of the most awaited celebrations of the year. It is a dynamic convergence of technical innovation and cultural brilliance, brought to life on a single electrifying platform.
               </p>

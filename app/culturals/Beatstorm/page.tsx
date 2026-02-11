@@ -2,10 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function BeatstormRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "BEATSTORM PASS",
+            price: 500,
+            type: "silver",
+            description: "ACCESS TO BEATSTORM COMPETITION\nTEAM SIZE: 2-20 MEMBERS"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -48,7 +68,7 @@ export default function BeatstormRegisterPage() {
                     <div className="lg:hidden relative flex items-center justify-center mb-8">
                         <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                             <Image
-                                src="/events/eventpages/2.svg"
+                                src="/events/eventpages/2.webp"
                                 alt="Beatstorm Dancer"
                                 fill
                                 className="object-contain"
@@ -61,7 +81,7 @@ export default function BeatstormRegisterPage() {
                         <div className="space-y-6 md:space-y-8 lg:col-span-7">
                             <div className="w-full">
                                 <Image
-                                    src="/events/eventpages/2-text.svg"
+                                    src="/events/eventpages/2-text.webp"
                                     alt="Competition Description"
                                     width={800}
                                     height={300}
@@ -78,18 +98,18 @@ export default function BeatstormRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer appearance-none bg-transparent border-none p-0 focus:outline-none"
                                 >
                                     <Image
-                                        src="/events/eventpages/register.svg"
+                                        src="/events/eventpages/register.webp"
                                         alt="Register"
                                         width={300}
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -97,7 +117,7 @@ export default function BeatstormRegisterPage() {
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
                             <div className="relative w-[350px] h-[470px] xl:w-[450px] xl:h-[600px]">
                                 <Image
-                                    src="/events/eventpages/2.svg"
+                                    src="/events/eventpages/2.webp"
                                     alt="Beatstorm Dancer"
                                     fill
                                     className="object-contain"
@@ -111,13 +131,13 @@ export default function BeatstormRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                       <li>1.Team size: Minimum 2, Maximum 20 members</li>  
-                       <li>2.Time limit: 6–8 minutes</li> 
-                       <li>3.Any dance style or fusion is allowed</li>  
-                       <li>4.Obscene movements or offensive themes are strictly prohibited</li>  
-                       <li>5.Props are allowed but must be handled by participants only</li>  
-                       <li>6.Teams must report 1 hour prior to the event</li>  
-                       <li>7.Judging will be based on synchronization, choreography, creativity, and stage impact</li>
+                        <li>1.Team size: Minimum 2, Maximum 20 members</li>
+                        <li>2.Time limit: 6–8 minutes</li>
+                        <li>3.Any dance style or fusion is allowed</li>
+                        <li>4.Obscene movements or offensive themes are strictly prohibited</li>
+                        <li>5.Props are allowed but must be handled by participants only</li>
+                        <li>6.Teams must report 1 hour prior to the event</li>
+                        <li>7.Judging will be based on synchronization, choreography, creativity, and stage impact</li>
                     </ul>
                 </section>
 
@@ -186,6 +206,14 @@ export default function BeatstormRegisterPage() {
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="BEATSTORM"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
         </div >
     );
 }

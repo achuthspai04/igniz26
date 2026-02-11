@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, type ReactNode, type CSSProperties } from "react";
+import { useRef, useEffect, useMemo, type ReactNode, type CSSProperties } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -38,6 +38,8 @@ export type LayerConfig = {
     triggerSelector: string;
     /** gsap.to() vars, e.g. { x: -1000 } */
     to: gsap.TweenVars;
+    /** Optional gsap.fromTo() initial vars — when set, uses fromTo instead of to */
+    from?: gsap.TweenVars;
     /** ScrollTrigger start, e.g. "top center" (default: "top center") */
     start?: string;
     /** ScrollTrigger end, e.g. "bottom top" – defines scroll range for scrub */
@@ -100,16 +102,15 @@ function ScrollTriggerLayer({
     const el = ref.current;
     const triggerEl = document.querySelector(st.triggerSelector);
     if (!el || !triggerEl) return;
-    const tween = gsap.to(el, {
-      ...st.to,
-      force3D: true,
-      scrollTrigger: {
-        trigger: triggerEl,
-        start: st.start ?? "top center",
-        end: st.end,
-        scrub: st.scrub,
-      },
-    });
+    const scrollTriggerConfig = {
+      trigger: triggerEl,
+      start: st.start ?? "top center",
+      end: st.end,
+      scrub: st.scrub,
+    };
+    const tween = st.from
+      ? gsap.fromTo(el, { ...st.from, force3D: true }, { ...st.to, force3D: true, scrollTrigger: scrollTriggerConfig })
+      : gsap.to(el, { ...st.to, force3D: true, scrollTrigger: scrollTriggerConfig });
     return () => {
       tween.kill();
       ScrollTrigger.getAll().forEach((s) => {
@@ -143,19 +144,25 @@ export default function LayeredImage({
   className = "",
 }: LayeredImageProps) {
   const isFull = aspectRatio === "full";
-  const aspectStyle =
-    !isFull && aspectRatio.includes("/")
-      ? { aspectRatio: aspectRatio.replace("_", "/") }
-      : undefined;
+  const aspectStyle = useMemo(
+    () =>
+      !isFull && aspectRatio.includes("/")
+        ? { aspectRatio: aspectRatio.replace("_", "/") }
+        : undefined,
+    [isFull, aspectRatio]
+  );
+
+  const sortedLayers = useMemo(
+    () => layers.slice().sort((a, b) => a.zIndex - b.zIndex),
+    [layers]
+  );
 
   return (
     <div
       className={`relative overflow-hidden w-full ${isFull ? "h-full min-h-0" : ""} ${className}`}
       style={aspectStyle}
     >
-      {layers
-        .slice()
-        .sort((a, b) => a.zIndex - b.zIndex)
+      {sortedLayers
         .map((layer, i) => {
           const scale = layer.scale ?? 1;
           const useSizeForScale = scale > 1;
@@ -218,6 +225,7 @@ export default function LayeredImage({
                   objectPosition: layer.objectPosition ?? "center",
                 }}
                 priority={layer.priority}
+                loading={layer.priority ? undefined : "lazy"}
               />
             ) : null;
           if (layer.gsapFrom) {
