@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
 
@@ -12,52 +13,119 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/5-text.svg",
     "/events/eventpages/register.svg",
 ];
+import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function VoiceOfIgnizRegisterPage() {
-    return (
-        <PageLoader assets={PRELOAD_ASSETS}>
-            <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
-                {/* Texture Overlay */}
-                <div
-                    className="fixed inset-0 z-0 opacity-30 pointer-events-none mix-blend-overlay"
-                    style={{
-                        backgroundImage: "url('/images/texture_updated.svg')",
-                        backgroundSize: "cover",
-                        backgroundRepeat: "no-repeat",
-                        backgroundPosition: "center top"
-                    }}
-                ></div>
+    const [isOpen, setIsOpen] = useState(false);
 
-                <Navbar />
-                <br />
-                <br />
-                <br />
-                <main className="relative z-10 flex-1 flex flex-col items-center px-4 pt-20 md:pt-32 pb-12 md:pb-20 max-w-7xl mx-auto w-full">
-                    {/* Hero Section */}
-                    <div className="w-full mb-12 md:mb-20">
-                        {/* Heading */}
-                        <h1
-                            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-akira-expanded text-[#FFD120] leading-tight mb-6 md:mb-8 break-words"
-                            style={{
-                                maskImage: "url('/images/navbartexture.png')",
-                                WebkitMaskImage: "url('/images/navbartexture.png')",
-                                maskMode: "luminance",
-                                maskSize: "cover",
-                                WebkitMaskSize: "cover",
-                                maskRepeat: "no-repeat",
-                                WebkitMaskRepeat: "no-repeat",
-                                maskPosition: "center",
-                                WebkitMaskPosition: "center"
-                            }}
-                        >
-                            VOICE OF IGNIZ
-                        </h1>
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "VOICE OF IGNIZ PASS",
+            price: 150,
+            type: "silver",
+            description: "ACCESS TO VOICE OF IGNIZ COMPETITION\nREGISTRATION: 150 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
+    return (
+        <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
+            {/* Texture Overlay */}
+            <div
+                className="fixed inset-0 z-0 opacity-30 pointer-events-none mix-blend-overlay"
+                style={{
+                    backgroundImage: "url('/images/texture_updated.svg')",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center top"
+                }}
+            ></div>
+
+            <Navbar />
+            <br />
+            <br />
+            <br />
+            <main className="relative z-10 flex-1 flex flex-col items-center px-4 pt-20 md:pt-32 pb-12 md:pb-20 max-w-7xl mx-auto w-full">
+                {/* Hero Section */}
+                <div className="w-full mb-12 md:mb-20">
+                    {/* Heading */}
+                    <h1
+                        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-akira-expanded text-[#FFD120] leading-tight mb-6 md:mb-8 break-words"
+                        style={{
+                            maskImage: "url('/images/navbartexture.png')",
+                            WebkitMaskImage: "url('/images/navbartexture.png')",
+                            maskMode: "luminance",
+                            maskSize: "cover",
+                            WebkitMaskSize: "cover",
+                            maskRepeat: "no-repeat",
+                            WebkitMaskRepeat: "no-repeat",
+                            maskPosition: "center",
+                            WebkitMaskPosition: "center"
+                        }}
+                    >
+                        VOICE OF IGNIZ
+                    </h1>
+
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/5.webp"
+                                alt="Voice of Igniz"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Grid */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                        <div className="space-y-6 md:space-y-8 lg:col-span-7">
+                            <div className="w-full">
+                                <Image
+                                    src="/events/eventpages/5-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
+                                />
+                            </div>
+
+                            <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
+                                <p>DATE :10:30-12:30PM</p>
+                                <p>STAGE: Stage 2</p>
+                                <p>REG FEES : 150 PER HEAD</p>
+                                <p>PRIZE POOL : 3000</p>
+                            </div>
+
+                            <div className="pt-4">
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
+                                >
+                                    <Image
+                                        src="/events/eventpages/register.webp"
+                                        alt="Register"
+                                        width={300}
+                                        height={100}
+                                        className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
+                                    />
+                                </button>
+                            </div>
+                        </div>
 
                         {/* Mobile: Image appears right after heading */}
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
                             <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                                 <Image
-                                    src="/events/eventpages/5.svg"
+                                    src="/events/eventpages/5.webp"
                                     alt="Voice of Igniz"
                                     fill
                                     className="object-contain"
@@ -77,6 +145,20 @@ export default function VoiceOfIgnizRegisterPage() {
                                         className="w-full h-auto"
                                     />
                                 </div>
+                {/* Rules Section */}
+                <section className="w-full mb-16">
+                    <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
+                    <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
+                        <li>1. Time Limit: 3-7 mins, any extensions in time will result in direct disqualifications.</li>
+                        <li>2. The event is exclusively for vocalists and not for solo instrumentalists.</li>
+                        <li>3. The genre of music can be English, Malayalam and Hindi.</li>
+                        <li>4. No editing or mixing is allowed in the audio.</li>
+                        <li>5. Either a backing track (karaoke) or one backing musician will be permitted.</li>
+                        <li>6. Judge's decision will be final.</li>
+                        <li>7. In case of any conflict, the organizer's decision would be final.</li>
+                        <li>8. Send your background music to stage@igniz.live</li>
+                    </ul>
+                </section>
 
                                 <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                     <p>DATE :10:30-12:30PM</p>
@@ -197,5 +279,24 @@ export default function VoiceOfIgnizRegisterPage() {
 
             </div>
         </PageLoader>
+                {/* Coordinators Section */}
+                <section className="w-full mb-10">
+                    <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
+                    <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
+                        <p>Parvathy Prakash : +91  8089011979</p>
+                        <p>Anushika K : +91 8075140810</p>
+                    </div>
+                </section>
+            </main>
+
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="VOICE OF IGNIZ"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
+        </div >
     );
 }

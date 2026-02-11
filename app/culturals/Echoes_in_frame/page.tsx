@@ -2,19 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import PageLoader from "@/components/PageLoader";
-
-const PRELOAD_ASSETS = [
-    "/images/texture_updated.svg",
-    "/images/navbartexture.png",
-    "/events/eventpages/4.svg",
-    "/events/eventpages/4-text.svg",
-    "/events/eventpages/register.svg",
-];
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function EchoesInFrameRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "ECHOES IN FRAME PASS",
+            price: 200,
+            type: "silver",
+            description: "ACCESS TO ECHOES IN FRAME COMPETITION\nREGISTRATION: 200 PER TEAM"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">

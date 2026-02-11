@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
 
@@ -12,8 +13,28 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/6-text.svg",
     "/events/eventpages/register.svg",
 ];
+import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function MRAndMSIgnizRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "MR & MS IGNIZ PASS",
+            price: 150,
+            type: "silver",
+            description: "ACCESS TO MR & MS IGNIZ COMPETITION\nREGISTRATION: 150 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -52,6 +73,30 @@ export default function MRAndMSIgnizRegisterPage() {
                         >
                             MR & MS IGNIZ
                         </h1>
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/6.webp"
+                                alt="Echoes in Frames"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Grid */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                        <div className="space-y-6 md:space-y-8 lg:col-span-7">
+                            <div className="w-full">
+                                <Image
+                                    src="/events/eventpages/6-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
+                                />
+                            </div>
 
                         {/* Mobile: Image appears right after heading */}
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
@@ -193,17 +238,24 @@ export default function MRAndMSIgnizRegisterPage() {
                         </div>
                     </section>
 
-                    {/* Coordinators Section */}
-                    <section className="w-full mb-10">
-                        <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
-                        <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                            <p>Parvathy Prakash : +91  8089011979</p>
-                            <p>Anushika K : +91 8075140810</p>
-                        </div>
-                    </section>
-                </main>
+                {/* Coordinators Section */}
+                <section className="w-full mb-10">
+                    <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
+                    <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
+                        <p>Parvathy Prakash : +91  8089011979</p>
+                        <p>Anushika K : +91 8075140810</p>
+                    </div>
+                </section>
+            </main>
 
-            </div>
-        </PageLoader>
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="MR & MS IGNIZ"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
+        </div >
     );
 }

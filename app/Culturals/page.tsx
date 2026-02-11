@@ -6,15 +6,15 @@ import PageLoader from "@/components/PageLoader";
 import CulturalEventCard from "@/components/CulturalEventCard";
 
 const CULTURAL_EVENTS = [
-    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition", href: "/culturals/abhinaya" },
-    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition", href: "/culturals/Beatstorm" },
-    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show", href: "/culturals/Aurelia" },
-    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition", href: "/culturals/Echoes_in_frame" },
-    { id: 5, src: "/culturals/solo_music.webp", alt: "Solo Music Competition" },
-    { id: 6, src: "/culturals/shot_choreo.webp", alt: "Spot Choreography" },
-    { id: 7, src: "/culturals/mr_mrs.webp", alt: "Mr & Ms Igniz" },
-    { id: 8, src: "/culturals/quiz.webp", alt: "Quiz Competition" },
-    { id: 9, src: "/culturals/band.webp", alt: "Band" },
+    { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance Competition", href: "/Culturals/abhinaya" },
+    { id: 2, src: "/culturals/d2r.webp", alt: "Hip-Hop Dance Competition", href: "/Culturals/Beatstorm" },
+    { id: 3, src: "/culturals/fashion_show.webp", alt: "Fashion Show", href: "/Culturals/Aurelia" },
+    { id: 4, src: "/culturals/short_film.webp", alt: "Short Film Competition", href: "/Culturals/Echoes_in_frame" },
+    { id: 5, src: "/culturals/solo_music.webp", alt: "Solo Music Competition", href: "/Culturals/voice_of_igniz" },
+    { id: 6, src: "/culturals/shot_choreo.webp", alt: "Spot Choreography", href: "/Culturals/Step-up" },
+    { id: 7, src: "/culturals/mr_mrs.webp", alt: "Mr & Ms Igniz", href: "/Culturals/MR&MSIgniz" },
+    { id: 8, src: "/culturals/quiz.webp", alt: "Quiz Competition", href: "/Culturals/Khel_Gyan" },
+    { id: 9, src: "/culturals/band.webp", alt: "Band", href: "/Culturals/Melodinz" },
 ];
 
 const PRELOAD_ASSETS = [

@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
@@ -13,8 +14,27 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/1-text.svg",
     "/events/eventpages/register.svg",
 ];
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AbhinayaRegisterPage() {
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "REGISTRATION",
+            price: 150,
+            type: "silver",
+            description: "Registration Fee: 150 Per Head"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -53,6 +73,17 @@ export default function AbhinayaRegisterPage() {
                         >
                             CLASSICAL DANCE COMPETITION
                         </h1>
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/1.webp"
+                                alt="Classical Dancer"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
 
                         {/* Mobile: Image appears right after heading */}
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
@@ -62,6 +93,11 @@ export default function AbhinayaRegisterPage() {
                                     alt="Classical Dancer"
                                     fill
                                     className="object-contain"
+                                    src="/events/eventpages/1-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
                                 />
                             </div>
                         </div>
@@ -101,6 +137,27 @@ export default function AbhinayaRegisterPage() {
                                         />
                                     </Link>
                                 </div>
+                            <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
+                                <p>DATE : <span className="text-[#FFD120]">21-22 FEB</span></p>
+                                <p>TIME : 10 : 30 - 12 : 00 AM</p>
+                                <p>STAGE : STAGE I</p>
+                                <p>REG FEES : 150 PER HEAD</p>
+                                <p>PRIZE POOL : 2000</p>
+                            </div>
+
+                            <div className="pt-4">
+                                <button
+                                    onClick={() => setIsRegisterOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer"
+                                >
+                                    <Image
+                                        src="/events/eventpages/register.webp"
+                                        alt="Register"
+                                        width={300}
+                                        height={100}
+                                        className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
+                                    />
+                                </button>
                             </div>
 
                             {/* Desktop: Image on the right */}
@@ -113,6 +170,15 @@ export default function AbhinayaRegisterPage() {
                                         className="object-contain"
                                     />
                                 </div>
+                        {/* Desktop: Image on the right */}
+                        <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
+                            <div className="relative w-[350px] h-[470px] xl:w-[450px] xl:h-[600px]">
+                                <Image
+                                    src="/events/eventpages/1.webp"
+                                    alt="Classical Dancer"
+                                    fill
+                                    className="object-contain"
+                                />
                             </div>
                         </div>
                     </div>
@@ -205,5 +271,14 @@ export default function AbhinayaRegisterPage() {
 
             </div>
         </PageLoader>
+            <RegistrationPopup
+                isOpen={isRegisterOpen}
+                onClose={() => setIsRegisterOpen(false)}
+                ticketOptions={ticketOptions}
+                eventName="CLASSICAL DANCE"
+            />
+
+            <Footer />
+        </div >
     );
 }

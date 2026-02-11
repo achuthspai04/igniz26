@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
@@ -13,8 +14,27 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/3-text.svg",
     "/events/eventpages/register.svg",
 ];
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AureliaRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "AURELIA PASS",
+            price: 180,
+            type: "silver",
+            description: "ACCESS TO AURELIA FASHION SHOW\nREGISTRATION: 180 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -29,30 +49,17 @@ export default function AureliaRegisterPage() {
                     }}
                 ></div>
 
-                <Navbar />
-                <br />
-                <br />
-                <br />
-                <main className="relative z-10 flex-1 flex flex-col items-center px-4 pt-20 md:pt-32 pb-12 md:pb-20 max-w-7xl mx-auto w-full">
-                    {/* Hero Section */}
-                    <div className="w-full mb-12 md:mb-20">
-                        {/* Heading */}
-                        <h1
-                            className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-akira-expanded text-[#FFD120] leading-tight mb-6 md:mb-8 break-words"
-                            style={{
-                                maskImage: "url('/images/navbartexture.png')",
-                                WebkitMaskImage: "url('/images/navbartexture.png')",
-                                maskMode: "luminance",
-                                maskSize: "cover",
-                                WebkitMaskSize: "cover",
-                                maskRepeat: "no-repeat",
-                                WebkitMaskRepeat: "no-repeat",
-                                maskPosition: "center",
-                                WebkitMaskPosition: "center"
-                            }}
-                        >
-                            AURELIA
-                        </h1>
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/3.webp"
+                                alt="Aurelia Fashion Show"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
 
                         {/* Mobile: Image appears right after heading */}
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
@@ -212,7 +219,14 @@ export default function AureliaRegisterPage() {
                     </section>
                 </main>
 
-            </div>
-        </PageLoader>
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="AURELIA"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
+        </div >
     );
 }

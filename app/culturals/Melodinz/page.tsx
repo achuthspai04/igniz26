@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
 
@@ -12,8 +13,28 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/8-text.svg",
     "/events/eventpages/register.svg",
 ];
+import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function MelodinzRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "MELODINZ PASS",
+            price: 150,
+            type: "silver",
+            description: "ACCESS TO MELODINZ COMPETITION\nREGISTRATION: 150 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -52,12 +73,97 @@ export default function MelodinzRegisterPage() {
                         >
                             Melodinz
                         </h1>
+        <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
+            {/* Texture Overlay */}
+            <div
+                className="fixed inset-0 z-0 opacity-30 pointer-events-none mix-blend-overlay"
+                style={{
+                    backgroundImage: "url('/images/texture_updated.svg')",
+                    backgroundSize: "cover",
+                    backgroundRepeat: "no-repeat",
+                    backgroundPosition: "center top"
+                }}
+            ></div>
+
+            <Navbar />
+            <br />
+            <br />
+            <br />
+            <main className="relative z-10 flex-1 flex flex-col items-center px-4 pt-20 md:pt-32 pb-12 md:pb-20 max-w-7xl mx-auto w-full">
+                {/* Hero Section */}
+                <div className="w-full mb-12 md:mb-20">
+                    {/* Heading */}
+                    <h1
+                        className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-akira-expanded text-[#FFD120] leading-tight mb-6 md:mb-8 break-words"
+                        style={{
+                            maskImage: "url('/images/navbartexture.png')",
+                            WebkitMaskImage: "url('/images/navbartexture.png')",
+                            maskMode: "luminance",
+                            maskSize: "cover",
+                            WebkitMaskSize: "cover",
+                            maskRepeat: "no-repeat",
+                            WebkitMaskRepeat: "no-repeat",
+                            maskPosition: "center",
+                            WebkitMaskPosition: "center"
+                        }}
+                    >
+                        Melodinz
+                    </h1>
+
+                    {/* Mobile: Image appears right after heading */}
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/8.webp"
+                                alt="Melodinz"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Grid */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                        <div className="space-y-6 md:space-y-8 lg:col-span-7">
+                            <div className="w-full">
+                                <Image
+                                    src="/events/eventpages/8-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
+                                />
+                            </div>
+
+                            <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
+                                <p>DATE :</p>
+                                <p>TIME : 10:00-2:30PM</p>
+                                <p>STAGE : Stage 2</p>
+                                <p>REG FEES : 150 PER HEAD</p>
+                                <p>PRIZE POOL : 10000</p>
+                            </div>
+
+                            <div className="pt-4">
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
+                                >
+                                    <Image
+                                        src="/events/eventpages/register.webp"
+                                        alt="Register"
+                                        width={300}
+                                        height={100}
+                                        className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
+                                    />
+                                </button>
+                            </div>
+                        </div>
 
                         {/* Mobile: Image appears right after heading */}
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
                             <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                                 <Image
-                                    src="/events/eventpages/8.svg"
+                                    src="/events/eventpages/8.webp"
                                     alt="Melodinz"
                                     fill
                                     className="object-contain"

@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PageLoader from "@/components/PageLoader";
@@ -13,8 +14,27 @@ const PRELOAD_ASSETS = [
     "/events/eventpages/2-text.svg",
     "/events/eventpages/register.svg",
 ];
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function BeatstormRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "BEATSTORM PASS",
+            price: 500,
+            type: "silver",
+            description: "ACCESS TO BEATSTORM COMPETITION\nTEAM SIZE: 2-20 MEMBERS"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -58,10 +78,11 @@ export default function BeatstormRegisterPage() {
                         <div className="lg:hidden relative flex items-center justify-center mb-8">
                             <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                                 <Image
-                                    src="/events/eventpages/2.svg"
-                                    alt="Beatstorm Dancer"
-                                    fill
-                                    className="object-contain"
+                                    src="/events/eventpages/2-text.webp"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
                                 />
                             </div>
                         </div>

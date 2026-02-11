@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
 
@@ -14,6 +15,24 @@ const PRELOAD_ASSETS = [
 ];
 
 export default function KhelGyanRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "KHEL GYAN PASS",
+            price: 50,
+            type: "silver",
+            description: "ACCESS TO KHEL GYAN QUIZ\nREGISTRATION: 50 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -183,17 +202,24 @@ export default function KhelGyanRegisterPage() {
                         </div>
                     </section>
 
-                    {/* Coordinators Section */}
-                    <section className="w-full mb-10">
-                        <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
-                        <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                            <p>Avinash Cinesh : +91  8075900386</p>
-                            <p>Abhishek Reijish : +91 89217 67432</p>
-                        </div>
-                    </section>
-                </main>
+                {/* Coordinators Section */}
+                <section className="w-full mb-10">
+                    <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
+                    <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
+                        <p>Avinash Cinesh : +91  8075900386</p>
+                        <p>Abhishek Reijish : +91 89217 67432</p>
+                    </div>
+                </section>
+            </main>
 
-            </div>
-        </PageLoader>
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="KHEL GYAN"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
+        </div >
     );
 }
