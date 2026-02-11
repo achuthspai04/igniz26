@@ -2,10 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AureliaRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "AURELIA PASS",
+            price: 180,
+            type: "silver",
+            description: "ACCESS TO AURELIA FASHION SHOW\nREGISTRATION: 180 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -48,7 +68,7 @@ export default function AureliaRegisterPage() {
                     <div className="lg:hidden relative flex items-center justify-center mb-8">
                         <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
                             <Image
-                                src="/events/eventpages/3.svg"
+                                src="/events/eventpages/3.webp"
                                 alt="Aurelia Fashion Show"
                                 fill
                                 className="object-contain"
@@ -61,7 +81,7 @@ export default function AureliaRegisterPage() {
                         <div className="space-y-6 md:space-y-8 lg:col-span-7">
                             <div className="w-full">
                                 <Image
-                                    src="/events/eventpages/3-text.svg"
+                                    src="/events/eventpages/3-text.webp"
                                     alt="Competition Description"
                                     width={800}
                                     height={300}
@@ -78,18 +98,18 @@ export default function AureliaRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
                                 >
                                     <Image
-                                        src="/events/eventpages/register.svg"
+                                        src="/events/eventpages/register.webp"
                                         alt="Register"
                                         width={300}
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -97,7 +117,7 @@ export default function AureliaRegisterPage() {
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
                             <div className="relative w-[350px] h-[470px] xl:w-[450px] xl:h-[600px]">
                                 <Image
-                                    src="/events/eventpages/3.svg"
+                                    src="/events/eventpages/3.webp"
                                     alt="Aurelia Fashion Show"
                                     fill
                                     className="object-contain"
@@ -202,6 +222,14 @@ export default function AureliaRegisterPage() {
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="AURELIA"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
         </div >
     );
 }
