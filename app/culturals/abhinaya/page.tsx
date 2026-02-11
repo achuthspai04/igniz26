@@ -1,11 +1,31 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AbhinayaRegisterPage() {
+    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "REGISTRATION",
+            price: 150,
+            type: "silver",
+            description: "Registration Fee: 150 Per Head"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -78,9 +98,9 @@ export default function AbhinayaRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsRegisterOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer"
                                 >
                                     <Image
                                         src="/events/eventpages/register.svg"
@@ -89,7 +109,7 @@ export default function AbhinayaRegisterPage() {
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -193,6 +213,14 @@ export default function AbhinayaRegisterPage() {
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isRegisterOpen}
+                onClose={() => setIsRegisterOpen(false)}
+                ticketOptions={ticketOptions}
+                eventName="CLASSICAL DANCE"
+            />
+
+            <Footer />
         </div >
     );
 }

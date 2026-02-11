@@ -2,9 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function StepUpRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "STEP UP PASS",
+            price: 150,
+            type: "silver",
+            description: "ACCESS TO STEP UP COMPETITION\nREGISTRATION: 150 PER HEAD"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -44,29 +65,29 @@ export default function StepUpRegisterPage() {
                     </h1>
 
                     {/* Mobile: Image appears right after heading */}
-                                        <div className="lg:hidden relative flex items-center justify-center mb-8">
-                                            <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
-                                                <Image
-                                                    src="/events/eventpages/9.svg"
-                                                    alt="Step Up"
-                                                    fill
-                                                    className="object-contain"
-                                                />
-                                            </div>
-                                        </div>
-                    
-                                        {/* Content Grid */}
-                                        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
-                                            <div className="space-y-6 md:space-y-8 lg:col-span-7">
-                                                <div className="w-full">
-                                                    <Image
-                                                        src="/events/eventpages/9-text.svg"
-                                                        alt="Competition Description"
-                                                        width={800}
-                                                        height={300}
-                                                        className="w-full h-auto"
-                                                    />
-                                                </div>
+                    <div className="lg:hidden relative flex items-center justify-center mb-8">
+                        <div className="relative w-[250px] h-[330px] sm:w-[300px] sm:h-[400px]">
+                            <Image
+                                src="/events/eventpages/9.svg"
+                                alt="Step Up"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
+                    </div>
+
+                    {/* Content Grid */}
+                    <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                        <div className="space-y-6 md:space-y-8 lg:col-span-7">
+                            <div className="w-full">
+                                <Image
+                                    src="/events/eventpages/9-text.svg"
+                                    alt="Competition Description"
+                                    width={800}
+                                    height={300}
+                                    className="w-full h-auto"
+                                />
+                            </div>
 
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE :</p>
@@ -77,9 +98,9 @@ export default function StepUpRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
                                 >
                                     <Image
                                         src="/events/eventpages/register.svg"
@@ -88,7 +109,7 @@ export default function StepUpRegisterPage() {
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -178,12 +199,20 @@ export default function StepUpRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                    <p>Sandriya Sebastian  : +91  9633197392</p>
-                    <p>Aakash M K  : +91 9383483757</p>
+                        <p>Sandriya Sebastian  : +91  9633197392</p>
+                        <p>Aakash M K  : +91 9383483757</p>
                     </div>
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="STEP UP"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
         </div >
     );
 }

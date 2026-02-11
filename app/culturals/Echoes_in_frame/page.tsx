@@ -2,10 +2,30 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function EchoesInFrameRegisterPage() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const ticketOptions: TicketOption[] = [
+        {
+            id: "standard",
+            name: "ECHOES IN FRAME PASS",
+            price: 200,
+            type: "silver",
+            description: "ACCESS TO ECHOES IN FRAME COMPETITION\nREGISTRATION: 200 PER TEAM"
+        },
+        {
+            id: "premium",
+            name: "GOLDEN PASS",
+            price: 800,
+            type: "gold",
+            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
+        }
+    ];
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
             {/* Texture Overlay */}
@@ -77,9 +97,9 @@ export default function EchoesInFrameRegisterPage() {
                             </div>
 
                             <div className="pt-4">
-                                <Link
-                                    href="#"
-                                    className="inline-block hover:scale-105 transition-transform"
+                                <button
+                                    onClick={() => setIsOpen(true)}
+                                    className="inline-block hover:scale-105 transition-transform cursor-pointer bg-transparent border-none p-0 focus:outline-none"
                                 >
                                     <Image
                                         src="/events/eventpages/register.svg"
@@ -88,7 +108,7 @@ export default function EchoesInFrameRegisterPage() {
                                         height={100}
                                         className="w-auto h-12 sm:h-14 md:h-16 lg:h-20"
                                     />
-                                </Link>
+                                </button>
                             </div>
                         </div>
 
@@ -183,6 +203,14 @@ export default function EchoesInFrameRegisterPage() {
                 </section>
             </main>
 
+            <RegistrationPopup
+                isOpen={isOpen}
+                onClose={() => setIsOpen(false)}
+                eventName="ECHOES IN FRAMES"
+                ticketOptions={ticketOptions}
+            />
+
+            <Footer />
         </div >
     );
 }
