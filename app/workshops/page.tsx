@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
@@ -583,15 +583,112 @@ const PRELOAD_ASSETS = [
 export default function WorkshopsPage() {
     const [selectedDept, setSelectedDept] = useState("COMPUTER SCIENCE");
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
+    const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
     const activeEvents = useMemo(() => DEPARTMENT_EVENTS[selectedDept] || [], [selectedDept]);
-    
+
+    // Reset visible cards when department changes
+    useEffect(() => {
+        setVisibleCards(new Set());
+    }, [selectedDept]);
+
+    // Intersection Observer for entrance animations
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute("data-card-id");
+                        if (id) {
+                            setVisibleCards((prev) => new Set(prev).add(id));
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+        );
+
+        cardRefs.current.forEach((el) => observer.observe(el));
+        return () => observer.disconnect();
+    }, [activeEvents]);
+
+    const setCardRef = useCallback((el: HTMLDivElement | null, id: string) => {
+        if (el) cardRefs.current.set(id, el);
+        else cardRefs.current.delete(id);
+    }, []);
+
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
 
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
+            {/* Card animation styles */}
+            <style jsx global>{`
+                .card-animate {
+                    opacity: 0;
+                    transform: translateY(60px);
+                    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .card-animate.card-visible {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+                .event-card-wrapper {
+                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                                filter 0.35s ease;
+                }
+                .event-card-wrapper:hover {
+                    transform: translateY(-8px) scale(1.03);
+                    filter: brightness(1.04);
+                }
+                .event-card-wrapper:hover .card-arrow {
+                    transform: rotate(-45deg) scale(1.15);
+                }
+                .event-card-wrapper:hover .card-image {
+                    filter: grayscale(0.3);
+                    transform: scale(1.05);
+                }
+                .card-arrow {
+                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .card-image {
+                    transition: filter 0.5s ease, transform 0.5s ease;
+                }
+                /* Dropdown animations */
+                @keyframes dropdownSlideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-16px) scaleY(0.9);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0) scaleY(1);
+                    }
+                }
+                .dropdown-menu {
+                    animation: dropdownSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+                    transform-origin: top center;
+                }
+                .dropdown-item {
+                    transition: filter 0.2s ease, transform 0.2s ease;
+                    filter: brightness(0.75);
+                }
+                .dropdown-item:hover {
+                    filter: brightness(1);
+                    transform: scale(1.02);
+                    z-index: 100 !important;
+                }
+                .dropdown-arrow {
+                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+                }
+                .dropdown-arrow.open {
+                    transform: rotate(180deg);
+                }
+            `}</style>
             <div className="relative w-full overflow-clip bg-[#2B0000] min-h-screen flex flex-col">
                 <Navbar />
 
@@ -623,11 +720,10 @@ export default function WorkshopsPage() {
         backgroundSize: "100% 100%",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
-        filter: "brightness(1)", // always default color
       }}
     >
       <span
-        className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
+        className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center pr-8"
         style={{
           fontFamily: '"Akira Expanded", sans-serif',
           fontWeight: 900,
@@ -643,12 +739,24 @@ export default function WorkshopsPage() {
       >
         {selectedDept}
       </span>
+      {/* Down arrow */}
+      <svg
+        className={`absolute right-6 md:right-8 w-5 h-5 md:w-6 md:h-6 dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#3B0000"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
     </button>
 
     {/* Dropdown */}
     {isDropdownOpen && (
       <div
-        className="absolute top-full left-0 w-full flex flex-col"
+        className="absolute top-full left-0 w-full flex flex-col dropdown-menu"
         style={{ marginTop: "-12px" }}
       >
         {DEPARTMENTS.map((dept, index) => (
@@ -658,7 +766,7 @@ export default function WorkshopsPage() {
               setSelectedDept(dept);
               setIsDropdownOpen(false);
             }}
-            className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border"
+            className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border dropdown-item"
             style={{
               zIndex: DEPARTMENTS.length - index,
               marginTop: index === 0 ? 0 : "-12px",
@@ -667,10 +775,7 @@ export default function WorkshopsPage() {
               backgroundSize: "100% 100%",
               backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
-              filter:
-                selectedDept === dept
-                  ? "brightness(1)"      // selected normal
-                  : "brightness(0.75)",  // unselected darker
+              animationDelay: `${index * 40}ms`,
             }}
           >
             <span
@@ -721,10 +826,21 @@ export default function WorkshopsPage() {
 
                     {/* Workshops Grid */}
                     <div className="relative z-10 w-full max-w-7xl space-y-8 md:space-y-10">
-                        {activeEvents.map((workshop) => (
+                        {activeEvents.map((workshop, index) => {
+                            const cardId = `${selectedDept}-${workshop.id}`;
+                            const isVisible = visibleCards.has(cardId);
+                            return (
                             <div
-                                key={workshop.id}
-                                className="relative w-full group hover:shadow-lg transition-shadow"
+                                key={cardId}
+                                ref={(el) => setCardRef(el, cardId)}
+                                data-card-id={cardId}
+                                className={`card-animate ${isVisible ? 'card-visible' : ''}`}
+                                style={{
+                                    transitionDelay: isVisible ? `${index * 120}ms` : '0ms',
+                                }}
+                            >
+                            <div
+                                className="relative w-full group event-card-wrapper"
                                 style={{
                                     WebkitMaskImage: 'url("/events/technical%20events/event-card.png")',
                                     maskImage: 'url("/events/technical%20events/event-card.png")',
@@ -749,18 +865,19 @@ export default function WorkshopsPage() {
                                 {/* Card content */}
                                 <div className="relative z-10 flex flex-col md:flex-row items-stretch min-h-[180px] md:min-h-[220px]">
                                     {/* Image Section - Left with gradient blend */}
-                                    <div className="relative w-full md:w-[32%] h-48 md:h-auto flex-shrink-0">
+                                    <div className="relative w-full md:w-[34%] h-48 md:h-auto flex-shrink-0">
                                         <Image
                                             src={workshop.image}
                                             alt={workshop.title}
                                             fill
-                                            className="object-cover grayscale"
+                                            className="object-cover grayscale card-image"
                                         />
-                                        {/* Smooth gradient blend effect on right edge */}
+                                        {/* Smooth gradient blend — extends past image edge to hide seam */}
                                         <div 
-                                            className="absolute inset-y-0 right-0 w-24 md:w-32"
+                                            className="absolute inset-y-0 w-56 md:w-72 z-10"
                                             style={{
-                                                background: 'linear-gradient(to right, transparent 0%, rgba(255, 209, 32, 0.3) 30%, rgba(255, 209, 32, 0.6) 50%, rgba(255, 209, 32, 0.85) 70%, #FFD120 100%)'
+                                                right: '-2rem',
+                                                background: 'linear-gradient(to right, transparent 0%, rgba(255, 209, 32, 0.15) 15%, rgba(255, 209, 32, 0.4) 30%, rgba(255, 209, 32, 0.65) 45%, rgba(255, 209, 32, 0.85) 60%, #FFD120 75%, #FFD120 100%)'
                                             }}
                                         />
                                     </div>
@@ -885,7 +1002,7 @@ export default function WorkshopsPage() {
                                     </div>
 
                                     {/* Arrow Icon - Top Right */}
-                                    <div className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 md:w-11 md:h-11 z-20">
+                                    <div className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 md:w-11 md:h-11 z-20 card-arrow">
                                         <Image
                                             src="/events/technical%20events/arrow-circle-right.png"
                                             alt="Details"
@@ -895,7 +1012,9 @@ export default function WorkshopsPage() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            </div>
+                            );
+                        })}
                     </div>
 
                     {/* Register Button */}
