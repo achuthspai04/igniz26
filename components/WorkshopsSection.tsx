@@ -59,7 +59,7 @@ export default function WorkshopsSection() {
           </div>
         </div>
 
-        <Link href="#">
+        <Link href="/workshops">
           <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
             <Image
               src="/events/eventpages/register.webp"
