@@ -40,7 +40,7 @@ export default function KhelGyanRegisterPage() {
                                 <Image src="/events/eventpages/7-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">21-22 FEB</span></p>
+                                <p>DATE : <span className="text-[#FFD120]">26-27 FEB</span></p>
                                 <p>TIME : 01:00 - 03:00 PM</p>
                                 <p>STAGE : AD block Classroom 2</p>
                                 <p>REG FEES : 50 PER HEAD</p>
