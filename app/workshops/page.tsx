@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
@@ -82,7 +82,21 @@ const PRELOAD_ASSETS = [
     ...WORKSHOPS.map((w) => w.image),
 ];
 
+const DEPARTMENTS = [
+    "COMPUTER SCIENCE",
+    "ARTIFICIAL INTELLIGENCE & DATA SCIENCE",
+    "CIVIL",
+    "MECHANICAL",
+    "AUTOMOBILE",
+    "ELECTRICAL",
+    "ELECTRONICS",
+    
+];
+
 export default function WorkshopsPage() {
+    const [selectedDept, setSelectedDept] = useState("COMPUTER SCIENCE");
+    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+    
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
@@ -107,21 +121,95 @@ export default function WorkshopsPage() {
                         </h1>
                     </div>
 
-                    {/* Department Section */}
-                    <div className="relative z-10 w-full max-w-4xl mb-12 md:mb-16 flex items-center justify-center gap-4">
-                        <div className="bg-[#FFD120] px-6 py-3 md:px-8 md:py-4 font-black text-[#1A0000] uppercase text-lg md:text-xl tracking-wide">
-                            Department
-                        </div>
-                        <div className="w-16 h-16 md:w-20 md:h-20 bg-white rounded-full flex items-center justify-center">
-                            <svg
-                                className="w-8 h-8 md:w-10 md:h-10 text-gray-400"
-                                fill="currentColor"
-                                viewBox="0 0 20 20"
-                            >
-                                <path d="M10 10a3 3 0 100-6 3 3 0 000 6zm0 1.268a6.008 6.008 0 00-5.916 9.142H15.916A6.008 6.008 0 0010 11.268z" />
-                            </svg>
-                        </div>
-                    </div>
+{/* Department Dropdown Section */}
+<div className="relative z-50 w-full max-w-4xl mb-12 md:mb-16 flex justify-center">
+  <div className="relative w-full max-w-[500px]"> {/* fixed consistent width */}
+
+    {/* Main Button */}
+    <button
+      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+      className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border"
+      style={{
+        backgroundImage: 'url("/events/technical%20events/dropdown.svg")',
+        backgroundSize: "100% 100%",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+        filter: "brightness(1)", // always default color
+      }}
+    >
+      <span
+        className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
+        style={{
+          fontFamily: '"Akira Expanded", sans-serif',
+          fontWeight: 900,
+          fontSize: "clamp(14px, 1.6vw, 20px)",
+          lineHeight: "1.05",
+          letterSpacing: "-0.04em",
+          whiteSpace: "normal",
+          overflow: "hidden",
+          display: "-webkit-box",
+          WebkitLineClamp: 2,
+          WebkitBoxOrient: "vertical",
+        }}
+      >
+        {selectedDept}
+      </span>
+    </button>
+
+    {/* Dropdown */}
+    {isDropdownOpen && (
+      <div
+        className="absolute top-full left-0 w-full flex flex-col"
+        style={{ marginTop: "-12px" }}
+      >
+        {DEPARTMENTS.map((dept, index) => (
+          <button
+            key={dept}
+            onClick={() => {
+              setSelectedDept(dept);
+              setIsDropdownOpen(false);
+            }}
+            className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border"
+            style={{
+              zIndex: DEPARTMENTS.length - index,
+              marginTop: index === 0 ? 0 : "-12px",
+              backgroundImage:
+                'url("/events/technical%20events/dropdown.svg")',
+              backgroundSize: "100% 100%",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+              filter:
+                selectedDept === dept
+                  ? "brightness(1)"      // selected normal
+                  : "brightness(0.75)",  // unselected darker
+            }}
+          >
+            <span
+              className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
+              style={{
+                fontFamily: '"Akira Expanded", sans-serif',
+                fontWeight: 900,
+                fontSize: "clamp(14px, 1.6vw, 20px)",
+                lineHeight: "1.05",
+                letterSpacing: "-0.04em",
+                whiteSpace: "normal",
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {dept}
+            </span>
+          </button>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
+
+
+
 
                     {/* SVG filters defined once at top level */}
                     <svg className="absolute w-0 h-0" aria-hidden="true" style={{ position: 'absolute', width: 0, height: 0 }}>
