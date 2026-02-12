@@ -41,7 +41,7 @@ export default function BeatstormRegisterPage() {
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">21-22 FEB</span></p>
-                                <p>TIME : 12:30 - 02:30 PM</p>
+                                <p>TIME : 10:15 - 01:00 PM</p>
                                 <p>STAGE : STAGE I</p>
                                 <p>REG FEES : 500 PER TEAM</p>
                                 <p>PRIZE POOL : 3000</p>
