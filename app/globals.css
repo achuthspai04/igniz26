@@ -72,3 +72,9 @@ body {
     content-visibility: auto;
   }
 }
+
+/* Radial edge fade — hides square borders of overlay images */
+.radial-edge-fade {
+  -webkit-mask-image: radial-gradient(ellipse 70% 70% at center, black 50%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 70% at center, black 50%, transparent 100%);
+}
