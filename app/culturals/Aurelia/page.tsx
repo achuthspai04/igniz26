@@ -106,8 +106,8 @@ export default function AureliaRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                        <p>Nayana S: +91 8547044844</p>
-                        <p>Anjana R Nair: +91 8139018475</p>
+                        <p>Syed Farhan: +91 8877780727</p>
+                        <p>Swathi V: +91 7356978336</p>
                     </div>
                 </section>
             </main>

@@ -97,8 +97,8 @@ export default function KhelGyanRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                        <p>Avinash K: +91 7736001500</p>
-                        <p>Abhishek A: +91 9645831412</p>
+                        <p>Avinash Cinesh: +91 8075900386</p>
+                        <p>Abhishek Reijish: +91 8921767432</p>
                     </div>
                 </section>
             </main>
