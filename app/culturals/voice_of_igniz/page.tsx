@@ -16,13 +16,6 @@ export default function VoiceOfIgnizRegisterPage() {
             price: 150,
             type: "silver",
             description: "ACCESS TO VOICE OF IGNIZ COMPETITION\nREGISTRATION: 150 PER HEAD"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 

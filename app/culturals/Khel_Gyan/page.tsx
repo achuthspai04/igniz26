@@ -16,13 +16,6 @@ export default function KhelGyanRegisterPage() {
             price: 50,
             type: "silver",
             description: "ACCESS TO KHEL GYAN COMPETITION\nREGISTRATION: 50 PER HEAD"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 

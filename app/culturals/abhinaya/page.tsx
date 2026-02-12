@@ -16,13 +16,6 @@ export default function AbhinayaRegisterPage() {
             price: 150,
             type: "silver",
             description: "Registration Fee: 150 Per Head"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 

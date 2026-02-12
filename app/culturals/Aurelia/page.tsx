@@ -16,13 +16,6 @@ export default function AureliaRegisterPage() {
             price: 180,
             type: "silver",
             description: "ACCESS TO AURELIA FASHION SHOW\nREGISTRATION: 180 PER HEAD"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 

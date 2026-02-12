@@ -16,13 +16,6 @@ export default function EchoesInFrameRegisterPage() {
             price: 200,
             type: "silver",
             description: "ACCESS TO ECHOES IN FRAME COMPETITION\nREGISTRATION: 200 PER TEAM"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 

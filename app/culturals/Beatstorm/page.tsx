@@ -16,13 +16,6 @@ export default function BeatstormRegisterPage() {
             price: 500,
             type: "silver",
             description: "ACCESS TO BEATSTORM COMPETITION\nTEAM SIZE: 2-20 MEMBERS"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 
