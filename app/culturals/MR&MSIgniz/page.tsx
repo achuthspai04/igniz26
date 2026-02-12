@@ -95,8 +95,8 @@ export default function MrMsIgnizRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                        <p>Parvathy Prakash: +91 8089011979</p>
-                        <p>Anushika K: +91 8075140810</p>
+                        <p>Aksa Santha Ronio: +91 8848462375</p>
+                        <p>Sadhika Saji K: +91 9072291156</p>
                     </div>
                 </section>
             </main>

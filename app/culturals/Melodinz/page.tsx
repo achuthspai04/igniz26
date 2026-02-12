@@ -98,8 +98,8 @@ export default function MelodinzRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                        <p>Adithya Krishnan: +91 8547684105</p>
-                        <p>Gayathri M: +91 8089654471</p>
+                        <p>Adithya K: +91 99467 66673</p>
+                        <p>Gayathri Murali: +91 9048451470</p>
                     </div>
                 </section>
             </main>
