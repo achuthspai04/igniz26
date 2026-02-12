@@ -1,11 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useState, useMemo } from "react";
-import Image from "next/image";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { useEffect, useState } from "react";
 
 const TARGET_DATE = new Date("2026-02-26T00:00:00").getTime();
 const TEXT_SHADOW_STYLE = { textShadow: '0 0 20px rgba(255, 209, 32, 0.4)' } as const;
@@ -30,8 +25,6 @@ function pad(n: number) {
 }
 
 export default function Countdown() {
-  const boltLeftRef = useRef<HTMLDivElement>(null);
-  const boltRightRef = useRef<HTMLDivElement>(null);
   const [time, setTime] = useState(getTimeLeft);
 
   useEffect(() => {
@@ -39,62 +32,13 @@ export default function Countdown() {
     return () => clearInterval(id);
   }, []);
 
-  useEffect(() => {
-    const triggerEl = document.querySelector("[data-scroll-trigger='hello-section']");
-    if (!triggerEl || !boltLeftRef.current || !boltRightRef.current) return;
-
-    const fromVars = { scale: 5, y: -300 };
-    const toVars = { scale: 1, y: 0 };
-    const scrollTriggerConfig = {
-      trigger: triggerEl,
-      start: "top bottom",
-      end: "bottom top",
-      scrub: true,
-    };
-
-    const tl = gsap.fromTo(
-      [boltLeftRef.current, boltRightRef.current],
-      fromVars,
-      { ...toVars, scrollTrigger: scrollTriggerConfig }
-    );
-
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((s) => {
-        if (s.trigger === triggerEl) s.kill();
-      });
-    };
-  }, []);
-
   return (
-    <section className="relative w-full min-h-[60vh] h-[60vh] md:min-h-screen md:h-screen flex flex-col items-center justify-start pt-[15vh] md:pt-[22vh] bg-[#1A0000] overflow-hidden">
+    <section className="relative w-full flex flex-col items-center justify-center py-8 md:py-24 bg-[#1A0000] overflow-hidden">
       {/* Texture overlay */}
       <div
         className="absolute inset-0 z-50 pointer-events-none select-none mix-blend-multiply"
         style={TEXTURE_STYLE}
       />
-      {/* Bolt left */}
-      <div ref={boltLeftRef} className="hidden md:block absolute left-0 top-[15vh] w-[50vw] pointer-events-none select-none z-10">
-        <Image
-          src="/images/bolt%20left.png"
-          alt=""
-          width={800}
-          height={1200}
-          sizes="58vw"
-          className="w-full h-auto"
-        />
-      </div>
-      {/* Bolt right */}
-      <div ref={boltRightRef} className="hidden md:block absolute right-0 top-[15vh] w-[50vw] pointer-events-none select-none z-10">
-        <Image
-          src="/images/bolt%20right.png"
-          alt=""
-          width={800}
-          height={1200}
-          sizes="58vw"
-          className="w-full h-auto"
-        />
-      </div>
 
       {/* Countdown Timer */}
       <div className="relative z-20 mx-auto px-4 flex items-center justify-center">

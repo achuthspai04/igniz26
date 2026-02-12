@@ -156,15 +156,66 @@ export default function Home() {
   }, []);
 
   const heroLayers = useMemo(() => {
+    if (!isMobile) return HERO_LAYERS;
     return HERO_LAYERS.map(layer => {
-      if (layer.src === "/images/carn 1.svg.svg" && isMobile) {
+      // For all layers with scrollTrigger on mobile: slow down with scrub smoothing
+      const mobileScrollTrigger = layer.scrollTrigger ? {
+        ...layer.scrollTrigger,
+        scrub: 1.5,
+      } : undefined;
+
+      // Carn layer: reduce scale for GPU perf
+      if (layer.src === "/images/carn 1.svg.svg") {
         return {
           ...layer,
-          scale: 3.5, // Reduce from 7x to 3.5x on mobile to save GPU memory
+          scale: 2.0,
           scrollTrigger: {
-            ...layer.scrollTrigger!,
+            ...mobileScrollTrigger!,
             from: { opacity: 0.5 },
           },
+        };
+      }
+      // Star bg: smaller scale so it fits mobile viewport
+      if (layer.src === "/images/bgstar.svg") {
+        return { ...layer, scale: 0.6, scrollTrigger: mobileScrollTrigger };
+      }
+      // Asset layers: use contain + shift up + radial fade, reduce scroll distance
+      if (layer.src === "/images/asset_2 1.svg" || layer.src === "/images/asset_3 1.svg") {
+        return {
+          ...layer,
+          objectFit: "contain" as const,
+          scale: 0.9,
+          translateY: "-5%",
+          maskImage: "radial-gradient(ellipse 55% 50% at center, black 55%, transparent 85%)",
+          scrollTrigger: mobileScrollTrigger ? { ...mobileScrollTrigger, to: { y: -400 } } : undefined,
+        };
+      }
+      // Bolts: contain + shift up + radial fade, reduce scroll distance
+      if (layer.src === "/images/bolts 3.svg") {
+        return {
+          ...layer,
+          objectFit: "contain" as const,
+          scale: 0.9,
+          translateY: "-5%",
+          maskImage: "radial-gradient(ellipse 55% 50% at center, black 55%, transparent 85%)",
+          scrollTrigger: mobileScrollTrigger ? { ...mobileScrollTrigger, to: { y: -400 } } : undefined,
+        };
+      }
+      // 48466 (Igniz title): bigger on mobile, reduce scroll distance
+      if (layer.src === "/images/48466.svg") {
+        return {
+          ...layer,
+          scale: 0.7,
+          scrollTrigger: mobileScrollTrigger ? { ...mobileScrollTrigger, to: { x: 400 } } : undefined,
+        };
+      }
+      // 2026: adjust scale, reduce scroll distance
+      if (layer.src === "/images/2026.svg") {
+        return {
+          ...layer,
+          scale: 0.08,
+          translateY: "85%",
+          scrollTrigger: mobileScrollTrigger ? { ...mobileScrollTrigger, to: { x: 400 } } : undefined,
         };
       }
       return layer;
@@ -175,36 +226,29 @@ export default function Home() {
     <div className="relative w-full overflow-x-hidden bg-[#1A0000] min-h-screen">
       {!assetsReady && <LoadingScreen onComplete={handleLoadComplete} />}
       <Navbar />
-      {/* Section 1: Hero — 100vh */}
-      <section className="relative w-full min-h-screen h-screen flex flex-col">
-        <main className="relative w-full flex-1 min-h-0">
+      {/* Section 1: Hero + Countdown */}
+      <section className="relative w-full flex flex-col">
+        <div className="relative w-full h-screen">
           <LayeredImage layers={heroLayers} aspectRatio="full" />
-        </main>
+          <div data-scroll-trigger="hello-section" className="absolute bottom-0 left-0 w-full h-0" />
+        </div>
+        <Countdown />
       </section>
-      <div data-scroll-trigger="hello-section">
-      </div>
-      <Countdown />
       <ProshowSection />
-      <section className="w-full min-h-[auto] md:min-h-screen flex items-center justify-center py-8 md:py-0">
+      <section className="w-full flex items-center justify-center py-16 md:py-24">
         <div className="flex flex-col items-center w-full">
-          <Image
-            src="/events/cultural events heading.webp"
-            alt="Culturals"
-            width={400}
-            height={80}
-            className="w-full max-w-2xl object-contain"
-          />
           <div className="w-full">
             <EventSection />
           </div>
           <Link href="/culturals">
-            <Image
-              src="/events/LOAD.svg"
-              alt="Register"
-              width={200}
-              height={60}
-              className="w-full max-w-md object-contain cursor-pointer hover:opacity-80 transition-opacity"
-            />
+            <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
+              <Image
+                src="/events/LOAD.svg"
+                alt="Register"
+                fill
+                className="object-contain"
+              />
+            </div>
           </Link>
         </div>
       </section>
