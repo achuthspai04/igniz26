@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function EchoesInFrameRegisterPage() {
@@ -93,7 +92,6 @@ export default function EchoesInFrameRegisterPage() {
                 </section>
             </main>
             <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="ECHOES IN FRAME" />
-            <Footer />
         </div>
     );
 }

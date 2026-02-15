@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function KhelGyanRegisterPage() {
@@ -96,7 +95,6 @@ export default function KhelGyanRegisterPage() {
                 </section>
             </main>
             <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="KHEL GYAN" />
-            <Footer />
         </div>
     );
 }

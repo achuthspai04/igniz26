@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AbhinayaRegisterPage() {
@@ -104,7 +103,6 @@ export default function AbhinayaRegisterPage() {
                 </section>
             </main>
             <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="CLASSICAL DANCE" />
-            <Footer />
         </div>
     );
 }

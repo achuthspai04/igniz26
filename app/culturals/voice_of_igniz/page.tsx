@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function VoiceOfIgnizRegisterPage() {
@@ -97,7 +96,6 @@ export default function VoiceOfIgnizRegisterPage() {
                 </section>
             </main>
             <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="VOICE OF IGNIZ" />
-            <Footer />
         </div>
     );
 }

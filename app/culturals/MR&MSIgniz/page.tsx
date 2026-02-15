@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
 import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function MrMsIgnizRegisterPage() {
@@ -94,7 +93,6 @@ export default function MrMsIgnizRegisterPage() {
                 </section>
             </main>
             <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="MR & MS IGNIZ" />
-            <Footer />
         </div>
     );
 }
