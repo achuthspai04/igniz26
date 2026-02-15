@@ -16,13 +16,6 @@ export default function AureliaRegisterPage() {
             price: 180,
             type: "silver",
             description: "ACCESS TO AURELIA FASHION SHOW\nREGISTRATION: 180 PER HEAD"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 
@@ -47,11 +40,11 @@ export default function AureliaRegisterPage() {
                                 <Image src="/events/eventpages/3-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">21-22 FEB</span></p>
-                                <p>TIME : 10:00 - 12:00 PM</p>
-                                <p>STAGE : STAGE I</p>
+                                <p>DATE : <span className="text-[#FFD120]">26-27 FEB</span></p>
+                                <p>TIME : 10:30 - 12:30 PM</p>
+                                <p>STAGE : STAGE 2</p>
                                 <p>REG FEES : 180 PER HEAD</p>
-                                <p>PRIZE POOL : 5000</p>
+                                <p>PRIZE POOL : 40000</p>
                             </div>
                             <div className="pt-4">
                                 <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">

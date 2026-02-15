@@ -16,13 +16,6 @@ export default function BeatstormRegisterPage() {
             price: 500,
             type: "silver",
             description: "ACCESS TO BEATSTORM COMPETITION\nTEAM SIZE: 2-20 MEMBERS"
-        },
-        {
-            id: "premium",
-            name: "GOLDEN PASS",
-            price: 800,
-            type: "gold",
-            description: "PRO SHOW INCLUDED WITH GOLDEN PASS\nGOLDEN PASS CAN BE ONLY PURCHASED ONCE"
         }
     ];
 
@@ -47,8 +40,8 @@ export default function BeatstormRegisterPage() {
                                 <Image src="/events/eventpages/2-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">21-22 FEB</span></p>
-                                <p>TIME : 12:30 - 02:30 PM</p>
+                                <p>DATE : <span className="text-[#FFD120]">26-27 FEB</span></p>
+                                <p>TIME : 10:15 - 01:00 PM</p>
                                 <p>STAGE : STAGE I</p>
                                 <p>REG FEES : 500 PER TEAM</p>
                                 <p>PRIZE POOL : 3000</p>

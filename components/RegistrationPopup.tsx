@@ -67,18 +67,18 @@ export default function RegistrationPopup({
         if (isOpen) {
             // Lock body scroll
             document.body.style.overflow = 'hidden';
-            
+
             // Animation In
             if (overlayRef.current) gsap.to(overlayRef.current, { opacity: 1, duration: 0.3, ease: "power2.out" });
             if (popupRef.current) {
                 gsap.fromTo(
                     popupRef.current,
                     { scale: 0.8, opacity: 0, y: 50 },
-                    { 
-                        scale: 1, 
-                        opacity: 1, 
-                        y: 0, 
-                        duration: 0.5, 
+                    {
+                        scale: 1,
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.5,
                         ease: "back.out(1.5)"
                     }
                 );
@@ -112,7 +112,7 @@ export default function RegistrationPopup({
     if (!isOpen) return null;
 
     const popupContent = (
-        <div 
+        <div
             ref={containerRef}
             className="fixed inset-0 z-[9999] flex items-start justify-center px-4 font-sans text-black overflow-y-auto pt-20 md:pt-24 pb-10"
         >
@@ -153,7 +153,7 @@ export default function RegistrationPopup({
                 <div className="relative z-10">
                     {/* LOGO Header */}
                     <div className="text-center mb-1 relative flex flex-col items-center">
-                        <div className="relative w-48 h-12 md:w-64 md:h-16">
+                        <div className="relative w-64 h-16 md:w-96 md:h-24">
                             <Image
                                 src="/events/eventpages/popup/IGNIZ%201.webp"
                                 alt="IGNIZ 2026"
@@ -205,12 +205,12 @@ export default function RegistrationPopup({
 
                     {/* Ticket Selection Area */}
                     {ticketOptions.length > 0 && (
-                        <div className="mt-4 grid grid-cols-2 gap-3">
+                        <div className={`mt-4 ${ticketOptions.length === 1 ? 'flex justify-center' : 'grid grid-cols-2 gap-3'}`}>
                             {[...ticketOptions].sort((a, b) => a.type === 'gold' ? -1 : 1).map((ticket) => (
                                 <div
                                     key={ticket.id}
                                     onClick={() => setSelectedTicket(ticket.id)}
-                                    className={`group cursor-pointer flex flex-col items-center`}
+                                    className={`group cursor-pointer flex flex-col items-center ${ticketOptions.length === 1 ? 'w-1/2' : 'w-full'}`}
                                 >
                                     {/* Ticket Card */}
                                     <div className="relative w-full h-20 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-1">
@@ -236,14 +236,16 @@ export default function RegistrationPopup({
 
 
                     {/* Disclaimer / Info */}
-                    <div className="mt-4 text-center px-4">
-                        <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight">
-                            *PRO SHOW INCLUDED WITH GOLDEN PASS.
-                        </p>
-                        <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight mt-1">
-                            *GOLDEN PASS CAN BE ONLY PURCHASED ONCE.
-                        </p>
-                    </div>
+                    {ticketOptions.some(t => t.type === 'gold') && (
+                        <div className="mt-4 text-center px-4">
+                            <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight">
+                                *PRO SHOW INCLUDED WITH GOLDEN PASS.
+                            </p>
+                            <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight mt-1">
+                                *GOLDEN PASS CAN BE ONLY PURCHASED ONCE.
+                            </p>
+                        </div>
+                    )}
 
                     {/* Grand Total & Pay Button */}
                     <div className="mt-6 text-center">
