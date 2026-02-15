@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     siteName: "IGNIZ 26",
     images: [
       {
-        url: "/images/IGNIZ1.png",
+        url: "/images/IGNIZ.png",
         width: 800,
         height: 600,
         alt: "Igniz 26 Logo",
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "IGNIZ 26 - SSET's Flagship Technical Fest",
     description: "IGNIZ 26 is the flagship technical fest of SSET, featuring a wide range of technical events, workshops, and competitions.",
-    images: ["/images/IGNIZ1.png"],
+    images: ["/images/IGNIZ.png"],
   },
   robots: {
     index: true,

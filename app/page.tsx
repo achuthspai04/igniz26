@@ -56,7 +56,7 @@ const HERO_LAYERS: LayerConfig[] = [
   },
   {
     src: "/images/asset_2 1.svg",
-    alt: "Igniz 1",
+    alt: "Igniz 26",
     zIndex: 35,
     objectFit: "cover",
     priority: true,
@@ -70,7 +70,7 @@ const HERO_LAYERS: LayerConfig[] = [
   },
   {
     src: "/images/asset_3 1.svg",
-    alt: "Igniz 1",
+    alt: "Igniz 26",
     zIndex: 35,
     objectFit: "cover",
     priority: true,
@@ -112,7 +112,7 @@ const HERO_LAYERS: LayerConfig[] = [
   },
   {
     src: "/images/48466.svg",
-    alt: "Igniz 1",
+    alt: "Igniz 26",
     zIndex: 40,
     scale: 0.5,
     objectFit: "contain",
