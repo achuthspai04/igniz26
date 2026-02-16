@@ -30,6 +30,8 @@ export type LayerConfig = {
   /** Extra Tailwind/custom classes for the layer wrapper */
   className?: string;
   priority?: boolean;
+  /** CSS mask-image value, e.g. radial-gradient(...) to fade edges */
+  maskImage?: string;
   /** GSAP from animation: animates from the given values (e.g. y: -100) with optional delay/duration */
   gsapFrom?: { y?: number; x?: number; delay?: number; duration?: number };
   /** GSAP ScrollTrigger: animates layer with gsap.to when trigger element enters viewport */
@@ -112,12 +114,11 @@ function ScrollTriggerLayer({
       ? gsap.fromTo(el, { ...st.from, force3D: true }, { ...st.to, force3D: true, scrollTrigger: scrollTriggerConfig })
       : gsap.to(el, { ...st.to, force3D: true, scrollTrigger: scrollTriggerConfig });
     return () => {
+      tween.scrollTrigger?.kill();
       tween.kill();
-      ScrollTrigger.getAll().forEach((s) => {
-        if (s.trigger === triggerEl) s.kill();
-      });
     };
   }, [st]);
+
   return (
     <div
       ref={ref}
@@ -210,7 +211,7 @@ export default function LayeredImage({
             transform: transformString || undefined,
           };
 
-          const layerContent =
+          const rawContent =
             layer.content != null ? (
               layer.content
             ) : layer.src != null ? (
@@ -228,6 +229,19 @@ export default function LayeredImage({
                 loading={layer.priority ? undefined : "lazy"}
               />
             ) : null;
+
+          // Wrap content with mask div if maskImage is set (separate from GSAP-animated div)
+          const layerContent = layer.maskImage ? (
+            <div style={{
+              position: "absolute",
+              inset: 0,
+              WebkitMaskImage: layer.maskImage,
+              maskImage: layer.maskImage,
+            }}>
+              {rawContent}
+            </div>
+          ) : rawContent;
+
           if (layer.gsapFrom) {
             return (
               <AnimatedLayer

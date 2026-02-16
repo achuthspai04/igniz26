@@ -163,7 +163,11 @@ export default function ProshowSection() {
       <div
         ref={picRef}
         className="absolute inset-x-0 bottom-0 z-30 w-full h-full flex items-end justify-center pointer-events-none select-none"
-        style={{ willChange: "transform" }}
+        style={{
+          willChange: "transform",
+          maskImage: "linear-gradient(to top, transparent 0%, black 20%, black 100%)",
+          WebkitMaskImage: "linear-gradient(to top, transparent 0%, black 20%, black 100%)",
+        }}
       >
         <Image
           src={PROSHOW_IMAGES.pic}
