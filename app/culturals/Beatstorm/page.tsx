@@ -14,7 +14,7 @@ export default function BeatstormRegisterPage() {
             name: "BEATSTORM PASS",
             price: 500,
             type: "silver",
-            description: "ACCESS TO BEATSTORM COMPETITION\nTEAM SIZE: 2-20 MEMBERS"
+            description: "ACCESS TO BEATSTORM COMPETITION\nREGISTRATION: 500 PER TEAM"
         }
     ];
 
@@ -41,9 +41,9 @@ export default function BeatstormRegisterPage() {
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">26-27 FEB</span></p>
                                 <p>TIME : 10:15 - 01:00 PM</p>
-                                <p>STAGE : STAGE I</p>
+                                <p>STAGE : STAGE 1</p>
                                 <p>REG FEES : 500 PER TEAM</p>
-                                <p>PRIZE POOL : 3000</p>
+                                <p>PRIZE POOL : 30000</p>
                             </div>
                             <div className="pt-4">
                                 <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">

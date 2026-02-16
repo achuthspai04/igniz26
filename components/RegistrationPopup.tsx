@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import gsap from "gsap";
 
-export type TicketType = "gold" | "silver";
+export type TicketType = "gold" | "silver" | "bronze";
 
 export interface TicketOption {
     id: string;
@@ -173,52 +173,61 @@ export default function RegistrationPopup({
                     </div>
 
                     {/* Form Fields */}
-                    <div className="space-y-2 text-sm md:text-base font-bold uppercase tracking-tight">
+                    <div className="space-y-1 md:space-y-2 text-xs md:text-base font-bold uppercase tracking-tight">
                         <div>
-                            <label className="block mb-1 tracking-wide font-bold text-[#2B0000]">NAME :</label>
+                            <label className="block mb-0.5 md:mb-1 tracking-wide font-bold text-[#2B0000]">NAME :</label>
                             <input
                                 type="text"
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full h-9 px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow uppercase font-sans font-bold text-base"
+                                className="w-full h-8 md:h-9 px-2 md:px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-shadow uppercase font-sans font-bold text-sm md:text-base"
                             />
                         </div>
                         <div>
-                            <label className="block mb-1 tracking-wide font-bold text-[#2B0000]">PHONE NO :</label>
+                            <label className="block mb-0.5 md:mb-1 tracking-wide font-bold text-[#2B0000]">PHONE NO :</label>
                             <input
                                 type="tel"
                                 value={formData.phone}
                                 onChange={e => setFormData({ ...formData, phone: e.target.value })}
-                                className="w-full h-9 px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow uppercase font-sans font-bold text-base"
+                                className="w-full h-8 md:h-9 px-2 md:px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-shadow uppercase font-sans font-bold text-sm md:text-base"
                             />
                         </div>
                         <div>
-                            <label className="block mb-1 tracking-wide font-bold text-[#2B0000]">EMAIL :</label>
+                            <label className="block mb-0.5 md:mb-1 tracking-wide font-bold text-[#2B0000]">EMAIL :</label>
                             <input
                                 type="email"
                                 value={formData.email}
                                 onChange={e => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full h-9 px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-shadow lowercase font-sans font-bold text-base"
+                                className="w-full h-8 md:h-9 px-2 md:px-3 bg-white border-2 border-black rounded-lg focus:outline-none focus:shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] transition-shadow lowercase font-sans font-bold text-sm md:text-base"
                             />
                         </div>
                     </div>
 
                     {/* Ticket Selection Area */}
                     {ticketOptions.length > 0 && (
-                        <div className={`mt-4 ${ticketOptions.length === 1 ? 'flex justify-center' : 'grid grid-cols-2 gap-3'}`}>
-                            {[...ticketOptions].sort((a, b) => a.type === 'gold' ? -1 : 1).map((ticket) => (
+                        <div className="mt-4 flex flex-col gap-3 items-center">
+                            {[...ticketOptions].sort((a, b) => {
+                                const order = { gold: 2, silver: 1, bronze: 0 };
+                                return (order[a.type as keyof typeof order] || 0) - (order[b.type as keyof typeof order] || 0);
+                            }).map((ticket) => (
                                 <div
                                     key={ticket.id}
                                     onClick={() => setSelectedTicket(ticket.id)}
                                     className={`group cursor-pointer flex flex-col items-center ${ticketOptions.length === 1 ? 'w-1/2' : 'w-full'}`}
                                 >
                                     {/* Ticket Card */}
-                                    <div className="relative w-full h-20 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-1">
+                                    <div className="relative w-full h-16 md:h-20 flex items-center justify-center transition-all duration-200 group-hover:-translate-y-1">
                                         <Image
-                                            src={ticket.type === 'silver' ? '/events/eventpages/popup/silver.webp' : '/events/eventpages/popup/golden.webp'}
+                                            src={
+                                                ticket.type === 'silver'
+                                                    ? '/events/eventpages/popup/silver.webp'
+                                                    : ticket.type === 'bronze'
+                                                        ? '/events/eventpages/popup/bronze.webp'
+                                                        : '/events/eventpages/popup/golden.webp'
+                                            }
                                             alt={ticket.name}
                                             fill
-                                            className={`object-contain ${ticket.type === 'gold' ? 'scale-115' : ''}`}
+                                            className={`object-contain ${ticket.type === 'gold' ? 'scale-115' : ticket.type === 'bronze' ? 'scale-90' : ''}`}
                                         />
 
                                     </div>
@@ -236,16 +245,24 @@ export default function RegistrationPopup({
 
 
                     {/* Disclaimer / Info */}
-                    {ticketOptions.some(t => t.type === 'gold') && (
-                        <div className="mt-4 text-center px-4">
-                            <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight">
-                                *PRO SHOW INCLUDED WITH GOLDEN PASS.
-                            </p>
-                            <p className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight mt-1">
-                                *GOLDEN PASS CAN BE ONLY PURCHASED ONCE.
-                            </p>
-                        </div>
-                    )}
+                    {/* Disclaimer / Info */}
+                    <div className="mt-4 text-center px-4 space-y-1">
+                        {[...ticketOptions]
+                            .sort((a, b) => {
+                                const order = { gold: 2, silver: 1, bronze: 0 };
+                                return (order[a.type as keyof typeof order] || 0) - (order[b.type as keyof typeof order] || 0);
+                            })
+                            // Filter out tickets without descriptions
+                            .filter(t => t.description)
+                            .map((ticket) => (
+                                <p key={ticket.id} className="text-[10px] md:text-xs font-bold text-black uppercase tracking-tight leading-tight">
+                                    *{ticket.name}: {ticket.description}
+                                </p>
+                            ))
+                        }
+
+
+                    </div>
 
                     {/* Grand Total & Pay Button */}
                     <div className="mt-6 text-center">
