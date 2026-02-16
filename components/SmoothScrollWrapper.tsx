@@ -17,7 +17,7 @@ export default function SmoothScrollWrapper({
   useEffect(() => {
     const isMobile = window.innerWidth < 768;
     smootherRef.current = ScrollSmoother.create({
-      smooth: isMobile ? 1 : 1.5,
+      smooth: isMobile ? 0 : 1.5,
       effects: !isMobile, // disable GSAP effects on mobile for GPU savings
       smoothTouch: false, // disable smooth touch — native scroll is far more performant on mobile
     });
