@@ -4,6 +4,8 @@ import { useEffect, useState, useMemo, useRef, useCallback } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
+import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
+import "./workshops.css";
 
 interface WorkshopEvent {
     id: number;
@@ -25,7 +27,7 @@ interface WorkshopEvent {
 const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
     "COMPUTER SCIENCE": [
         {
-id: 1, title: "HACK THE IGNIZ", image: "/events/technical events/cs/cs-hack-the-igniz.webp", type: "Workshop + CTF Match", day: "Day 1", time: "9AM - 4PM", venue: "Lab 5", registrationFee: "₹149/- per head",
+            id: 1, title: "HACK THE IGNIZ", image: "/events/technical events/cs/cs-hack-the-igniz.webp", type: "Workshop + CTF Match", day: "Day 1", time: "9AM - 4PM", venue: "Lab 5", registrationFee: "₹149/- per head",
             proshowFee: "₹400",
             prizePool: "₹3,000",
             description: "Web & Android App Hacking, Bug Bounty & CTF Competition",
@@ -34,7 +36,7 @@ id: 1, title: "HACK THE IGNIZ", image: "/events/technical events/cs/cs-hack-the-
             conductedBy: "Pranav Jayan, Janish Shaji",
         },
         {
-id: 2, title: "HOME LABBING 101", image: "/events/technical events/cs/cs-homelabbing.webp", type: "Workshop", day: "Day 1", time: "9AM - 4PM", venue: "CCF", registrationFee: "₹99/- per head",
+            id: 2, title: "HOME LABBING 101", image: "/events/technical events/cs/cs-homelabbing.webp", type: "Workshop", day: "Day 1", time: "9AM - 4PM", venue: "CCF", registrationFee: "₹99/- per head",
             proshowFee: "₹350",
             prizePool: "₹2,000",
             description: "Build Your Own Cloud at Home",
@@ -43,7 +45,7 @@ id: 2, title: "HOME LABBING 101", image: "/events/technical events/cs/cs-homelab
             conductedBy: "Jasil",
         },
         {
-id: 3, title: "CACHE QUEST", image: "/events/technical events/cs/cs-cache-quest.webp", type: "Competition", day: "Day 2", time: "9AM - 4PM", venue: "AD 104 (in and around campus)", registrationFee: "₹99/- per head",
+            id: 3, title: "CACHE QUEST", image: "/events/technical events/cs/cs-cache-quest.webp", type: "Competition", day: "Day 2", time: "9AM - 4PM", venue: "AD 104 (in and around campus)", registrationFee: "₹99/- per head",
             proshowFee: "₹350",
             prizePool: "₹5,000",
             description: "Treasure Hunt using GeoCaching",
@@ -52,7 +54,7 @@ id: 3, title: "CACHE QUEST", image: "/events/technical events/cs/cs-cache-quest.
             conductedBy: "Aneeja",
         },
         {
-id: 4, title: "INDIE WEB 101", image: "/events/technical events/cs/cs-indie-web.webp", type: "Workshop", day: "Day 2", time: "9AM - 4PM", venue: "Lab 5", registrationFee: "₹99/- per head",
+            id: 4, title: "INDIE WEB 101", image: "/events/technical events/cs/cs-indie-web.webp", type: "Workshop", day: "Day 2", time: "9AM - 4PM", venue: "Lab 5", registrationFee: "₹99/- per head",
             proshowFee: "₹350",
             prizePool: "₹3,000",
             description: "Owning Your Place on the Internet",
@@ -586,14 +588,80 @@ export default function WorkshopsPage() {
     const [visibleCards, setVisibleCards] = useState<Set<string>>(new Set());
     const cardRefs = useRef<Map<string, HTMLDivElement>>(new Map());
 
+    const [showPopup, setShowPopup] = useState(false);
+    const [selectedWorkshop, setSelectedWorkshop] = useState<WorkshopEvent | null>(null);
+
+    const parseFee = (feeStr: string): number => {
+        // Handle "Free" or "-"
+        if (!feeStr || feeStr.toLowerCase().includes("free") || feeStr === "-") return 0;
+
+        // Extract first number found
+        const match = feeStr.match(/₹?(\d+,?\d*)/);
+        let amount = match ? parseInt(match[1].replace(/,/g, ''), 10) : 0;
+
+        
+      
+        if (feeStr.toLowerCase().includes("per person") || feeStr.toLowerCase().includes("per head") || feeStr.toLowerCase().includes("solo")) {
+           
+            const perPersonMatch = feeStr.match(/₹?(\d+,?\d*)\s*(?:\/-)?\s*(?:per person|per head|solo)/i);
+            if (perPersonMatch) {
+                amount = parseInt(perPersonMatch[1].replace(/,/g, ''), 10);
+            }
+        } else if (feeStr.toLowerCase().includes("team")) {
+            
+        }
+
+        return amount;
+    };
+
+    const getTicketOptions = (workshop: WorkshopEvent): TicketOption[] => {
+        const options: TicketOption[] = [];
+
+        // Bronze Pass - Workshop Only
+        const baseFee = parseFee(workshop.registrationFee);
+
+        
+
+        if (baseFee > 0 || workshop.registrationFee.toLowerCase().includes("free")) {
+            options.push({
+                id: "bronze",
+                name: "BRONZE PASS",
+                price: baseFee,
+                type: "bronze",
+                description: "Workshop Only"
+            });
+        }
+
+        const silverFee = parseFee(workshop.proshowFee);
+        if (silverFee > 0 && workshop.proshowFee !== "-") {
+            options.push({
+                id: "silver",
+                name: "SILVER PASS",
+                price: silverFee,
+                type: "silver",
+                description: "Workshop + Respective Day Proshow"
+            });
+
+          
+            const goldPrice = silverFee + 250;
+            options.push({
+                id: "gold",
+                name: "GOLDEN PASS",
+                price: goldPrice,
+                type: "gold",
+                description: "Workshop + 2 Days Proshow"
+            });
+        }
+
+        return options;
+    };
+
     const activeEvents = useMemo(() => DEPARTMENT_EVENTS[selectedDept] || [], [selectedDept]);
 
-    // Reset visible cards when department changes
     useEffect(() => {
         setVisibleCards(new Set());
     }, [selectedDept]);
 
-    // Intersection Observer for entrance animations
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries) => {
@@ -626,69 +694,7 @@ export default function WorkshopsPage() {
     return (
         <PageLoader assets={PRELOAD_ASSETS}>
             {/* Card animation styles */}
-            <style jsx global>{`
-                .card-animate {
-                    opacity: 0;
-                    transform: translateY(60px);
-                    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .card-animate.card-visible {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                .event-card-wrapper {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                                filter 0.35s ease;
-                }
-                .event-card-wrapper:hover {
-                    transform: translateY(-8px) scale(1.03);
-                    filter: brightness(1.04);
-                }
-                .event-card-wrapper:hover .card-arrow {
-                    transform: rotate(-45deg) scale(1.15);
-                }
-                .event-card-wrapper:hover .card-image {
-                    filter: grayscale(0.3);
-                    transform: scale(1.05);
-                }
-                .card-arrow {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .card-image {
-                    transition: filter 0.5s ease, transform 0.5s ease;
-                }
-                /* Dropdown animations */
-                @keyframes dropdownSlideDown {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-16px) scaleY(0.9);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0) scaleY(1);
-                    }
-                }
-                .dropdown-menu {
-                    animation: dropdownSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                    transform-origin: top center;
-                }
-                .dropdown-item {
-                    transition: filter 0.2s ease, transform 0.2s ease;
-                    filter: brightness(0.75);
-                }
-                .dropdown-item:hover {
-                    filter: brightness(1);
-                    transform: scale(1.02);
-                    z-index: 100 !important;
-                }
-                .dropdown-arrow {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .dropdown-arrow.open {
-                    transform: rotate(180deg);
-                }
-            `}</style>
+            {/* Card animation styles - moved to workshops.css */}
             <div className="relative w-full overflow-clip bg-[#2B0000] min-h-screen flex flex-col">
                 <Navbar />
 
@@ -707,100 +713,100 @@ export default function WorkshopsPage() {
                         </h1>
                     </div>
 
-{/* Department Dropdown Section */}
-<div className="relative z-50 w-full max-w-4xl mb-12 md:mb-16 flex justify-center">
-  <div className="relative w-full max-w-[500px]"> {/* fixed consistent width */}
+                    {/* Department Dropdown Section */}
+                    <div className="relative z-50 w-full max-w-4xl mb-12 md:mb-16 flex justify-center">
+                        <div className="relative w-full max-w-[500px]"> {/* fixed consistent width */}
 
-    {/* Main Button */}
-    <button
-      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-      className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border"
-      style={{
-        backgroundImage: 'url("/events/technical%20events/dropdown.svg")',
-        backgroundSize: "100% 100%",
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "center",
-      }}
-    >
-      <span
-        className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center pr-8"
-        style={{
-          fontFamily: '"Akira Expanded", sans-serif',
-          fontWeight: 900,
-          fontSize: "clamp(14px, 1.6vw, 20px)",
-          lineHeight: "1.05",
-          letterSpacing: "-0.04em",
-          whiteSpace: "normal",
-          overflow: "hidden",
-          display: "-webkit-box",
-          WebkitLineClamp: 2,
-          WebkitBoxOrient: "vertical",
-        }}
-      >
-        {selectedDept}
-      </span>
-      {/* Down arrow */}
-      <svg
-        className={`absolute right-6 md:right-8 w-5 h-5 md:w-6 md:h-6 dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="#3B0000"
-        strokeWidth="3"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <polyline points="6 9 12 15 18 9" />
-      </svg>
-    </button>
+                            {/* Main Button */}
+                            <button
+                                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                                className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border"
+                                style={{
+                                    backgroundImage: 'url("/events/technical%20events/dropdown.svg")',
+                                    backgroundSize: "100% 100%",
+                                    backgroundRepeat: "no-repeat",
+                                    backgroundPosition: "center",
+                                }}
+                            >
+                                <span
+                                    className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center pr-8"
+                                    style={{
+                                        fontFamily: '"Akira Expanded", sans-serif',
+                                        fontWeight: 900,
+                                        fontSize: "clamp(14px, 1.6vw, 20px)",
+                                        lineHeight: "1.05",
+                                        letterSpacing: "-0.04em",
+                                        whiteSpace: "normal",
+                                        overflow: "hidden",
+                                        display: "-webkit-box",
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: "vertical",
+                                    }}
+                                >
+                                    {selectedDept}
+                                </span>
+                                {/* Down arrow */}
+                                <svg
+                                    className={`absolute right-6 md:right-8 w-5 h-5 md:w-6 md:h-6 dropdown-arrow ${isDropdownOpen ? 'open' : ''}`}
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    stroke="#3B0000"
+                                    strokeWidth="3"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                >
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            </button>
 
-    {/* Dropdown */}
-    {isDropdownOpen && (
-      <div
-        className="absolute top-full left-0 w-full flex flex-col dropdown-menu"
-        style={{ marginTop: "-12px" }}
-      >
-        {DEPARTMENTS.map((dept, index) => (
-          <button
-            key={dept}
-            onClick={() => {
-              setSelectedDept(dept);
-              setIsDropdownOpen(false);
-            }}
-            className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border dropdown-item"
-            style={{
-              zIndex: DEPARTMENTS.length - index,
-              marginTop: index === 0 ? 0 : "-12px",
-              backgroundImage:
-                'url("/events/technical%20events/dropdown.svg")',
-              backgroundSize: "100% 100%",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-              animationDelay: `${index * 40}ms`,
-            }}
-          >
-            <span
-              className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
-              style={{
-                fontFamily: '"Akira Expanded", sans-serif',
-                fontWeight: 900,
-                fontSize: "clamp(14px, 1.6vw, 20px)",
-                lineHeight: "1.05",
-                letterSpacing: "-0.04em",
-                whiteSpace: "normal",
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {dept}
-            </span>
-          </button>
-        ))}
-      </div>
-    )}
-  </div>
-</div>
+                            {/* Dropdown */}
+                            {isDropdownOpen && (
+                                <div
+                                    className="absolute top-full left-0 w-full flex flex-col dropdown-menu"
+                                    style={{ marginTop: "-12px" }}
+                                >
+                                    {DEPARTMENTS.map((dept, index) => (
+                                        <button
+                                            key={dept}
+                                            onClick={() => {
+                                                setSelectedDept(dept);
+                                                setIsDropdownOpen(false);
+                                            }}
+                                            className="relative w-full h-[76px] px-5 flex items-center justify-center text-center cursor-pointer overflow-hidden box-border dropdown-item"
+                                            style={{
+                                                zIndex: DEPARTMENTS.length - index,
+                                                marginTop: index === 0 ? 0 : "-12px",
+                                                backgroundImage:
+                                                    'url("/events/technical%20events/dropdown.svg")',
+                                                backgroundSize: "100% 100%",
+                                                backgroundRepeat: "no-repeat",
+                                                backgroundPosition: "center",
+                                                animationDelay: `${index * 40}ms`,
+                                            }}
+                                        >
+                                            <span
+                                                className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
+                                                style={{
+                                                    fontFamily: '"Akira Expanded", sans-serif',
+                                                    fontWeight: 900,
+                                                    fontSize: "clamp(14px, 1.6vw, 20px)",
+                                                    lineHeight: "1.05",
+                                                    letterSpacing: "-0.04em",
+                                                    whiteSpace: "normal",
+                                                    overflow: "hidden",
+                                                    display: "-webkit-box",
+                                                    WebkitLineClamp: 2,
+                                                    WebkitBoxOrient: "vertical",
+                                                }}
+                                            >
+                                                {dept}
+                                            </span>
+                                        </button>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </div>
 
 
 
@@ -813,13 +819,13 @@ export default function WorkshopsPage() {
                                 <feDisplacementMap in="SourceGraphic" in2="noise" scale="5" xChannelSelector="R" yChannelSelector="G" />
                                 <feMorphology operator="erode" radius="0.2" />
                             </filter>
-<filter id="grainDescription" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
-    <feTurbulence type="fractalNoise" baseFrequency="2.5" numOctaves="3" seed="10" result="noise" />
-     <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" /> 
-<feMorphology operator="erode" radius="0.1" /> 
+                            <filter id="grainDescription" x="-10%" y="-10%" width="120%" height="120%" filterUnits="objectBoundingBox" primitiveUnits="userSpaceOnUse">
+                                <feTurbulence type="fractalNoise" baseFrequency="2.5" numOctaves="3" seed="10" result="noise" />
+                                <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G" />
+                                <feMorphology operator="erode" radius="0.1" />
 
-</filter>                   
-                            
+                            </filter>
+
                         </defs>
                     </svg>
 
@@ -830,189 +836,195 @@ export default function WorkshopsPage() {
                             const cardId = `${selectedDept}-${workshop.id}`;
                             const isVisible = visibleCards.has(cardId);
                             return (
-                            <div
-                                key={cardId}
-                                ref={(el) => setCardRef(el, cardId)}
-                                data-card-id={cardId}
-                                className={`card-animate ${isVisible ? 'card-visible' : ''}`}
-                                style={{
-                                    transitionDelay: isVisible ? `${index * 120}ms` : '0ms',
-                                }}
-                            >
-                            <div
-                                className="relative w-full group event-card-wrapper"
-                                style={{
-                                    WebkitMaskImage: 'url("/events/technical%20events/event-card.png")',
-                                    maskImage: 'url("/events/technical%20events/event-card.png")',
-                                    WebkitMaskSize: '100% 100%',
-                                    maskSize: '100% 100%',
-                                    WebkitMaskRepeat: 'no-repeat',
-                                    maskRepeat: 'no-repeat',
-                                    WebkitMaskPosition: 'center',
-                                    maskPosition: 'center',
-                                }}
-                            >
-                                {/* Ticket background */}
-                                <div className="absolute inset-0">
-                                    <Image
-                                        src="/events/technical%20events/event-card.png"
-                                        alt=""
-                                        fill
-                                        className="object-fill"
-                                    />
-                                </div>
-                                
-                                {/* Card content */}
-                                <div className="relative z-10 flex flex-col md:flex-row items-stretch min-h-[180px] md:min-h-[220px]">
-                                    {/* Image Section - Left with gradient blend */}
-                                    <div className="relative w-full md:w-[34%] h-48 md:h-auto flex-shrink-0">
-                                        <Image
-                                            src={workshop.image}
-                                            alt={workshop.title}
-                                            fill
-                                            className="object-cover grayscale card-image"
-                                        />
-                                        {/* Smooth gradient blend — extends past image edge to hide seam */}
-                                        <div 
-                                            className="absolute inset-y-0 w-56 md:w-72 z-10"
-                                            style={{
-                                                right: '-2rem',
-                                                background: 'linear-gradient(to right, transparent 0%, rgba(255, 209, 32, 0.15) 15%, rgba(255, 209, 32, 0.4) 30%, rgba(255, 209, 32, 0.65) 45%, rgba(255, 209, 32, 0.85) 60%, #FFD120 75%, #FFD120 100%)'
-                                            }}
-                                        />
-                                    </div>
-
-                                    {/* Title and Description - Center */}
-                                    <div className="w-1/3 flex-shrink-0 p-6 md:p-8 md:pr-2 flex flex-col justify-start items-start min-h-[200px] overflow-hidden">
-                                        {/* Title */}
-                                        <div className="mb-3 relative">
-                                            <h3 
-                                                className="uppercase"
-                                                style={{
-                                                    fontFamily: '"Akira Expanded", sans-serif',
-                                                    fontWeight: 800,
-                                                    fontSize: 'clamp(32px, 5vw, 63.57px)',
-                                                    lineHeight: '0.71',
-                                                    letterSpacing: '-0.08em',
-                                                    filter: 'url(#grainTitle)',
-                                                    color: '#1A0000',
-                                                }}
-                                            >
-                                                {workshop.title}
-                                            </h3>
-                                            {/* Texture layer clipped to text shape */}
-                                            <h3 
-                                                className="uppercase absolute inset-0 pointer-events-none"
-                                                aria-hidden="true"
-                                                style={{
-                                                    fontFamily: '"Akira Expanded", sans-serif',
-                                                    fontWeight: 800,
-                                                    fontSize: 'clamp(32px, 5vw, 63.57px)',
-                                                    lineHeight: '0.71',
-                                                    letterSpacing: '-0.08em',
-                                                    backgroundImage: 'url("/events/technical%20events/text-texture.png")',
-                                                    backgroundSize: '237px 355px',
-                                                    backgroundRepeat: 'repeat',
-                                                    WebkitBackgroundClip: 'text',
-                                                    backgroundClip: 'text',
-                                                    WebkitTextFillColor: 'transparent',
-                                                    mixBlendMode: 'soft-light',
-                                                    opacity: 0.4,
-                                                }}
-                                            >
-                                                {workshop.title}
-                                            </h3>
-                                        </div>
-                                        {/* Description */}
-                                        <div className="relative">
-                                            <p 
-                                                style={{
-                                                    fontFamily: '"Quanta Grotesk Pro", sans-serif',
-                                                    fontWeight: 900,
-                                                    fontSize: '18.5px',
-                                                    lineHeight: '18.5px',
-                                                    letterSpacing: '0.01em',
-                                                    filter: 'url(#grainDescription)',
-                                                    color: '#1A0000',
-                                                }}
-                                            >
-                                                {workshop.description}
-                                            </p>
-                                            {/* Texture layer clipped to text shape */}
-                                            <p 
-                                                className="absolute inset-0 pointer-events-none"
-                                                aria-hidden="true"
-                                                style={{
-                                                    fontFamily: '"Quanta Grotesk Pro", sans-serif',
-                                                    fontWeight: 900,
-                                                    fontSize: '18.5px',
-                                                    lineHeight: '18.5px',
-                                                    letterSpacing: '0.01em',
-                                                    backgroundImage: 'url("/events/technical%20events/text-texture.png")',
-                                                    backgroundSize: '237px 355px',
-                                                    backgroundRepeat: 'repeat',
-                                                    WebkitBackgroundClip: 'text',
-                                                    backgroundClip: 'text',
-                                                    WebkitTextFillColor: 'transparent',
-                                                    mixBlendMode: 'soft-light',
-                                                    opacity: 0.4,
-                                                }}
-                                            >
-                                                {workshop.description}
-                                            </p>
-                                        </div>
-                                    </div>
-
-                                    {/* Details Section - Right */}
-                                    <div 
-                                        className="flex-1 p-6 md:p-8 md:pl-6 flex flex-col justify-start min-h-[200px] text-[#1A0000] space-y-2"
+                                <div
+                                    key={cardId}
+                                    ref={(el) => setCardRef(el, cardId)}
+                                    data-card-id={cardId}
+                                    className={`card-animate ${isVisible ? 'card-visible' : ''}`}
+                                    style={{
+                                        transitionDelay: isVisible ? `${index * 120}ms` : '0ms',
+                                    }}
+                                >
+                                    <div
+                                        className="relative w-full group event-card-wrapper"
                                         style={{
-                                            fontFamily: '"Quanta Grotesk Pro", sans-serif',
-                                            fontWeight: 900,
-                                            fontSize: '20px',
-                                            lineHeight: '18.5px',
-                                            letterSpacing: '1%',
-                                            verticalAlign: 'middle',
+                                            WebkitMaskImage: 'url("/events/technical%20events/event-card.png")',
+                                            maskImage: 'url("/events/technical%20events/event-card.png")',
+                                            WebkitMaskSize: '100% 100%',
+                                            maskSize: '100% 100%',
+                                            WebkitMaskRepeat: 'no-repeat',
+                                            maskRepeat: 'no-repeat',
+                                            WebkitMaskPosition: 'center',
+                                            maskPosition: 'center',
                                         }}
                                     >
-                                        <div>
-                                            <span className="block text-xs uppercase font-bold tracking-wider opacity-70 mb-1">{workshop.type}</span>
-                                            <span className="block">Day: {workshop.day}</span>
-                                            <span className="block">Time: {workshop.time}</span>
-                                            <span className="block">Venue: {workshop.venue}</span>
+                                        {/* Ticket background */}
+                                        <div className="absolute inset-0">
+                                            <Image
+                                                src="/events/technical%20events/event-card.png"
+                                                alt=""
+                                                fill
+                                                className="object-fill"
+                                            />
                                         </div>
 
-                                        <div>
-                                            <span className="block">Reg.Fee: {workshop.registrationFee}</span>
-                                            {workshop.proshowFee !== "-" && (
-                                                <span className="block">With PROSHOW: {workshop.proshowFee}</span>
-                                            )}
-                                            {workshop.prizePool !== "-" && (
-                                                <span className="block">Prize Pool: {workshop.prizePool}</span>
-                                            )}
-                                        </div>
+                                        {/* Card content */}
+                                        <div className="relative z-10 flex flex-col md:flex-row items-stretch min-h-[180px] md:min-h-[220px]">
+                                            {/* Image Section - Left with gradient blend */}
+                                            <div className="relative w-full md:w-[34%] h-48 md:h-auto flex-shrink-0">
+                                                <Image
+                                                    src={workshop.image}
+                                                    alt={workshop.title}
+                                                    fill
+                                                    className="object-cover grayscale card-image"
+                                                />
+                                                {/* Smooth gradient blend — extends past image edge to hide seam */}
+                                                <div
+                                                    className="absolute inset-y-0 w-56 md:w-72 z-10"
+                                                    style={{
+                                                        right: '-2rem',
+                                                        background: 'linear-gradient(to right, transparent 0%, rgba(255, 209, 32, 0.15) 15%, rgba(255, 209, 32, 0.4) 30%, rgba(255, 209, 32, 0.65) 45%, rgba(255, 209, 32, 0.85) 60%, #FFD120 75%, #FFD120 100%)'
+                                                    }}
+                                                />
+                                            </div>
 
-                                        <div className="border-t-2 border-[#1A0000] pt-2 mt-2">
-                                            <span className="block">Volunteer: {workshop.volunteer}</span>
-                                            <span className="block">Contact: {workshop.contact}</span>
-                                            {workshop.conductedBy !== "-" && (
-                                                <span className="block">Conducted By: {workshop.conductedBy}</span>
-                                            )}
-                                        </div>
-                                    </div>
+                                            {/* Title and Description - Center */}
+                                            <div className="w-1/3 flex-shrink-0 p-6 md:p-8 md:pr-2 flex flex-col justify-start items-start min-h-[200px] overflow-hidden">
+                                                {/* Title */}
+                                                <div className="mb-3 relative">
+                                                    <h3
+                                                        className="uppercase"
+                                                        style={{
+                                                            fontFamily: '"Akira Expanded", sans-serif',
+                                                            fontWeight: 800,
+                                                            fontSize: 'clamp(32px, 5vw, 63.57px)',
+                                                            lineHeight: '0.71',
+                                                            letterSpacing: '-0.08em',
+                                                            filter: 'url(#grainTitle)',
+                                                            color: '#1A0000',
+                                                        }}
+                                                    >
+                                                        {workshop.title}
+                                                    </h3>
+                                                    {/* Texture layer clipped to text shape */}
+                                                    <h3
+                                                        className="uppercase absolute inset-0 pointer-events-none"
+                                                        aria-hidden="true"
+                                                        style={{
+                                                            fontFamily: '"Akira Expanded", sans-serif',
+                                                            fontWeight: 800,
+                                                            fontSize: 'clamp(32px, 5vw, 63.57px)',
+                                                            lineHeight: '0.71',
+                                                            letterSpacing: '-0.08em',
+                                                            backgroundImage: 'url("/events/technical%20events/text-texture.png")',
+                                                            backgroundSize: '237px 355px',
+                                                            backgroundRepeat: 'repeat',
+                                                            WebkitBackgroundClip: 'text',
+                                                            backgroundClip: 'text',
+                                                            WebkitTextFillColor: 'transparent',
+                                                            mixBlendMode: 'soft-light',
+                                                            opacity: 0.4,
+                                                        }}
+                                                    >
+                                                        {workshop.title}
+                                                    </h3>
+                                                </div>
+                                                {/* Description */}
+                                                <div className="relative">
+                                                    <p
+                                                        style={{
+                                                            fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                            fontWeight: 900,
+                                                            fontSize: '18.5px',
+                                                            lineHeight: '18.5px',
+                                                            letterSpacing: '0.01em',
+                                                            filter: 'url(#grainDescription)',
+                                                            color: '#1A0000',
+                                                        }}
+                                                    >
+                                                        {workshop.description}
+                                                    </p>
+                                                    {/* Texture layer clipped to text shape */}
+                                                    <p
+                                                        className="absolute inset-0 pointer-events-none"
+                                                        aria-hidden="true"
+                                                        style={{
+                                                            fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                            fontWeight: 900,
+                                                            fontSize: '18.5px',
+                                                            lineHeight: '18.5px',
+                                                            letterSpacing: '0.01em',
+                                                            backgroundImage: 'url("/events/technical%20events/text-texture.png")',
+                                                            backgroundSize: '237px 355px',
+                                                            backgroundRepeat: 'repeat',
+                                                            WebkitBackgroundClip: 'text',
+                                                            backgroundClip: 'text',
+                                                            WebkitTextFillColor: 'transparent',
+                                                            mixBlendMode: 'soft-light',
+                                                            opacity: 0.4,
+                                                        }}
+                                                    >
+                                                        {workshop.description}
+                                                    </p>
+                                                </div>
+                                            </div>
 
-                                    {/* Arrow Icon - Top Right */}
-                                    <div className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 md:w-11 md:h-11 z-20 card-arrow">
-                                        <Image
-                                            src="/events/technical%20events/arrow-circle-right.png"
-                                            alt="Details"
-                                            fill
-                                            className="object-contain"
-                                        />
+                                            {/* Details Section - Right */}
+                                            <div
+                                                className="flex-1 p-6 md:p-8 md:pl-6 flex flex-col justify-start min-h-[200px] text-[#1A0000] space-y-2"
+                                                style={{
+                                                    fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                    fontWeight: 900,
+                                                    fontSize: '20px',
+                                                    lineHeight: '18.5px',
+                                                    letterSpacing: '1%',
+                                                    verticalAlign: 'middle',
+                                                }}
+                                            >
+                                                <div>
+                                                    <span className="block text-xs uppercase font-bold tracking-wider opacity-70 mb-1">{workshop.type}</span>
+                                                    <span className="block">Day: {workshop.day}</span>
+                                                    <span className="block">Time: {workshop.time}</span>
+                                                    <span className="block">Venue: {workshop.venue}</span>
+                                                </div>
+
+                                                <div>
+                                                    <span className="block">Reg.Fee: {workshop.registrationFee}</span>
+                                                    {workshop.proshowFee !== "-" && (
+                                                        <span className="block">With PROSHOW: {workshop.proshowFee}</span>
+                                                    )}
+                                                    {workshop.prizePool !== "-" && (
+                                                        <span className="block">Prize Pool: {workshop.prizePool}</span>
+                                                    )}
+                                                </div>
+
+                                                <div className="border-t-2 border-[#1A0000] pt-2 mt-2">
+                                                    <span className="block">Volunteer: {workshop.volunteer}</span>
+                                                    <span className="block">Contact: {workshop.contact}</span>
+                                                    {workshop.conductedBy !== "-" && (
+                                                        <span className="block">Conducted By: {workshop.conductedBy}</span>
+                                                    )}
+                                                </div>
+                                            </div>
+
+                                            {/* Arrow Icon - Top Right - Clickable */}
+                                            <button
+                                                onClick={() => {
+                                                    setSelectedWorkshop(workshop);
+                                                    setShowPopup(true);
+                                                }}
+                                                className="absolute top-4 right-4 md:top-6 md:right-6 w-10 h-10 md:w-11 md:h-11 z-20 card-arrow cursor-pointer hover:scale-110 transition-transform"
+                                            >
+                                                <Image
+                                                    src="/events/technical%20events/arrow-circle-right.png"
+                                                    alt="Details"
+                                                    fill
+                                                    className="object-contain"
+                                                />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            </div>
                             );
                         })}
                     </div>
@@ -1029,6 +1041,15 @@ export default function WorkshopsPage() {
                         </button>
                     </div>
                 </main>
+
+                {selectedWorkshop && (
+                    <RegistrationPopup
+                        isOpen={showPopup}
+                        onClose={() => setShowPopup(false)}
+                        eventName={selectedWorkshop.title}
+                        ticketOptions={getTicketOptions(selectedWorkshop)}
+                    />
+                )}
             </div>
         </PageLoader>
     );

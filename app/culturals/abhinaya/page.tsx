@@ -11,10 +11,10 @@ export default function AbhinayaRegisterPage() {
     const ticketOptions: TicketOption[] = [
         {
             id: "standard",
-            name: "REGISTRATION",
+            name: "ABHINAYA PASS",
             price: 150,
             type: "silver",
-            description: "Registration Fee: 150 Per Head"
+            description: "ACCESS TO CLASSICAL DANCE COMPETITION\nREGISTRATION: 150 PER HEAD"
         }
     ];
 
@@ -43,7 +43,7 @@ export default function AbhinayaRegisterPage() {
                                 <p>TIME : 10 : 30 - 12 : 00 AM</p>
                                 <p>STAGE : SEMINAR HALL AC BLOCK</p>
                                 <p>REG FEES : 150 PER HEAD</p>
-                                <p>PRIZE POOL : 2000</p>
+                                <p>PRIZE POOL : 3000</p>
                             </div>
                             <div className="pt-4">
                                 <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">
@@ -98,7 +98,7 @@ export default function AbhinayaRegisterPage() {
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
                         <p>Gouri K Mineesh: +91 85905 74275</p>
-                        <p>Amritha Venugopal: +91 98473 05340</p>
+                        <p>Amritha Venugopal: +91 98473 06340</p>
                     </div>
                 </section>
             </main>
