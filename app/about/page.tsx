@@ -63,7 +63,7 @@ export default function About() {
               ABOUT SSET
             </h2>
             <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
-              The SCMS School of Engineering and Technology (SSET) is envisioned as a premier institution providing exceptional technology-related education. SSET focuses on the holistic development of students, emphasizing ethical values and preparing them to meet the evolving diverse needs of the industry and the challenges posed by society. The institution fosters innovation, critical thinking, and interdisciplinary learning to nurture competent professionals and responsible global citizens.
+              SCMS School of Engineering and Technology (SSET), Ernakulam, is a premier institution committed to academic excellence, innovation, and holistic development. With state-of-the-art infrastructure, industry-focused programs, and experienced faculty, SSET nurtures skilled engineers ready for global challenges. Driven by quality education, research, and strong industry collaboration, SSET empowers students to lead, innovate, and excel.
             </p>
           </section>
 
