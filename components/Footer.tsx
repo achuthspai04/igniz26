@@ -1,7 +1,26 @@
+'use client';
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Footer() {
+    const [copiedText, setCopiedText] = useState<string | null>(null);
+
+    const copyToClipboard = (text: string) => {
+        if (typeof navigator !== "undefined" && navigator.clipboard?.writeText) {
+            navigator.clipboard
+                .writeText(text)
+                .then(() => {
+                    setCopiedText(text);
+                    setTimeout(() => setCopiedText(null), 2000);
+                })
+                .catch(() => {
+                    // Silently fail if clipboard is unavailable
+                });
+        }
+    };
+
     const navLinks = [
         {
             label: "MAIL US",
@@ -30,6 +49,7 @@ export default function Footer() {
         },
     ];
     return (
+        <>
         <footer
             className={`relative bg-[#2B0000] overflow-hidden min-h-[32rem]`}
             style={{
@@ -106,8 +126,11 @@ export default function Footer() {
                                                     <div key={i}>
                                                         {item.href ? (
                                                             <>
-                                                                {/* Desktop: selectable plain text */}
-                                                                <span className="hidden md:inline">
+                                                                {/* Desktop: selectable plain text with yellow hover & copy on click */}
+                                                                <span
+                                                                    className="hidden md:inline md:hover:text-[#FFD120] cursor-pointer"
+                                                                    onClick={() => copyToClipboard(item.text)}
+                                                                >
                                                                     {item.text}
                                                                 </span>
                                                                 {/* Mobile: clickable tel link */}
@@ -212,5 +235,11 @@ export default function Footer() {
                 </div>
             </div>
         </footer>
+        {copiedText && (
+            <div className="hidden md:block fixed bottom-6 right-6 z-[2000] bg-black/80 text-[#FFD120] px-4 py-2 rounded-md text-xs sm:text-sm shadow-lg">
+                Copied {copiedText} to clipboard
+            </div>
+        )}
+        </>
     );
 }
