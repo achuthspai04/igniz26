@@ -599,16 +599,16 @@ export default function WorkshopsPage() {
         const match = feeStr.match(/₹?(\d+,?\d*)/);
         let amount = match ? parseInt(match[1].replace(/,/g, ''), 10) : 0;
 
-        
-      
+
+
         if (feeStr.toLowerCase().includes("per person") || feeStr.toLowerCase().includes("per head") || feeStr.toLowerCase().includes("solo")) {
-           
+
             const perPersonMatch = feeStr.match(/₹?(\d+,?\d*)\s*(?:\/-)?\s*(?:per person|per head|solo)/i);
             if (perPersonMatch) {
                 amount = parseInt(perPersonMatch[1].replace(/,/g, ''), 10);
             }
         } else if (feeStr.toLowerCase().includes("team")) {
-            
+
         }
 
         return amount;
@@ -620,7 +620,7 @@ export default function WorkshopsPage() {
         // Bronze Pass - Workshop Only
         const baseFee = parseFee(workshop.registrationFee);
 
-        
+
 
         if (baseFee > 0 || workshop.registrationFee.toLowerCase().includes("free")) {
             options.push({
@@ -642,7 +642,7 @@ export default function WorkshopsPage() {
                 description: "Workshop + Respective Day Proshow"
             });
 
-          
+
             const goldPrice = silverFee + 250;
             options.push({
                 id: "gold",
@@ -889,7 +889,7 @@ export default function WorkshopsPage() {
                                             </div>
 
                                             {/* Title and Description - Center */}
-                                            <div className="w-1/3 flex-shrink-0 p-6 md:p-8 md:pr-2 flex flex-col justify-start items-start min-h-[200px] overflow-hidden">
+                                            <div className="w-full md:w-1/3 flex-shrink-0 p-6 md:p-8 md:pr-2 flex flex-col justify-start items-start min-h-[200px]">
                                                 {/* Title */}
                                                 <div className="mb-3 relative">
                                                     <h3
@@ -897,7 +897,7 @@ export default function WorkshopsPage() {
                                                         style={{
                                                             fontFamily: '"Akira Expanded", sans-serif',
                                                             fontWeight: 800,
-                                                            fontSize: 'clamp(32px, 5vw, 63.57px)',
+                                                            fontSize: 'clamp(22px, 5vw, 63.57px)',
                                                             lineHeight: '0.71',
                                                             letterSpacing: '-0.08em',
                                                             filter: 'url(#grainTitle)',
@@ -913,7 +913,7 @@ export default function WorkshopsPage() {
                                                         style={{
                                                             fontFamily: '"Akira Expanded", sans-serif',
                                                             fontWeight: 800,
-                                                            fontSize: 'clamp(32px, 5vw, 63.57px)',
+                                                            fontSize: 'clamp(22px, 5vw, 63.57px)',
                                                             lineHeight: '0.71',
                                                             letterSpacing: '-0.08em',
                                                             backgroundImage: 'url("/events/technical%20events/text-texture.png")',

@@ -1,61 +1,75 @@
 .card-animate {
-                    opacity: 0;
-                    transform: translateY(60px);
-                    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                                transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .card-animate.card-visible {
-                    opacity: 1;
-                    transform: translateY(0);
-                }
-                .event-card-wrapper {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-                                filter 0.35s ease;
-                }
-                .event-card-wrapper:hover {
-                    transform: translateY(-8px) scale(1.03);
-                    filter: brightness(1.04);
-                }
-                .event-card-wrapper:hover .card-arrow {
-                    transform: rotate(-45deg) scale(1.15);
-                }
-                .event-card-wrapper:hover .card-image {
-                    filter: grayscale(0.3);
-                    transform: scale(1.05);
-                }
-                .card-arrow {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .card-image {
-                    transition: filter 0.5s ease, transform 0.5s ease;
-                }
-                /* Dropdown animations */
-                @keyframes dropdownSlideDown {
-                    from {
-                        opacity: 0;
-                        transform: translateY(-16px) scaleY(0.9);
-                    }
-                    to {
-                        opacity: 1;
-                        transform: translateY(0) scaleY(1);
-                    }
-                }
-                .dropdown-menu {
-                    animation: dropdownSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-                    transform-origin: top center;
-                }
-                .dropdown-item {
-                    transition: filter 0.2s ease, transform 0.2s ease;
-                    filter: brightness(0.75);
-                }
-                .dropdown-item:hover {
-                    filter: brightness(1);
-                    transform: scale(1.02);
-                    z-index: 100 !important;
-                }
-                .dropdown-arrow {
-                    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-                }
-                .dropdown-arrow.open {
-                    transform: rotate(180deg);
-                }
+    opacity: 0;
+    transform: translateY(60px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-animate.card-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.event-card-wrapper {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.35s ease;
+}
+
+.event-card-wrapper:hover {
+    transform: translateY(-8px) scale(1.03);
+    filter: brightness(1.04);
+}
+
+.event-card-wrapper:hover .card-arrow {
+    transform: rotate(-45deg) scale(1.15);
+}
+
+.event-card-wrapper:hover .card-image {
+    filter: grayscale(0.3);
+    transform: scale(1.05);
+}
+
+.card-arrow {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-image {
+    transition: filter 0.5s ease, transform 0.5s ease;
+}
+
+/* Dropdown animations */
+@keyframes dropdownSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-16px) scaleY(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scaleY(1);
+    }
+}
+
+.dropdown-menu {
+    animation: dropdownSlideDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    transform-origin: top center;
+}
+
+.dropdown-item {
+    transition: filter 0.2s ease, transform 0.2s ease;
+    filter: brightness(0.75);
+}
+
+.dropdown-item:hover {
+    filter: brightness(1);
+    transform: scale(1.02);
+    z-index: 100 !important;
+}
+
+.dropdown-arrow {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
