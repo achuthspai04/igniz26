@@ -4,12 +4,85 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
 import PageLoader from "@/components/PageLoader";
+import InteractiveComicPanel, {
+    type ComicPanelConfig,
+} from "@/components/InteractiveComicPanel";
 
-const COMIC_SVGS = [
-    "/images/Frame%20comic.svg",
-    "/images/Frame%20comic%20(1).svg",
-    "/images/Frame%20comic%20(2).svg",
-    "/images/Frame%20comic%20(3).svg",
+const COMIC_SVG_1 = "/images/Frame%20comic-1.svg";
+const COMIC_SVG_2 = "/images/Frame%20comic-2.svg";
+const COMIC_SVG_3 = "/images/Frame%20comic-3.svg";
+const COMIC_SVG_4 = "/images/Frame%20comic-4.svg";
+
+const PANEL_CONFIG_1: ComicPanelConfig[] = [
+    {
+        id: "TOP",
+        label: "Mechanical Bull",
+        onClick: () => console.log("Mechanical Bull clicked"),
+    },
+    {
+        id: "LEFT",
+        label: "Archery",
+        onClick: () => console.log("Archery clicked"),
+    },
+    {
+        id: "RIGHT",
+        label: "Bumper Balls",
+        onClick: () => console.log("Bumper Balls clicked"),
+    },
+];
+
+const PANEL_CONFIG_2: ComicPanelConfig[] = [
+    {
+        id: "TOP",
+        label: "Paint Ball",
+        onClick: () => console.log("Paint Ball clicked"),
+    },
+    {
+        id: "LEFT",
+        label: "VR Gaming",
+        onClick: () => console.log("VR Gaming clicked"),
+    },
+    {
+        id: "RIGHT",
+        label: "E-Sports",
+        onClick: () => console.log("E-Sports clicked"),
+    },
+];
+
+const PANEL_CONFIG_3: ComicPanelConfig[] = [
+    {
+        id: "TOP",
+        label: "Escape Room",
+        onClick: () => console.log("Escape Room clicked"),
+    },
+    {
+        id: "LEFT",
+        label: "Treasure Hunt",
+        onClick: () => console.log("Treasure Hunt clicked"),
+    },
+    {
+        id: "RIGHT",
+        label: "Basketball Throw",
+        onClick: () => console.log("Basketball Throw clicked"),
+    },
+];
+
+const PANEL_CONFIG_4: ComicPanelConfig[] = [
+    {
+        id: "TOP",
+        label: "Ring Throw",
+        onClick: () => console.log("Ring Throw clicked"),
+    },
+    {
+        id: "LEFT",
+        label: "Snake & Ladder",
+        onClick: () => console.log("Snake & Ladder clicked"),
+    },
+    {
+        id: "RIGHT",
+        label: "Board Games",
+        onClick: () => console.log("Board Games clicked"),
+    },
 ];
 
 export default function EntertainmentPage() {
@@ -18,7 +91,7 @@ export default function EntertainmentPage() {
     }, []);
 
     return (
-        <PageLoader assets={COMIC_SVGS}>
+        <PageLoader assets={[COMIC_SVG_1, COMIC_SVG_2, COMIC_SVG_3, COMIC_SVG_4]}>
             <div className="relative w-full overflow-clip bg-[#1A0000] min-h-screen flex flex-col">
                 {/* Texture overlay */}
                 <div
@@ -48,20 +121,24 @@ export default function EntertainmentPage() {
                         </h1>
                     </div>
 
-                    {/* Comic SVGs — stacked column */}
+                    {/* Interactive Comic Panels */}
                     <div className="relative z-10 w-full max-w-4xl flex flex-col gap-4 sm:gap-6 md:gap-8">
-                        {COMIC_SVGS.map((src, idx) => (
-                            <div key={idx} className="w-full">
-                                <Image
-                                    src={src}
-                                    alt={`Entertainment panel ${idx + 1}`}
-                                    width={1200}
-                                    height={800}
-                                    className="w-full h-auto"
-                                    priority={idx === 0}
-                                />
-                            </div>
-                        ))}
+                        <InteractiveComicPanel
+                            svgPath={COMIC_SVG_1}
+                            panels={PANEL_CONFIG_1}
+                        />
+                        <InteractiveComicPanel
+                            svgPath={COMIC_SVG_2}
+                            panels={PANEL_CONFIG_2}
+                        />
+                        <InteractiveComicPanel
+                            svgPath={COMIC_SVG_3}
+                            panels={PANEL_CONFIG_3}
+                        />
+                        <InteractiveComicPanel
+                            svgPath={COMIC_SVG_4}
+                            panels={PANEL_CONFIG_4}
+                        />
                     </div>
 
                     {/* Register Button */}
