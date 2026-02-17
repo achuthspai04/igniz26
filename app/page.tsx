@@ -240,7 +240,7 @@ export default function Home() {
           <div className="w-full">
             <EventSection />
           </div>
-          <Link href="/culturals">
+          <Link href="/Culturals">
             <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
               <Image
                 src="/events/LOAD.svg"
