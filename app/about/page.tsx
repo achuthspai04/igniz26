@@ -6,7 +6,7 @@ const ABOUT_HEADING_STYLE = {
 
 export default function About() {
   return (
-    <div className="relative min-h-[auto] md:min-h-screen w-full bg-[#1A0000] overflow-hidden">
+    <div id="about-us" className="relative min-h-[auto] md:min-h-screen w-full bg-[#1A0000] overflow-hidden">
       {/* Background Texture */}
       <div
         className="absolute inset-0 z-[2] pointer-events-none"

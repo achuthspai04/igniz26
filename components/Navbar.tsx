@@ -1,17 +1,41 @@
 'use client';
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import LayeredImage from './LayeredImage';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 const Navbar = () => {
     const eventStartDay = '26';
     const eventEndDay = '27';
     const eventMonth = 'FEB';
     const [menuOpen, setMenuOpen] = useState(false);
+    const [ticketsOpen, setTicketsOpen] = useState(false);
+    const [mobileTicketsOpen, setMobileTicketsOpen] = useState(false);
+    const ticketsRef = useRef<HTMLDivElement>(null);
     const toggleMenu = useCallback(() => setMenuOpen(prev => !prev), []);
-    const closeMenu = useCallback(() => setMenuOpen(false), []);
+    const closeMenu = useCallback(() => { setMenuOpen(false); setMobileTicketsOpen(false); }, []);
+
+    const TICKET_ITEMS = useMemo(
+        () => [
+            { label: 'Culturals', href: '/Culturals' },
+            { label: 'Technical Workshops', href: '/workshops' },
+            { label: 'Entertainment & Games', href: '/entertainment' },
+        ],
+        []
+    );
+
+    // Close desktop dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (ticketsRef.current && !ticketsRef.current.contains(e.target as Node)) {
+                setTicketsOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     // Prevent body scroll when menu is open
     useEffect(() => {
@@ -31,19 +55,21 @@ const Navbar = () => {
 
                 {/* Left: Logo */}
                 <div className="flex items-center">
-                    <Image
-                        src="/images/navbarlogo.svg"
-                        alt="IGNIS logo"
-                        width={120}
-                        height={90}
-                        className="h-[72px] md:h-[80px] w-auto"
-                        priority
-                    />
+                    <Link href="/" aria-label="Go to home page">
+                        <Image
+                            src="/images/navbarlogo.svg"
+                            alt="IGNIZ logo"
+                            width={120}
+                            height={90}
+                            className="h-[72px] md:h-[80px] w-auto cursor-pointer"
+                            priority
+                        />
+                    </Link>
                 </div>
 
                 {/* Center Navbar — Desktop */}
-                <nav className="hidden md:flex flex-1 h-[63px] border-3 border-[#FF8A12] box-border items-center mx-4 pl-10 pr-10 relative overflow-hidden">
-                    <div className="absolute inset-0">
+                <nav className="hidden md:flex flex-1 h-[63px] border-3 border-[#FF8A12] box-border items-center mx-4 pl-10 pr-10 relative overflow-visible">
+                    <div className="absolute inset-0 overflow-hidden">
                         <LayeredImage
                             aspectRatio="full"
                             className="h-full w-full"
@@ -77,10 +103,77 @@ const Navbar = () => {
                         </Link>
 
                         <div className="ml-auto flex items-center gap-12 text-black font-semibold uppercase tracking-wide">
-                            <Link href="/about" className="-skew-x-6 cursor-pointer">
+                            <a
+                                href="#about-us"
+                                className="-skew-x-6 cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const smoother = ScrollSmoother.get();
+                                    if (smoother) {
+                                        smoother.scrollTo('#about-us', true);
+                                    } else {
+                                        document.getElementById('about-us')?.scrollIntoView({ behavior: 'smooth' });
+                                    }
+                                }}
+                            >
                                 About Us
-                            </Link>
-                            <span className="-skew-x-6 cursor-pointer">Tickets</span>
+                            </a>
+                            {/* Tickets Dropdown */}
+                            <div
+                                ref={ticketsRef}
+                                className="relative pb-[18px] -mb-[18px]"
+                                onMouseEnter={() => setTicketsOpen(true)}
+                                onMouseLeave={() => setTicketsOpen(false)}
+                            >
+                                <span
+                                    className="-skew-x-6 cursor-pointer flex items-center gap-1"
+                                    onClick={() => setTicketsOpen(prev => !prev)}
+                                >
+                                    Tickets
+                                    <svg
+                                        className={`w-4 h-4 transition-transform duration-200 ${ticketsOpen ? 'rotate-180' : ''}`}
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                                    </svg>
+                                </span>
+
+                                {/* Desktop Dropdown Panel */}
+                                <div
+                                    className={`absolute top-full right-0 w-52 border-3 border-[#FF8A12] overflow-hidden transition-all duration-200 ${ticketsOpen
+                                        ? 'opacity-100 translate-y-0 pointer-events-auto'
+                                        : 'opacity-0 -translate-y-2 pointer-events-none'
+                                        }`}
+                                    style={{ zIndex: 9999 }}
+                                >
+                                    {/* Dropdown background */}
+                                    <div className="absolute inset-0">
+                                        <div className="absolute inset-0 bg-[#FFD120]" />
+                                        <div
+                                            className="absolute inset-0 mix-blend-multiply"
+                                            style={{
+                                                backgroundImage: `url('/images/navbartexture.png')`,
+                                                backgroundSize: 'cover',
+                                                backgroundPosition: 'center',
+                                            }}
+                                        />
+                                    </div>
+                                    {/* Dropdown items */}
+                                    <div className="relative z-10 flex flex-col py-2">
+                                        {TICKET_ITEMS.map((item) => (
+                                            <Link
+                                                key={item.href}
+                                                href={item.href}
+                                                className="px-5 py-2.5 text-[1.1rem] text-black font-semibold uppercase tracking-wide -skew-x-6 hover:text-[#FF8A12] hover:bg-black/5 transition-colors text-center whitespace-normal"
+                                            >
+                                                {item.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </nav>
@@ -109,19 +202,16 @@ const Navbar = () => {
                 >
                     <div className="flex flex-col items-center justify-center gap-[6px]">
                         <span
-                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${
-                                menuOpen ? 'rotate-45 translate-y-[9.5px]' : ''
-                            }`}
+                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${menuOpen ? 'rotate-45 translate-y-[9.5px]' : ''
+                                }`}
                         />
                         <span
-                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${
-                                menuOpen ? 'opacity-0' : ''
-                            }`}
+                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${menuOpen ? 'opacity-0' : ''
+                                }`}
                         />
                         <span
-                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${
-                                menuOpen ? '-rotate-45 -translate-y-[9.5px]' : ''
-                            }`}
+                            className={`block w-[28px] h-[3.5px] bg-[#FFD120] rounded-sm transition-all duration-300 ${menuOpen ? '-rotate-45 -translate-y-[9.5px]' : ''
+                                }`}
                         />
                     </div>
                 </button>
@@ -130,9 +220,8 @@ const Navbar = () => {
 
             {/* Mobile Dropdown Menu */}
             <div
-                className={`md:hidden fixed inset-0 top-[120px] z-[999] transition-all duration-400 ${
-                    menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
-                }`}
+                className={`md:hidden fixed inset-0 top-[120px] z-[999] transition-all duration-400 ${menuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+                    }`}
             >
                 {/* Backdrop */}
                 <div
@@ -142,9 +231,8 @@ const Navbar = () => {
 
                 {/* Menu Panel */}
                 <div
-                    className={`relative mx-4 sm:mx-6 mt-2 border-3 border-[#FF8A12] overflow-hidden transition-all duration-400 ${
-                        menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
-                    }`}
+                    className={`relative mx-4 sm:mx-6 mt-2 border-3 border-[#FF8A12] overflow-hidden transition-all duration-400 ${menuOpen ? 'translate-y-0 opacity-100' : '-translate-y-4 opacity-0'
+                        }`}
                 >
                     {/* Background with texture */}
                     <div className="absolute inset-0">
@@ -181,19 +269,53 @@ const Navbar = () => {
                         >
                             Home
                         </Link>
-                        <Link
-                            href="/about"
+                        <a
+                            href="#about-us"
                             className="-skew-x-6 cursor-pointer hover:text-[#FF8A12] transition-colors"
-                            onClick={closeMenu}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                closeMenu();
+                                const smoother = ScrollSmoother.get();
+                                if (smoother) {
+                                    smoother.scrollTo('#about-us', true);
+                                } else {
+                                    document.getElementById('about-us')?.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }}
                         >
                             About Us
-                        </Link>
-                        <span
-                            className="-skew-x-6 cursor-pointer hover:text-[#FF8A12] transition-colors"
-                            onClick={closeMenu}
-                        >
-                            Tickets
-                        </span>
+                        </a>
+                        {/* Mobile Tickets Accordion */}
+                        <div className="flex flex-col items-center w-full">
+                            <span
+                                className="-skew-x-6 cursor-pointer hover:text-[#FF8A12] transition-colors flex items-center gap-2"
+                                onClick={() => setMobileTicketsOpen(prev => !prev)}
+                            >
+                                Tickets
+                                <svg
+                                    className={`w-5 h-5 transition-transform duration-200 ${mobileTicketsOpen ? 'rotate-180' : ''}`}
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </span>
+                            <div
+                                className={`flex flex-col items-center w-full overflow-hidden transition-all duration-300 ${mobileTicketsOpen ? 'max-h-60 mt-3 opacity-100' : 'max-h-0 opacity-0'}`}
+                            >
+                                {TICKET_ITEMS.map((item) => (
+                                    <Link
+                                        key={item.href}
+                                        href={item.href}
+                                        className="py-2 px-6 text-[1.4rem] text-black/80 font-semibold uppercase tracking-wide -skew-x-6 hover:text-[#FF8A12] transition-colors text-center whitespace-normal"
+                                        onClick={closeMenu}
+                                    >
+                                        {item.label}
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
