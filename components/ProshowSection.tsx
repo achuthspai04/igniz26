@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PROSHOW_IMAGES = Object.freeze({
   ellipse: "/proShow/proshow cta.svg",
-  pic: "/images/pic-s.svg",
+  pic: "/images/pic.svg",
   proShow: "/proShow/PRO%20SHOW.png",
   red: "/proShow/ProShowLogo.png",
   texture: "/images/asset_texture%201.svg",
