@@ -123,13 +123,14 @@ export default function EntertainmentPage() {
 
                     {/* Interactive Comic Panels */}
                     <div className="relative z-10 w-full max-w-4xl flex flex-col gap-4 sm:gap-6 md:gap-8">
-                        <InteractiveComicPanel
-                            svgPath={COMIC_SVG_1}
-                            panels={PANEL_CONFIG_1}
-                        />
+                        
                         <InteractiveComicPanel
                             svgPath={COMIC_SVG_2}
                             panels={PANEL_CONFIG_2}
+                        />
+                        <InteractiveComicPanel
+                            svgPath={COMIC_SVG_1}
+                            panels={PANEL_CONFIG_1}
                         />
                         <InteractiveComicPanel
                             svgPath={COMIC_SVG_3}
