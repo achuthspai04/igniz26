@@ -39,6 +39,7 @@ export default function VoiceOfIgnizRegisterPage() {
                                 <Image src="/events/eventpages/5-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
+                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>                                
                                 <p>TIME : 10:30 - 12:30 PM</p>
                                 <p>STAGE : STAGE 2</p>
                                 <p>REG FEES : 150 PER HEAD</p>
@@ -60,14 +61,14 @@ export default function VoiceOfIgnizRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Time Limit: 3-7 mins, any extensions in time will result in direct disqualification.</li>
-                        <li>2. The event is exclusively for vocalists and not for solo instrumentalists.</li>
-                        <li>3. The genre of music can be English, Malayalam and Hindi.</li>
-                        <li>4. No editing or mixing is allowed in the audio.</li>
-                        <li>5. Either a backing track (karaoke) or one backing musician will be permitted.</li>
-                        <li>6. Judge&apos;s decision will be final.</li>
-                        <li>7. In case of any conflict, the organizer&apos;s decision would be final.</li>
-                        <li>8. Send your background music to stage@igniz.live</li>
+                        <li>1. Time limit- A minimum of 3 Mins and a maximum of 7 mins will be allowed. Please note that any extensions in time will result in direct disqualifications. All participants are requested to note that the timer will begin as soon as they step on to the stage, and so no additional time will be given for sound check. ( Maximum 7 mins per participant )</li>
+                        <li>2. This event is exclusively for vocalists and not for solo instrumentalists.</li>
+                        <li>3. Only Indian film songs will be entertained for the event. The language is of your choice.</li>
+                        <li>4. Cover versions shall be entertained.</li>
+                        <li>5. Either a backing track (karaoke) or one backing instrumentalist , preferably a guitarist or keyboardist will be permitted (Kindly note that only the performance of the vocalist will be judged in such a circumstance).</li>
+                        <li>6. Judge&apos;s decision will be final .</li>
+                        <li>7. In case of any conflict, the organizer&apos;s decision will be final.</li>
+                        <li>8. Send your background music to stage@igniz.live before the announced deadline to avoid any delay in the smooth functioning of the event.</li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">

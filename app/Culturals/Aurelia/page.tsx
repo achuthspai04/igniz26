@@ -39,7 +39,7 @@ export default function AureliaRegisterPage() {
                                 <Image src="/events/eventpages/3-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">26-27 FEB</span></p>
+                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
                                 <p>TIME : 10:30 - 12:30 PM</p>
                                 <p>STAGE : STAGE 1</p>
                                 <p>REG FEES : 180 PER HEAD</p>
@@ -61,21 +61,22 @@ export default function AureliaRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Participating teams should send: College Name (and Team Name if any), Name and Contact info of any 2 team members, List of Team Members, Send your background music to stage@igniz.live</li>
+                        <li>1. Participating teams should send the following: ▪ College Name (and Team Name if any) ▪ Name and Contact info of any 2 team members ▪ List of Team Members ▪ Send your background music to stage@igniz.live .</li>
                         <li>2. The deadline for the same shall be informed after confirmation of participation.</li>
                         <li>3. Presenting banners, posters, or other materials directly displaying the theme is prohibited.</li>
-                        <li>4. Background music should be cross-checked with the event coordinator prior to the event.</li>
+                        <li>4. Background music should be cross-checked with the event coordinator prior to the event</li>
                         <li>5. A minimum of 6 and a maximum of 20 models per team are allowed.</li>
                         <li>6. One participant cannot be a part of two teams.</li>
                         <li>7. Time limit per team: 10 minutes empty to empty.</li>
                         <li>8. An additional 1 minute, if required, will be provided for narration only. Exceeding the time limit will lead to team disqualification.</li>
                         <li>9. Participating teams can contact one of the coordinators for more details regarding registration.</li>
-                        <li>10. Participation without the college ID will automatically result in team disqualification.</li>
-                        <li>11. Only 3 Helper Passes will be given per team.</li>
-                        <li>12. Teams will be judged on costumes, theme, walking stance, attitude and coordination.</li>
-                        <li>13. Details regarding the college should not be revealed during the show.</li>
+                        <li>10. Participation without the college ID and the IGNIZ ID will automatically result in team disqualification.</li>
+                        <li>11. Only 6 Helper Passes will be given per team.</li>
+                        <li>12. Teams will be judged on costumes walking stance, and attitude.</li>
+                        <li>13. Details regarding the college (for example, college name) shouldn&apos;t be revealed during the show.</li>
                         <li>14. Failure to adhere to the rules will lead to disqualification.</li>
-                        <li>15. Decision of the judges will be final.</li>
+                        <li>15. Teams must bring a backup copy of their music (pen drive)</li>
+                        <li>16. Decision of the judges will be final.</li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">
