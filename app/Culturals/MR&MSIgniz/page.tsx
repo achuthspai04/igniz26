@@ -41,7 +41,7 @@ export default function MrMsIgnizRegisterPage() {
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
                                 <p>TIME : 01:00 - 03:00 PM</p>
-                                <p>STAGE : STAGE 2</p>
+                                <p>STAGE : STAGE 1</p>
                                 <p>REG FEES : 150 PER HEAD</p>
                                 <p>PRIZE POOL : 3000</p>
                             </div>
