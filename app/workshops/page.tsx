@@ -48,7 +48,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             conductedBy: "Jasil",
         },
         {
-            id: 3, title: "CACHE QUEST", image: "/events/technical events/cs/cs-cache-quest.webp", type: "Competition", day: "Day 2", time: "9AM - 3:30PM", venue: "AD 104 (in and around campus)", 
+            id: 3, title: "CACHE QUEST", image: "/events/technical events/cs/cs-cache-quest.webp", type: "Competition", day: "Day 2", time: "9AM - 3:30PM", venue: "AD 104 (in and around campus)",
             registrationFee: "₹199/- per head",
             proshowFee: "₹299",
             goldenFee: "₹499",
@@ -59,7 +59,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             conductedBy: "Aneeja",
         },
         {
-            id: 4, title: "INDIE WEB 101", image: "/events/technical events/cs/cs-indie-web.webp", type: "Workshop + Competition", day: "Day 2", time: "9AM - 3:30PM", venue: "Lab 5, AD", 
+            id: 4, title: "INDIE WEB 101", image: "/events/technical events/cs/cs-indie-web.webp", type: "Workshop + Competition", day: "Day 2", time: "9AM - 3:30PM", venue: "Lab 5, AD",
             registrationFee: "₹199/- per head",
             proshowFee: "₹299",
             goldenFee: "₹499",
@@ -489,7 +489,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             venue: "Conference Hall",
             registrationFee: "₹300/-",
             proshowFee: "-",
-            prizePool: "1st ₹5,000 / 2nd ₹3,000",
+            prizePool: "₹8,000\n(1st ₹5,000 / 2nd ₹2,000)",
             description: "IGNIZ Debate",
             volunteer: "Aksa Santha Ronio",
             contact: "8848462375",
@@ -506,7 +506,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             registrationFee: "₹300/-",
             proshowFee: "₹400",
             goldenFee: "₹500",
-            prizePool: "₹8,000",
+            prizePool: "₹7,000",
             description: "IGNIZ MUN — An SSETMUN Initiative",
             volunteer: "Aksa Santha Ronio",
             contact: "8848462375",
@@ -904,7 +904,7 @@ export default function WorkshopsPage() {
                                                             fontFamily: '"Akira Expanded", sans-serif',
                                                             fontWeight: 800,
                                                             fontSize: 'clamp(22px, 5vw, 63.57px)',
-                                                            lineHeight: '0.71',
+                                                            lineHeight: '0.95',
                                                             letterSpacing: '-0.08em',
                                                             filter: 'url(#grainTitle)',
                                                             color: '#1A0000',
@@ -920,7 +920,7 @@ export default function WorkshopsPage() {
                                                             fontFamily: '"Akira Expanded", sans-serif',
                                                             fontWeight: 800,
                                                             fontSize: 'clamp(22px, 5vw, 63.57px)',
-                                                            lineHeight: '0.71',
+                                                            lineHeight: '0.95',
                                                             letterSpacing: '-0.08em',
                                                             backgroundImage: 'url("/events/technical%20events/text-texture.png")',
                                                             backgroundSize: '237px 355px',
@@ -977,12 +977,12 @@ export default function WorkshopsPage() {
 
                                             {/* Details Section - Right */}
                                             <div
-                                                className="flex-1 p-6 md:p-8 md:pl-6 flex flex-col justify-start min-h-[200px] text-[#1A0000] space-y-2"
+                                                className="flex-1 p-6 md:p-8 md:pl-6 flex flex-col justify-start min-h-[200px] text-[#1A0000] space-y-4"
                                                 style={{
                                                     fontFamily: '"Quanta Grotesk Pro", sans-serif',
                                                     fontWeight: 900,
                                                     fontSize: '20px',
-                                                    lineHeight: '18.5px',
+                                                    lineHeight: '1.4',
                                                     letterSpacing: '1%',
                                                     verticalAlign: 'middle',
                                                 }}
@@ -1000,7 +1000,7 @@ export default function WorkshopsPage() {
                                                         <span className="block">With PROSHOW: {workshop.proshowFee}</span>
                                                     )}
                                                     {workshop.prizePool !== "-" && (
-                                                        <span className="block">Prize Pool: {workshop.prizePool}</span>
+                                                        <span className="block whitespace-pre-line">Prize Pool: {workshop.prizePool}</span>
                                                     )}
                                                 </div>
 
