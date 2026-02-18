@@ -134,7 +134,7 @@ export default function EventSection() {
           className="font-akira-expanded text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
           style={{
             textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
-            fontFamily: '"Akira Expanded", sans-serif',
+            fontFamily: 'var(--font-akira), sans-serif',
           }}
         >
           <span className="block md:inline">Cultural</span>{" "}

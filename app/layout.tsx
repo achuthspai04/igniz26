@@ -27,6 +27,31 @@ const dmSans = DM_Sans({
   variable: '--font-dmSans'
 })
 
+const mightMakesRight = localFont({
+  src: "../public/fonts/MightMakesRightBB.woff2",
+  variable: "--font-might",
+});
+
+const akiraExpanded = localFont({
+  src: "../public/fonts/AkiraExpanded.ttf",
+  variable: "--font-akira",
+});
+
+const lumadFree = localFont({
+  src: "../public/fonts/LumadFree.ttf",
+  variable: "--font-lumad",
+});
+
+const quantaGrotesk = localFont({
+  src: "../public/fonts/QuantaGroteskPro.woff2",
+  variable: "--font-quanta",
+});
+
+const quantaGroteskBlackItalic = localFont({
+  src: "../public/fonts/QuantaGroteskProBlackIta.woff2",
+  variable: "--font-quanta-italic",
+});
+
 export const metadata: Metadata = {
   title: "IGNIZ 26 - SSET's Flagship Technical Fest",
   description: "IGNIZ 26 is the flagship technical fest of SSET, featuring a wide range of technical events, workshops, and competitions.",
@@ -94,30 +119,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/f9ced2222639ca75db5574cba95a22eb?family=Might+Makes+Right+BB"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.cdnfonts.com/css/akira-expanded"
-        />
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/16d5b3ff3b7d315066ef040db2c92106?family=Lumad+Free"
-        />
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/88ab5e9510bcfe27031d652730e5952f?family=Quanta+Grotesk+Pro"
-        />
-        <link
-          rel="stylesheet"
-          href="https://db.onlinewebfonts.com/c/0527d4e74f677604a98934e82e1c522e?family=Quanta+Grotesk+Pro+Black+Ita"
-        />
-      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${blackHanSans.variable} ${dmSans.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${blackHanSans.variable} ${dmSans.variable} ${mightMakesRight.variable} ${akiraExpanded.variable} ${lumadFree.variable} ${quantaGrotesk.variable} ${quantaGroteskBlackItalic.variable} antialiased`}
         suppressHydrationWarning
       >
         <SmoothScrollWrapper>

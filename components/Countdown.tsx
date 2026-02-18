@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const TARGET_DATE = new Date("2026-02-26T00:00:00").getTime();
 const TEXT_SHADOW_STYLE = { textShadow: '0 0 20px rgba(255, 209, 32, 0.4)' } as const;
-const CONTAINER_STYLE = { fontFamily: '"Lumad Free", monospace', letterSpacing: '-0.05em' } as const;
+const CONTAINER_STYLE = { fontFamily: 'var(--font-lumad), monospace', letterSpacing: '-0.05em' } as const;
 const TEXTURE_STYLE = {
   backgroundImage: 'url("/images/asset_texture%201.svg")',
   backgroundSize: "cover" as const,

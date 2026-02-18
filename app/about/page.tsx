@@ -34,7 +34,7 @@ export default function About() {
         <div
           className="absolute inset-0 opacity-80 mix-blend-multiply"
           style={{
-            backgroundImage: `url('/images/TEXTURE%20UP.png')`,
+            backgroundImage: `url('/images/texture_up.webp')`,
             backgroundSize: 'contain',
             backgroundRepeat: 'repeat',
             backgroundPosition: 'center',
@@ -62,7 +62,7 @@ export default function About() {
             >
               ABOUT SSET
             </h2>
-            <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
+            <p className="text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: 'var(--font-quanta), sans-serif' }}>
               SCMS School of Engineering and Technology (SSET), Ernakulam, is a premier institution committed to academic excellence, innovation, and holistic development. With state-of-the-art infrastructure, industry-focused programs, and experienced faculty, SSET nurtures skilled engineers ready for global challenges. Driven by quality education, research, and strong industry collaboration, SSET empowers students to lead, innovate, and excel.
             </p>
           </section>
@@ -75,7 +75,7 @@ export default function About() {
             >
               ABOUT IGNIZ
             </h2>
-            <div className="space-y-6 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: '"Quanta Grotesk Pro", sans-serif' }}>
+            <div className="space-y-6 text-white/90 text-base sm:text-lg md:text-xl leading-relaxed md:leading-loose text-justify" style={{ fontFamily: 'var(--font-quanta), sans-serif' }}>
               <p>
                 IGNIZ is the flagship techno-cultural fest of SCMS School of Engineering and Technology (SSET) and one of the most awaited celebrations of the year. It is a dynamic convergence of technical innovation and cultural brilliance, brought to life on a single electrifying platform.
               </p>
