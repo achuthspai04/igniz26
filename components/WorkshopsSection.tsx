@@ -38,7 +38,7 @@ export default function WorkshopsSection() {
         </div>
 
         <div className="mt-10 w-full max-w-5xl space-y-6 md:space-y-8">
-          <div className="relative w-full aspect-[1263/369] overflow-hidden">
+          <Link href="/workshops" className="block relative w-full aspect-[1263/369] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity">
             <Image
               src={WORKSHOP_IMAGES.event1}
               alt="Hack the Igniz workshop banner"
@@ -46,9 +46,9 @@ export default function WorkshopsSection() {
               sizes="(max-width: 1024px) 100vw, 900px"
               className="object-contain"
             />
-          </div>
+          </Link>
 
-          <div className="relative w-full aspect-[1263/369] overflow-hidden">
+          <Link href="/workshops" className="block relative w-full aspect-[1263/369] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity">
             <Image
               src={WORKSHOP_IMAGES.event2}
               alt="Pythe Quest workshop banner"
@@ -56,7 +56,7 @@ export default function WorkshopsSection() {
               sizes="(max-width: 1024px) 100vw, 900px"
               className="object-contain"
             />
-          </div>
+          </Link>
         </div>
 
         <Link href="/workshops">

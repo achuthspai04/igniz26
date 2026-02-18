@@ -32,7 +32,7 @@ export default function EntertainmentSection() {
                 </div>
 
                 <div className="mt-10 w-full space-y-6 md:space-y-8">
-                    <div className="relative w-full aspect-[1263/1200] overflow-hidden">
+                    <Link href="/entertainment" className="block relative w-full aspect-[1263/1200] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity">
                         <Image
                             src="/images/Frame%20comic.svg"
                             alt="Entertainment banner"
@@ -40,7 +40,7 @@ export default function EntertainmentSection() {
                             sizes="(max-width: 1024px) 100vw, 900px"
                             className="object-contain"
                         />
-                    </div>
+                    </Link>
                 </div>
 
                 <Link href="/entertainment">

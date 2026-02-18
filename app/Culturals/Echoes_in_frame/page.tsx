@@ -1,22 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function EchoesInFrameRegisterPage() {
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-    const ticketOptions: TicketOption[] = [
-        {
-            id: "standard",
-            name: "ECHOES IN FRAME PASS",
-            price: 200,
-            type: "silver",
-            description: "ACCESS TO ECHOES IN FRAME COMPETITION\nREGISTRATION: 200 PER TEAM"
-        }
-    ];
 
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -39,15 +26,15 @@ export default function EchoesInFrameRegisterPage() {
                                 <Image src="/events/eventpages/4-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>                                
+                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
                                 <p>STAGE : ONLINE</p>
                                 <p>REG FEES : 200 PER TEAM</p>
                                 <p>PRIZE POOL : 3000</p>
                             </div>
                             <div className="pt-4">
-                                <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">
+                                <a href="https://snaptiqz.com/event/echoesinframes" target="_blank" rel="noopener noreferrer" className="inline-block hover:scale-105 transition-transform">
                                     <Image src="/events/eventpages/register.webp" alt="Register" width={300} height={100} className="w-auto h-12 sm:h-14 md:h-16 lg:h-20" />
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
@@ -92,7 +79,7 @@ export default function EchoesInFrameRegisterPage() {
                     </div>
                 </section>
             </main>
-            <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="ECHOES IN FRAME" />
+
         </div>
     );
 }
