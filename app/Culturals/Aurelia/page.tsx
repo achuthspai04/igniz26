@@ -40,7 +40,7 @@ export default function AureliaRegisterPage() {
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
-                                <p>TIME : 10:30 - 12:30 PM</p>
+                                <p>TIME : 11:00 - 01:00 PM</p>
                                 <p>STAGE : STAGE 1</p>
                                 <p>REG FEES : 180 PER HEAD</p>
                                 <p>PRIZE POOL : 40000</p>

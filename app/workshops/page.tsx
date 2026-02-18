@@ -165,11 +165,11 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             venue: "PG Lab - AD 411",
             registrationFee: "Solo: ₹199 / Team of 2: ₹175pp / Team of 3: ₹150pp",
             proshowFee: "-",
-            prizePool: "1st ₹3,000 / 2nd ₹2,000 / 3rd ₹3,000",
+            prizePool: "1st ₹4,000 / 2nd ₹2,500 / 3rd ₹1,000",
             description: "A 6 hour Stranger Things themed makeathon to help Eleven escape",
             volunteer: "Ilham Nadhir, Adithyan K",
             contact: "73568 31775 / 95620 99491",
-            conductedBy: "Aksa Rose, Fahad, Arjun",
+            conductedBy: "Aksa Rose, Arjun V",
         },
         {
             id: 6,
