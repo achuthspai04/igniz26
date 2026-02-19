@@ -5,11 +5,6 @@ import { useEffect, useState } from "react";
 const TARGET_DATE = new Date("2026-02-26T00:00:00").getTime();
 const TEXT_SHADOW_STYLE = { textShadow: '0 0 20px rgba(255, 209, 32, 0.4)' } as const;
 const CONTAINER_STYLE = { fontFamily: 'var(--font-lumad), monospace', letterSpacing: '-0.05em' } as const;
-const TEXTURE_STYLE = {
-  backgroundImage: 'url("/images/asset_texture%201.svg")',
-  backgroundSize: "cover" as const,
-  backgroundPosition: "center" as const,
-} as const;
 
 function getTimeLeft() {
   const now = Date.now();
@@ -34,11 +29,6 @@ export default function Countdown() {
 
   return (
     <section className="relative w-full flex flex-col items-center justify-center py-8 md:py-24 bg-[#1A0000] overflow-hidden">
-      {/* Texture overlay */}
-      <div
-        className="absolute inset-0 z-50 pointer-events-none select-none mix-blend-multiply"
-        style={TEXTURE_STYLE}
-      />
 
       {/* Countdown Timer */}
       <div className="relative z-20 mx-auto px-4 flex items-center justify-center">

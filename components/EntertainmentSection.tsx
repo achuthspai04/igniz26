@@ -8,15 +8,6 @@ const ENTERTAINMENT_HEADING_STYLE = {
 export default function EntertainmentSection() {
     return (
         <section className="relative w-full bg-[#1A0000] py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-hidden">
-            {/* Texture overlay like Countdown */}
-            <div
-                className="absolute inset-0 z-0 pointer-events-none select-none mix-blend-multiply"
-                style={{
-                    backgroundImage: 'url("/images/asset_texture%201.svg")',
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
-            />
 
             <div className="relative z-10 mx-auto max-w-6xl flex flex-col items-center">
                 <div className="text-center">
@@ -44,12 +35,19 @@ export default function EntertainmentSection() {
                 </div>
 
                 <Link href="/entertainment">
-                    <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
-                        <Image
-                            src="/events/eventpages/register.webp"
-                            alt="Register"
-                            fill
-                            className="object-contain"
+                    <div className="relative w-48 h-14 md:w-56 md:h-16 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center p-3">
+                        <div
+                            className="w-full h-full bg-[#FFD120]"
+                            style={{
+                                maskImage: 'url("/images/next.png")',
+                                WebkitMaskImage: 'url("/images/next.png")',
+                                maskSize: 'contain',
+                                WebkitMaskSize: 'contain',
+                                maskRepeat: 'no-repeat',
+                                WebkitMaskRepeat: 'no-repeat',
+                                maskPosition: 'center',
+                                WebkitMaskPosition: 'center'
+                            }}
                         />
                     </div>
                 </Link>

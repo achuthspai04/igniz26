@@ -151,13 +151,13 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
         },
         {
             id: 4,
-            title: "IEEE Cryptiq",
+            title: "IEEE Cryptiq (IEEE Members)",
             image: "/events/technical events/ai-ds/IEEE-Cryptiq.webp",
             type: "Competition",
             day: "Day 2",
             time: "9:30AM - 12:30PM",
             venue: "Lab 6 - AD 505",
-            registrationFee: "Team of 3: IEEE ₹100 / Non-IEEE ₹199",
+            registrationFee: "Team of 3: ₹100 (IEEE Members)",
             proshowFee: "-",
             prizePool: "₹10,000",
             description: "State level debugging competition",
@@ -165,6 +165,23 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             contact: "90742 51149 / 7736013480",
             conductedBy: "IEEE Team",
             registrationUrl: "https://snaptiqz.com/event/ieeecryptiq",
+        },
+        {
+            id: 41,
+            title: "IEEE Cryptiq (Non-IEEE Members)",
+            image: "/events/technical events/ai-ds/IEEE-Cryptiq.webp",
+            type: "Competition",
+            day: "Day 2",
+            time: "9:30AM - 12:30PM",
+            venue: "Lab 6 - AD 505",
+            registrationFee: "Team of 3: ₹199 (Non-IEEE Members)",
+            proshowFee: "-",
+            prizePool: "₹10,000",
+            description: "State level debugging competition",
+            volunteer: "Alan, Anurag",
+            contact: "90742 51149 / 7736013480",
+            conductedBy: "IEEE Team",
+            registrationUrl: "https://snaptiqz.com/event/cryptiq",
         },
         {
             id: 5,
@@ -290,6 +307,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             volunteer: "Muhamed Minhaj Fazal, Govind Padmakumar",
             contact: "9383497169 / 8590357034",
             conductedBy: "Techmagii",
+            registrationUrl: "https://snaptiqz.com/event/techmaghi",
         },
         {
             id: 2,
@@ -306,6 +324,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             volunteer: "Abel Charly, Gokula Krishnan",
             contact: "8078798472 / 8606007926",
             conductedBy: "Gautham P Utham",
+            registrationUrl: "https://snaptiqz.com/event/upcyclingoftrash",
         },
         {
             id: 3,
@@ -322,6 +341,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             volunteer: "Al Shafan",
             contact: "8606216861",
             conductedBy: "Faiz, Arjun",
+            registrationUrl: "https://snaptiqz.com/event/torquetails",
         },
     ],
     "AUTOMOBILE": [
@@ -888,28 +908,6 @@ export default function WorkshopsPage() {
                                                     >
                                                         {workshop.title}
                                                     </h3>
-                                                    {/* Texture layer clipped to text shape */}
-                                                    <h3
-                                                        className="uppercase absolute inset-0 pointer-events-none break-words"
-                                                        aria-hidden="true"
-                                                        style={{
-                                                            fontFamily: 'var(--font-akira), sans-serif',
-                                                            fontWeight: 800,
-                                                            fontSize: 'clamp(20px, 3.5vw, 36px)',
-                                                            lineHeight: '1',
-                                                            letterSpacing: '-0.06em',
-                                                            backgroundImage: 'url("/events/technical%20events/text-texture.png")',
-                                                            backgroundSize: '237px 355px',
-                                                            backgroundRepeat: 'repeat',
-                                                            WebkitBackgroundClip: 'text',
-                                                            backgroundClip: 'text',
-                                                            WebkitTextFillColor: 'transparent',
-                                                            mixBlendMode: 'soft-light',
-                                                            opacity: 0.4,
-                                                        }}
-                                                    >
-                                                        {workshop.title}
-                                                    </h3>
                                                 </div>
                                                 {/* Description */}
                                                 <div className="relative">
@@ -922,28 +920,6 @@ export default function WorkshopsPage() {
                                                             letterSpacing: '0.01em',
                                                             filter: 'url(#grainDescription)',
                                                             color: '#1A0000',
-                                                        }}
-                                                    >
-                                                        {workshop.description}
-                                                    </p>
-                                                    {/* Texture layer clipped to text shape */}
-                                                    <p
-                                                        className="absolute inset-0 pointer-events-none"
-                                                        aria-hidden="true"
-                                                        style={{
-                                                            fontFamily: 'var(--font-quanta), sans-serif',
-                                                            fontWeight: 900,
-                                                            fontSize: '18.5px',
-                                                            lineHeight: '18.5px',
-                                                            letterSpacing: '0.01em',
-                                                            backgroundImage: 'url("/events/technical%20events/text-texture.png")',
-                                                            backgroundSize: '237px 355px',
-                                                            backgroundRepeat: 'repeat',
-                                                            WebkitBackgroundClip: 'text',
-                                                            backgroundClip: 'text',
-                                                            WebkitTextFillColor: 'transparent',
-                                                            mixBlendMode: 'soft-light',
-                                                            opacity: 0.4,
                                                         }}
                                                     >
                                                         {workshop.description}

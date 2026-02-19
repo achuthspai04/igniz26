@@ -105,27 +105,6 @@ export default function EventSection() {
     >
       {/* Background Texture — CSS-only on mobile for perf, Image on desktop */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none bg-[#1A0000]">
-        {isMobile ? (
-          /* Mobile: skip heavy mix-blend-multiply Image, use CSS background instead */
-          <div
-            className="absolute inset-0 opacity-80"
-            style={{
-              backgroundImage: `url(${TEXTURE_SRC})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              mixBlendMode: "multiply",
-            }}
-          />
-        ) : (
-          <div className="absolute inset-0 mix-blend-multiply opacity-80">
-            <Image
-              src={TEXTURE_SRC}
-              alt=""
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A0000]/20 via-transparent to-[#1A0000]/80" />
       </div>
 

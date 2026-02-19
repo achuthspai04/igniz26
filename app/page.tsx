@@ -241,12 +241,19 @@ export default function Home() {
             <EventSection />
           </div>
           <Link href="/Culturals">
-            <div className="relative w-64 h-20 md:w-80 md:h-24 cursor-pointer hover:opacity-80 transition-opacity">
-              <Image
-                src="/events/LOAD.svg"
-                alt="Register"
-                fill
-                className="object-contain"
+            <div className="relative w-48 h-14 md:w-56 md:h-16 cursor-pointer hover:opacity-80 transition-opacity flex items-center justify-center p-3">
+              <div
+                className="w-full h-full bg-[#FFD120]"
+                style={{
+                  maskImage: 'url("/images/next.png")',
+                  WebkitMaskImage: 'url("/images/next.png")',
+                  maskSize: 'contain',
+                  WebkitMaskSize: 'contain',
+                  maskRepeat: 'no-repeat',
+                  WebkitMaskRepeat: 'no-repeat',
+                  maskPosition: 'center',
+                  WebkitMaskPosition: 'center'
+                }}
               />
             </div>
           </Link>
