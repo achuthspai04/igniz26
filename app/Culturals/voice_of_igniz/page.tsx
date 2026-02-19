@@ -1,22 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function VoiceOfIgnizRegisterPage() {
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-    const ticketOptions: TicketOption[] = [
-        {
-            id: "standard",
-            name: "VOICE OF IGNIZ PASS",
-            price: 150,
-            type: "silver",
-            description: "ACCESS TO VOICE OF IGNIZ COMPETITION\nREGISTRATION: 150 PER HEAD"
-        }
-    ];
 
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -39,6 +26,9 @@ export default function VoiceOfIgnizRegisterPage() {
                                 <Image src="/events/eventpages/5-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
+                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
+                                <p>TIME : 10:30 - 12:30 PM</p>
+                                <p>STAGE : STAGE 2</p>
                                 <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>                                
                                 <p>TIME : 02:00 - 04:00 PM</p>
                                 <p>STAGE : ATRIUM</p>
@@ -46,9 +36,9 @@ export default function VoiceOfIgnizRegisterPage() {
                                 <p>PRIZE POOL : 3000</p>
                             </div>
                             <div className="pt-4">
-                                <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">
+                                <a href="https://snaptiqz.com/event/voiceofigniz" target="_blank" rel="noopener noreferrer" className="inline-block hover:scale-105 transition-transform">
                                     <Image src="/events/eventpages/register.webp" alt="Register" width={300} height={100} className="w-auto h-12 sm:h-14 md:h-16 lg:h-20" />
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
@@ -96,7 +86,7 @@ export default function VoiceOfIgnizRegisterPage() {
                     </div>
                 </section>
             </main>
-            <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="VOICE OF IGNIZ" />
+
         </div>
     );
 }

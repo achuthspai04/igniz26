@@ -114,7 +114,7 @@ export default function EntertainmentPage() {
                             className="font-akira-expanded text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
                             style={{
                                 textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
-                                fontFamily: '"Akira Expanded", sans-serif',
+                                fontFamily: 'var(--font-akira), sans-serif',
                             }}
                         >
                             Entertainment
@@ -123,7 +123,7 @@ export default function EntertainmentPage() {
 
                     {/* Interactive Comic Panels */}
                     <div className="relative z-10 w-full max-w-4xl flex flex-col gap-4 sm:gap-6 md:gap-8">
-                        
+
                         <InteractiveComicPanel
                             svgPath={COMIC_SVG_2}
                             panels={PANEL_CONFIG_2}

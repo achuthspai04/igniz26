@@ -9,7 +9,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PROSHOW_IMAGES = Object.freeze({
   ellipse: "/proShow/proshow cta.svg",
-  pic: "/images/pic.svg",
+  pic: "/images/pic.png",
   proShow: "/proShow/PRO%20SHOW.png",
   red: "/proShow/ProShowLogo.png",
   texture: "/images/asset_texture%201.svg",
@@ -135,9 +135,9 @@ export default function ProshowSection() {
             sizes="(max-width: 640px) 90vw, (max-width: 768px) 80vw, 65vw"
             className="relative w-full h-auto object-contain object-bottom"
           />
-          {/* Navbar texture overlay with multiply – masked to CTA shape via mask-image */}
+          {/* Navbar texture overlay with multiply – masked to CTA shape via mask-image (hidden on mobile to avoid dimming) */}
           <div
-            className="absolute inset-0 [mix-blend-mode:multiply]"
+            className="absolute inset-0 [mix-blend-mode:multiply] hidden md:block"
             style={{
               maskImage: "url(/proShow/proshow%20cta.svg)",
               WebkitMaskImage: "url(/proShow/proshow%20cta.svg)",

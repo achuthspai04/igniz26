@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useMemo, useCallback, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 const EVENTS = [
   { id: 1, src: "/culturals/classical_dance.webp", alt: "Classical Dance\nCompetition" },
@@ -104,27 +105,6 @@ export default function EventSection() {
     >
       {/* Background Texture — CSS-only on mobile for perf, Image on desktop */}
       <div className="absolute inset-0 z-0 pointer-events-none select-none bg-[#1A0000]">
-        {isMobile ? (
-          /* Mobile: skip heavy mix-blend-multiply Image, use CSS background instead */
-          <div
-            className="absolute inset-0 opacity-80"
-            style={{
-              backgroundImage: `url(${TEXTURE_SRC})`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              mixBlendMode: "multiply",
-            }}
-          />
-        ) : (
-          <div className="absolute inset-0 mix-blend-multiply opacity-80">
-            <Image
-              src={TEXTURE_SRC}
-              alt=""
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
         <div className="absolute inset-0 bg-gradient-to-b from-[#1A0000]/20 via-transparent to-[#1A0000]/80" />
       </div>
 
@@ -134,7 +114,7 @@ export default function EventSection() {
           className="font-akira-expanded text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
           style={{
             textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
-            fontFamily: '"Akira Expanded", sans-serif',
+            fontFamily: 'var(--font-akira), sans-serif',
           }}
         >
           <span className="block md:inline">Cultural</span>{" "}
@@ -151,9 +131,10 @@ export default function EventSection() {
       >
         <div className="flex -space-x-8 md:-space-x-20 pl-[5vw] pr-[5vw] items-end">
           {displayEvents.map((event, index) => (
-            <div
+            <Link
               key={`${event.id}-${index}`}
-              className="relative flex-shrink-0 flex flex-col items-center w-[80vw] sm:w-[60vw] md:w-[33vw] group"
+              href="/Culturals"
+              className="relative flex-shrink-0 flex flex-col items-center w-[80vw] sm:w-[60vw] md:w-[33vw] group cursor-pointer"
             >
               {/* Image — the WebP already includes the yellow circle background */}
               <div className="relative w-full aspect-square flex items-center justify-center transition-transform duration-500 group-hover:scale-105 bg-transparent">
@@ -168,7 +149,7 @@ export default function EventSection() {
               </div>
 
 
-            </div>
+            </Link>
           ))}
         </div>
       </div>

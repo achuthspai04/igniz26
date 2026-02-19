@@ -54,7 +54,7 @@ export default function PageLoader({
                 <div
                     className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#1A0000]"
                     style={{
-                        fontFamily: '"Might Makes Right BB", system-ui, sans-serif',
+                        fontFamily: 'var(--font-might), system-ui, sans-serif',
                         opacity: fadingOut ? 0 : 1,
                         transition: `opacity ${FADE_DURATION_MS}ms ease-in-out`,
                         pointerEvents: fadingOut ? "none" : "auto",

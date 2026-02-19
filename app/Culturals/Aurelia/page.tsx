@@ -1,22 +1,9 @@
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Navbar from "@/components/Navbar";
-import RegistrationPopup, { TicketOption } from "@/components/RegistrationPopup";
 
 export default function AureliaRegisterPage() {
-    const [isRegisterOpen, setIsRegisterOpen] = useState(false);
-
-    const ticketOptions: TicketOption[] = [
-        {
-            id: "standard",
-            name: "AURELIA PASS",
-            price: 180,
-            type: "silver",
-            description: "ACCESS TO AURELIA FASHION SHOW\nREGISTRATION: 180 PER HEAD"
-        }
-    ];
 
     return (
         <div className="relative w-full overflow-x-hidden bg-[#2B0000] min-h-screen flex flex-col font-sans text-white">
@@ -46,9 +33,9 @@ export default function AureliaRegisterPage() {
                                 <p>PRIZE POOL : 40000</p>
                             </div>
                             <div className="pt-4">
-                                <button onClick={() => setIsRegisterOpen(true)} className="inline-block hover:scale-105 transition-transform bg-transparent border-none p-0 cursor-pointer">
+                                <a href="https://snaptiqz.com/event/aurelia" target="_blank" rel="noopener noreferrer" className="inline-block hover:scale-105 transition-transform">
                                     <Image src="/events/eventpages/register.webp" alt="Register" width={300} height={100} className="w-auto h-12 sm:h-14 md:h-16 lg:h-20" />
-                                </button>
+                                </a>
                             </div>
                         </div>
                         <div className="hidden lg:flex relative items-center justify-center lg:col-span-5">
@@ -104,7 +91,7 @@ export default function AureliaRegisterPage() {
                     </div>
                 </section>
             </main>
-            <RegistrationPopup isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} ticketOptions={ticketOptions} eventName="AURELIA" />
+
         </div>
     );
 }
