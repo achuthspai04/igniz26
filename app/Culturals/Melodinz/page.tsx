@@ -47,31 +47,36 @@ export default function MelodinzRegisterPage() {
                 </div>
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
-                       <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Event Type: This is an Eastern-Western fusion band event.</li>
-                        <li>2. Team Size: Maximum of 15 members per team.</li>
-                        <li>3. Performance Time:
+                    <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
+                        <li>This is an Eastern-Western fusion band event.</li>
+                        <li>1. Team Size: Maximum of 15 members per team.</li>
+                        <li>2. Performance Time:
                             <ul className="pl-6 pt-1 space-y-1">
                                 <li>a. Performance: 15 minutes.</li>
                                 <li>b. Setup Time: Additional 10 minutes.</li>
+                                <li>Teams exceeding the time limit will face immediate disqualification without further review.</li>
                             </ul>
                         </li>
-                        <li>4. Time Limits: Teams exceeding the time limit will face immediate disqualification without further review.</li>
-                        <li>5. Judging Criteria:
+                        <li>3. Judging Criteria:
                             <ul className="pl-6 pt-1 space-y-1">
-                                <li>a. Originality and Creativity, Tightness, overall Tone and Sound, Performance and Interaction, Vocals and Harmony, Synergy between Western and Eastern elements.</li>
+                                <li>a. Originality and Creativity, Tightness, Overall Tone and Sound, Performance and Interaction, Vocals and Harmony, Synergy between Western and Eastern elements.</li>
                             </ul>
                         </li>
-                        <li>6. Effects: Distortion is permitted where needed.</li>
-                        <li>7. Languages: Teams can perform in any regional language of their choice.</li>
-                        <li>8. Instrument Guidelines:
+                        <li>4. Effects: Distortion is permitted where needed.</li>
+                        <li>5. Drums: A standard 5-piece drum kit will be provided.</li>
+                        <li>6. Languages: Teams can perform in any regional language of their choice.</li>
+                        <li>7. Instrument Guidelines:
                             <ul className="pl-6 pt-1 space-y-1">
                                 <li>a. Drums: A standard 5-piece drum kit will be provided.</li>
                                 <li>b. Other Instruments: Teams must bring their own instruments.</li>
                                 <li>c. Rhythm Pad: If brought by the team, it can be used to enhance the performance but will not be provided on stage.</li>
                             </ul>
                         </li>
-                        <li>9. Live Music Only: All music must be played live on stage.</li>
+                        <li>9. Live Music Only:
+                            <ul className="pl-6 pt-1 space-y-1">
+                                <li>a. All music must be played live on stage.</li>
+                            </ul>
+                        </li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">
