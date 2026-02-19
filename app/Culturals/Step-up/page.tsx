@@ -48,7 +48,7 @@ export default function StepUpRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Participation Format: Solo/group format will be announced on the spot.</li>
+                        <li>1. Participation Format: Solo format will be announced on the spot.</li>
                         <li>2. Preparation Time: Preparation time will be limited and strictly monitored.</li>
                         <li>3. Music &amp; Theme: Music and theme will be provided by the organizers.</li>
                         <li>4. No External Assistance: No external assistance is allowed during preparation.</li>
@@ -71,6 +71,7 @@ export default function StepUpRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">

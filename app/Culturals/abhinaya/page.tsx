@@ -50,11 +50,12 @@ export default function AbhinayaRegisterPage() {
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
                         <li>1. Time Limit: 10 minutes for performance and 2 minutes for setting of the stage.</li>
                         <li>2. The audio should be mailed to stage@igniz.live in mp3 or mp4 format on or before 24/02/2026, 11:59pm.</li>
-                        <li>3. The song can be of any language.</li>
-                        <li>4. Participants are required to carry their college identity card.</li>
-                        <li>5. Judging Criteria:
+                        <li>3. Only BHARATHANATYAM dance form is allowed.</li>
+                        <li>4. The song can be of any language.</li>
+                        <li>5. Participants are required to carry their College Identity card</li>
+                        <li>6. Judging Criteria:
                             <ul className="pl-6 pt-1 space-y-1">
-                                <li>a. Foot work</li>
+                                <li>a. Footwork</li>
                                 <li>b. Facial expression</li>
                                 <li>c. Mudra</li>
                                 <li>d. Rhythm</li>
@@ -79,13 +80,14 @@ export default function AbhinayaRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
                         <p>Gouri K Mineesh: +91 85905 74275</p>
-                        <p>Amritha Venugopal: +91 98473 06340</p>
+                        <p>Sreya Vinod: +91 95443 73208</p>
                     </div>
                 </section>
             </main>

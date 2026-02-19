@@ -48,7 +48,7 @@ export default function BeatstormRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                       <li>1.Team size: Minimum 2, Maximum 25 members</li> 
+                        <li>1.Team size: Minimum 2, Maximum 25 members</li>
                         <li>2.Time limit: 8-10 minutes</li>
                         <li>3.Dance form can be theme or non theme </li>
                         <li>4.Obscene movements or offensive themes are strictly prohibited</li>
@@ -72,6 +72,7 @@ export default function BeatstormRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">
