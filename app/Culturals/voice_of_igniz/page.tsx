@@ -23,7 +23,7 @@ export default function VoiceOfIgnizRegisterPage() {
                     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                         <div className="space-y-6 md:space-y-8 lg:col-span-7">
                             <div className="w-full">
-                                <Image src="/events/eventpages/5-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
+                                <Image src="/events/eventpages/voice of igniz -text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
@@ -76,6 +76,7 @@ export default function VoiceOfIgnizRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">

@@ -59,7 +59,7 @@ export default function AureliaRegisterPage() {
                         <li>9. Participating teams can contact one of the coordinators for more details regarding registration.</li>
                         <li>10. Participation without the college ID and the IGNIZ ID will automatically result in team disqualification.</li>
                         <li>11. Only 6 Helper Passes will be given per team.</li>
-                        <li>12. Teams will be judged on costumes walking stance, and attitude.</li>
+                        <li>12. The performance will be evaluated based on the overall execution of the theme, creativity in presentation, choreography, synchronization, costume & styling, stage presence, confidence, expressions, and the overall impact created by the team.</li>
                         <li>13. Details regarding the college (for example, college name) shouldn&apos;t be revealed during the show.</li>
                         <li>14. Failure to adhere to the rules will lead to disqualification.</li>
                         <li>15. Teams must bring a backup copy of their music (pen drive)</li>
@@ -81,6 +81,7 @@ export default function AureliaRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">

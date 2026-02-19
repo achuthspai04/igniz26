@@ -47,14 +47,31 @@ export default function MelodinzRegisterPage() {
                 </div>
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
-                    <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Time Limit: 3-7 mins. Any extensions in time will result in direct disqualification.</li>
-                        <li>2. The event is exclusively for instrumentalists (not for solo vocalists).</li>
-                        <li>3. The genre can be English, Malayalam, or Hindi.</li>
-                        <li>4. No editing or mixing is allowed in the audio.</li>
-                        <li>5. Both solo and group performances are allowed.</li>
-                        <li>6. Judge&apos;s decision will be final.</li>
-                        <li>7. In case of any conflict, the organizer&apos;s decision would be final.</li>
+                       <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
+                        <li>1. Event Type: This is an Eastern-Western fusion band event.</li>
+                        <li>2. Team Size: Maximum of 15 members per team.</li>
+                        <li>3. Performance Time:
+                            <ul className="pl-6 pt-1 space-y-1">
+                                <li>a. Performance: 15 minutes.</li>
+                                <li>b. Setup Time: Additional 10 minutes.</li>
+                            </ul>
+                        </li>
+                        <li>4. Time Limits: Teams exceeding the time limit will face immediate disqualification without further review.</li>
+                        <li>5. Judging Criteria:
+                            <ul className="pl-6 pt-1 space-y-1">
+                                <li>a. Originality and Creativity, Tightness, overall Tone and Sound, Performance and Interaction, Vocals and Harmony, Synergy between Western and Eastern elements.</li>
+                            </ul>
+                        </li>
+                        <li>6. Effects: Distortion is permitted where needed.</li>
+                        <li>7. Languages: Teams can perform in any regional language of their choice.</li>
+                        <li>8. Instrument Guidelines:
+                            <ul className="pl-6 pt-1 space-y-1">
+                                <li>a. Drums: A standard 5-piece drum kit will be provided.</li>
+                                <li>b. Other Instruments: Teams must bring their own instruments.</li>
+                                <li>c. Rhythm Pad: If brought by the team, it can be used to enhance the performance but will not be provided on stage.</li>
+                            </ul>
+                        </li>
+                        <li>9. Live Music Only: All music must be played live on stage.</li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">
@@ -72,6 +89,7 @@ export default function MelodinzRegisterPage() {
                         <div className="flex gap-2"><span>10.</span><p>Photography &amp; Media: The organizing committee reserves the right to photograph or record events.</p></div>
                         <div className="flex gap-2"><span>11.</span><p>Rule Modifications: The organizing committee reserves the right to modify rules at any time.</p></div>
                         <div className="flex gap-2"><span>12.</span><p>Authority: Failure to comply may result in disqualification without prior notice.</p></div>
+                        <div className="flex gap-2"><span>13.</span><p>Participants registering for group events must belong to the same college. Cross-college teams will not be permitted.</p></div>
                     </div>
                 </section>
                 <section className="w-full mb-10">
