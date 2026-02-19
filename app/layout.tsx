@@ -33,12 +33,34 @@ const mightMakesRight = localFont({
 });
 
 const akiraExpanded = localFont({
-  src: "../public/fonts/AkiraExpanded.ttf",
+  src: [
+    {
+      path: "../public/fonts/AkiraExpanded.woff",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/AkiraExpanded.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
   variable: "--font-akira",
 });
 
 const lumadFree = localFont({
-  src: "../public/fonts/LumadFree.ttf",
+  src: [
+    {
+      path: "../public/fonts/LumadFree.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/LumadFree.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
   variable: "--font-lumad",
 });
 
