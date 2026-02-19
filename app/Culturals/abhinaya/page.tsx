@@ -27,8 +27,8 @@ export default function AbhinayaRegisterPage() {
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>
-                                <p>TIME : 10 : 30 - 12 : 00 AM</p>
-                                <p>STAGE : SEMINAR HALL AC BLOCK</p>
+                                <p>TIME : 10 : 00 - 12 : 00 AM</p>
+                                <p>STAGE : ATRIUM</p>
                                 <p>REG FEES : 150 PER HEAD</p>
                                 <p>PRIZE POOL : 3000</p>
                             </div>

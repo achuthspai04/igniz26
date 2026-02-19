@@ -24,7 +24,7 @@ export default function EntertainmentSection() {
                         className="font-akira-expanded text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
                         style={{
                             ...ENTERTAINMENT_HEADING_STYLE,
-                            fontFamily: '"Akira Expanded", sans-serif',
+                            fontFamily: 'var(--font-akira), sans-serif',
                         }}
                     >
                         Entertainment

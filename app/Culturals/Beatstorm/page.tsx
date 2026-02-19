@@ -27,7 +27,7 @@ export default function BeatstormRegisterPage() {
                             </div>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
                                 <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>
-                                <p>TIME : 10:30 - 12:00 PM</p>
+                                <p>TIME : 02:00 - 04:00 PM</p>
                                 <p>STAGE : STAGE 1</p>
                                 <p>REG FEES : 500 PER TEAM</p>
                                 <p>PRIZE POOL : 30000</p>
@@ -48,13 +48,13 @@ export default function BeatstormRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Team size: Minimum 2, Maximum 20 members</li>
-                        <li>2. Time limit: 6-8 minutes</li>
-                        <li>3. Any dance style or fusion is allowed</li>
-                        <li>4. Obscene movements or offensive themes are strictly prohibited</li>
-                        <li>5. Props are allowed but must be handled by participants only</li>
-                        <li>6. Teams must report 1 hour prior to the event</li>
-                        <li>7. Judging will be based on synchronization, choreography, creativity, and stage impact</li>
+                       <li>1.Team size: Minimum 2, Maximum 25 members</li> 
+                        <li>2.Time limit: 8-10 minutes</li>
+                        <li>3.Dance form can be theme or non theme </li>
+                        <li>4.Obscene movements or offensive themes are strictly prohibited</li>
+                        <li>5.Props are allowed but must be handled by participants only</li>
+                        <li>6.Teams must report 1 hour prior to the event</li>
+                        <li>7.Judging will be based on synchronization, choreography, creativity, and stage impact. </li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">
@@ -79,6 +79,7 @@ export default function BeatstormRegisterPage() {
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
                         <p>Nayana S: +91 8547044844</p>
                         <p>Anjana R Nair: +91 8139018475</p>
+                        <p>Ardhra P Raj: +91 8547797743</p>
                     </div>
                 </section>
             </main>

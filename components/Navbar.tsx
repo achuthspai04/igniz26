@@ -3,10 +3,13 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname, useRouter } from 'next/navigation';
 import LayeredImage from './LayeredImage';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 const Navbar = () => {
+    const pathname = usePathname();
+    const router = useRouter();
     const eventStartDay = '26';
     const eventEndDay = '27';
     const eventMonth = 'FEB';
@@ -104,10 +107,14 @@ const Navbar = () => {
 
                         <div className="ml-auto flex items-center gap-12 text-black font-semibold uppercase tracking-wide">
                             <a
-                                href="#about-us"
+                                href="/#about-us"
                                 className="-skew-x-6 cursor-pointer"
                                 onClick={(e) => {
                                     e.preventDefault();
+                                    if (pathname !== '/') {
+                                        router.push('/#about-us');
+                                        return;
+                                    }
                                     const smoother = ScrollSmoother.get();
                                     if (smoother) {
                                         smoother.scrollTo('#about-us', true);
@@ -270,11 +277,15 @@ const Navbar = () => {
                             Home
                         </Link>
                         <a
-                            href="#about-us"
+                            href="/#about-us"
                             className="-skew-x-6 cursor-pointer hover:text-[#FF8A12] transition-colors"
                             onClick={(e) => {
                                 e.preventDefault();
                                 closeMenu();
+                                if (pathname !== '/') {
+                                    router.push('/#about-us');
+                                    return;
+                                }
                                 const smoother = ScrollSmoother.get();
                                 if (smoother) {
                                     smoother.scrollTo('#about-us', true);

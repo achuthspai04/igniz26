@@ -30,7 +30,7 @@ export default function ReturnPolicy() {
         <p
           className="mt-10 text-[#FFD120] text-base sm:text-lg md:text-xl leading-relaxed sm:leading-8 md:leading-9"
           style={{
-            fontFamily: "Quanta Grotesk Pro",
+            fontFamily: "var(--font-quanta)",
           }}
         >
           Registrations are final. Fees are refunded only if an event is officially cancelled

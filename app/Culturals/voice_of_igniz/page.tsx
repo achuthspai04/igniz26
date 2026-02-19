@@ -29,6 +29,9 @@ export default function VoiceOfIgnizRegisterPage() {
                                 <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
                                 <p>TIME : 10:30 - 12:30 PM</p>
                                 <p>STAGE : STAGE 2</p>
+                                <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>                                
+                                <p>TIME : 02:00 - 04:00 PM</p>
+                                <p>STAGE : ATRIUM</p>
                                 <p>REG FEES : 150 PER HEAD</p>
                                 <p>PRIZE POOL : 3000</p>
                             </div>
@@ -78,7 +81,7 @@ export default function VoiceOfIgnizRegisterPage() {
                 <section className="w-full mb-10">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">COORDINATORS</h2>
                     <div className="space-y-2 text-lg md:text-2xl font-medium tracking-wide text-white">
-                        <p>Parvathy Prakash: +91 8089011979</p>
+                        <p>Parvathi Prakash Menon: +91 8089011979</p>
                         <p>Anushika K: +91 8075140810</p>
                     </div>
                 </section>

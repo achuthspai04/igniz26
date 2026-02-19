@@ -1,121 +1,96 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 
-/** All critical image/assets used on the home page – preload for smooth first view */
-const PRELOAD_ASSETS = [
-  // Hero (LayeredImage)
+/**
+ * Only preload the 3 assets that are ABOVE THE FOLD on first paint.
+ * Everything else loads naturally via <img>, next/image, or lazy intersection.
+ *
+ * bgstar.svg  — hero background (largest visual element)
+ * navbarlogo.svg — navbar logo (visible immediately)
+ * logo.svg — hero center logo
+ */
+const CRITICAL_ASSETS = [
   "/images/bgstar.svg",
-  "/images/logo.svg",
-  "/images/carn 1.svg.svg",
-  "/images/asset_2 1.svg",
-  "/images/asset_3 1.svg",
-  "/images/bolts 3.svg",
-  "/images/asset_texture 1.svg",
-  "/images/48466.svg",
-  "/images/2026.svg",
-  // Countdown
-  "/images/bolt%20left.png",
-  "/images/bolt%20right.png",
-  "/images/COUNTDOWN.svg",
-  // Navbar
   "/images/navbarlogo.svg",
-  "/images/navbartexture.png",
-  // Proshow
-  "/proShow/proshow%20cta%20(1).svg",
-  "/proShow/pic.png",
-  "/proShow/PRO%20SHOW.png",
-  "/proShow/ProShowLogo.png",
-  "/proShow/PRO%20SHOW%20OUTLINE.png",
-  // Culturals / Events section
-  "/events/cultural%20events%20heading.webp",
-  "/events/LOAD.svg",
-  "/culturals/classical_dance.webp",
-  "/culturals/d2r.webp",
-  "/culturals/fashion_show.webp",
-  "/culturals/short_film.webp",
-  "/culturals/solo_music.webp",
-  "/culturals/band.webp",
-  "/culturals/mr_mrs.webp",
-  "/culturals/quiz.webp",
-  "/culturals/shot_choreo.webp",
-  // Workshops
-  "/images/event-1-red.svg",
-  "/images/event-2.svg",
-  "/events/eventpages/register.svg",
-  // About section
-  "/images/TEXTURE%20UP.png",
+  "/images/logo.svg",
 ];
 
 const MIN_DISPLAY_MS = 1200;
-const MAX_WAIT_MS = 15000;
+const MAX_WAIT_MS = 6000;  // tighter cap — 3 assets shouldn't need 15s
 const FADE_DURATION_MS = 600;
-
-function preloadImage(src: string): Promise<void> {
-  return new Promise((resolve) => {
-    const img = new window.Image();
-    img.onload = () => resolve();
-    img.onerror = () => resolve(); // don't block on broken assets
-    img.src = src;
-  });
-}
 
 export default function LoadingScreen({ onComplete }: { onComplete: () => void }) {
   const [progress, setProgress] = useState(0);
   const [fadingOut, setFadingOut] = useState(false);
 
-  const finish = useCallback(() => {
-    // Start fade-out, then signal parent after animation ends
-    setFadingOut(true);
-    setTimeout(() => {
-      onComplete();
-    }, FADE_DURATION_MS);
-  }, [onComplete]);
+  // Stable ref to onComplete — avoids re-running the effect if parent
+  // doesn't memoize the callback (common React pitfall).
+  const onCompleteRef = useRef(onComplete);
+  onCompleteRef.current = onComplete;
 
   useEffect(() => {
     const start = Date.now();
     let cancelled = false;
-    let doneTimeout: ReturnType<typeof setTimeout> | null = null;
+    const timers: ReturnType<typeof setTimeout>[] = [];
+    const images: HTMLImageElement[] = [];
 
-    const total = PRELOAD_ASSETS.length;
+    const total = CRITICAL_ASSETS.length;
     let loaded = 0;
 
-    const report = () => {
+    const finish = () => {
       if (cancelled) return;
-      setProgress(Math.round((loaded / total) * 100));
+      cancelled = true; // prevent double-fire from both paths
+      setFadingOut(true);
+      const t = setTimeout(() => onCompleteRef.current(), FADE_DURATION_MS);
+      timers.push(t);
     };
 
-    const promises = PRELOAD_ASSETS.map((src) =>
-      preloadImage(src).then(() => {
-        loaded++;
-        report();
-      })
-    );
-
-    Promise.all(promises).then(() => {
+    const onAssetDone = () => {
+      loaded++;
       if (cancelled) return;
-      const elapsed = Date.now() - start;
-      const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
-      doneTimeout = setTimeout(finish, remaining);
+      // Single batched progress update per asset (only 3 total updates)
+      setProgress(Math.round((loaded / total) * 100));
+
+      if (loaded >= total) {
+        const elapsed = Date.now() - start;
+        const remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+        const t = setTimeout(finish, remaining);
+        timers.push(t);
+      }
+    };
+
+    // Fire preloads
+    CRITICAL_ASSETS.forEach((src) => {
+      const img = new window.Image();
+      img.onload = onAssetDone;
+      img.onerror = onAssetDone; // don't block on broken assets
+      img.src = src;
+      images.push(img);
     });
 
-    const maxTimeout = setTimeout(() => {
-      if (!cancelled) finish();
-    }, MAX_WAIT_MS);
+    // Safety cap — always dismiss even on network failure
+    const maxTimer = setTimeout(finish, MAX_WAIT_MS);
+    timers.push(maxTimer);
 
     return () => {
       cancelled = true;
-      if (doneTimeout) clearTimeout(doneTimeout);
-      clearTimeout(maxTimeout);
+      timers.forEach(clearTimeout);
+      // Break references to prevent GC leak
+      images.forEach((img) => {
+        img.onload = null;
+        img.onerror = null;
+        img.src = "";
+      });
     };
-  }, [finish]);
+  }, []); // empty deps — guaranteed single execution
 
   return (
     <div
       className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#1A0000]"
       style={{
-        fontFamily: '"Might Makes Right BB", system-ui, sans-serif',
+        fontFamily: 'var(--font-might), system-ui, sans-serif',
         opacity: fadingOut ? 0 : 1,
         transition: `opacity ${FADE_DURATION_MS}ms ease-in-out`,
         pointerEvents: fadingOut ? "none" : "auto",
@@ -141,8 +116,11 @@ export default function LoadingScreen({ onComplete }: { onComplete: () => void }
         {/* Progress bar */}
         <div className="w-full h-1.5 bg-[#2a0a0a] rounded-full overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-[#FF8A12] to-[#FFD120] rounded-full transition-all duration-200 ease-out"
-            style={{ width: `${progress}%` }}
+            className="h-full bg-gradient-to-r from-[#FF8A12] to-[#FFD120] rounded-full"
+            style={{
+              width: `${progress}%`,
+              transition: "width 200ms ease-out",
+            }}
           />
         </div>
 

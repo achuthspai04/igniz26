@@ -43,11 +43,11 @@ body {
 
 
 .font-might-makes-right {
-  font-family: "Might Makes Right BB", system-ui, sans-serif;
+  font-family: var(--font-might), system-ui, sans-serif;
 }
 
 .font-akira-expanded {
-  font-family: "Akira Expanded", "Might Makes Right BB", system-ui, sans-serif;
+  font-family: var(--font-akira), var(--font-might), system-ui, sans-serif;
 }
 
 /* Hide scrollbar while keeping scroll behavior */

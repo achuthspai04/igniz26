@@ -176,7 +176,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             venue: "PG Lab - AD 411",
             registrationFee: "Solo: ₹199 / Team of 2: ₹175pp / Team of 3: ₹150pp",
             proshowFee: "-",
-            prizePool: "1st ₹3,000 / 2nd ₹2,000 / 3rd ₹3,000",
+            prizePool: "1st ₹4,000 / 2nd ₹2,500 / 3rd ₹1,000",
             description: "A 6 hour Stranger Things themed makeathon to help Eleven escape",
             volunteer: "Ilham Nadhir, Adithyan K",
             contact: "73568 31775 / 95620 99491",
@@ -680,7 +680,7 @@ export default function WorkshopsPage() {
                             className="font-akira-expanded text-3xl md:text-5xl lg:text-6xl font-semibold tracking-wide text-[#FFD120] uppercase"
                             style={{
                                 textShadow: "0 0 20px rgba(255, 209, 32, 0.5)",
-                                fontFamily: '"Akira Expanded", sans-serif',
+                                fontFamily: 'var(--font-akira), sans-serif',
                             }}
                         >
                             Technical Workshops
@@ -705,7 +705,7 @@ export default function WorkshopsPage() {
                                 <span
                                     className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center pr-8"
                                     style={{
-                                        fontFamily: '"Akira Expanded", sans-serif',
+                                        fontFamily: 'var(--font-akira), sans-serif',
                                         fontWeight: 900,
                                         fontSize: "clamp(14px, 1.6vw, 20px)",
                                         lineHeight: "1.05",
@@ -761,7 +761,7 @@ export default function WorkshopsPage() {
                                             <span
                                                 className="relative z-10 block w-full min-w-0 text-[#3B0000] uppercase text-center"
                                                 style={{
-                                                    fontFamily: '"Akira Expanded", sans-serif',
+                                                    fontFamily: 'var(--font-akira), sans-serif',
                                                     fontWeight: 900,
                                                     fontSize: "clamp(14px, 1.6vw, 20px)",
                                                     lineHeight: "1.05",
@@ -877,7 +877,7 @@ export default function WorkshopsPage() {
                                                     <h3
                                                         className="uppercase break-words"
                                                         style={{
-                                                            fontFamily: '"Akira Expanded", sans-serif',
+                                                            fontFamily: 'var(--font-akira), sans-serif',
                                                             fontWeight: 800,
                                                             fontSize: 'clamp(20px, 3.5vw, 36px)',
                                                             lineHeight: '1',
@@ -893,7 +893,7 @@ export default function WorkshopsPage() {
                                                         className="uppercase absolute inset-0 pointer-events-none break-words"
                                                         aria-hidden="true"
                                                         style={{
-                                                            fontFamily: '"Akira Expanded", sans-serif',
+                                                            fontFamily: 'var(--font-akira), sans-serif',
                                                             fontWeight: 800,
                                                             fontSize: 'clamp(20px, 3.5vw, 36px)',
                                                             lineHeight: '1',
@@ -915,7 +915,7 @@ export default function WorkshopsPage() {
                                                 <div className="relative">
                                                     <p
                                                         style={{
-                                                            fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                            fontFamily: 'var(--font-quanta), sans-serif',
                                                             fontWeight: 900,
                                                             fontSize: '18.5px',
                                                             lineHeight: '18.5px',
@@ -931,7 +931,7 @@ export default function WorkshopsPage() {
                                                         className="absolute inset-0 pointer-events-none"
                                                         aria-hidden="true"
                                                         style={{
-                                                            fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                            fontFamily: 'var(--font-quanta), sans-serif',
                                                             fontWeight: 900,
                                                             fontSize: '18.5px',
                                                             lineHeight: '18.5px',
@@ -955,7 +955,7 @@ export default function WorkshopsPage() {
                                             <div
                                                 className="flex-1 p-6 md:p-8 md:pl-6 flex flex-col justify-start min-h-[200px] min-w-0 text-[#1A0000] space-y-4"
                                                 style={{
-                                                    fontFamily: '"Quanta Grotesk Pro", sans-serif',
+                                                    fontFamily: 'var(--font-quanta), sans-serif',
                                                     fontWeight: 900,
                                                     fontSize: '20px',
                                                     lineHeight: '1.4',
