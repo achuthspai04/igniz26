@@ -22,14 +22,14 @@ export default function VoiceOfIgnizRegisterPage() {
                     </div>
                     <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
                         <div className="space-y-6 md:space-y-8 lg:col-span-7">
-                            <div className="w-full">
-                                <Image src="/events/eventpages/5-text.webp" alt="Competition Description" width={800} height={300} className="w-full h-auto" />
-                            </div>
+                            <p
+                                className="text-white/80 text-4xl md:text-5xl lg:text-6xl leading-snug"
+                                style={{ fontFamily: "var(--font-quanta), sans-serif" }}
+                            >
+                                This event allows solo singers to exhibit their talent and versatility by singing any Indian film song of their choice.
+                            </p>
                             <div className="space-y-1 text-base sm:text-lg md:text-xl lg:text-2xl font-akira-expanded text-[#FFD120] uppercase">
-                                <p>DATE : <span className="text-[#FFD120]">27 FEB</span></p>
-                                <p>TIME : 10:30 - 12:30 PM</p>
-                                <p>STAGE : STAGE 2</p>
-                                <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>                                
+                                <p>DATE : <span className="text-[#FFD120]">26 FEB</span></p>
                                 <p>TIME : 02:00 - 04:00 PM</p>
                                 <p>STAGE : ATRIUM</p>
                                 <p>REG FEES : 150 PER HEAD</p>
