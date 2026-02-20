@@ -478,7 +478,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             image: "/events/technical events/electronics/rasberry.webp",
             type: "Workshop",
             day: "Day 2",
-            time: "9AM - 11AM",
+            time: "9AM - 1PM",
             venue: "AC 1 Lab 1",
             registrationFee: "₹199",
             proshowFee: "₹299",
@@ -493,7 +493,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
         {
             id: 3,
             title: "BlitzDenken",
-            image: "/events/technical events/electronics/blitz.webp",
+            image: "/events/technical events/electronics/blitzdenken.jpeg",
             type: "Hackathon",
             day: "Day 1",
             time: "11AM - 3PM",
@@ -510,7 +510,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
         {
             id: 4,
             title: "RoboCraft (ECE & EEE)",
-            image: "/events/technical events/electronics/robo.webp",
+            image: "/events/technical events/electronics/robocraft.jpeg",
             type: "Competition",
             day: "Day 2",
             time: "9AM - 3PM",
@@ -878,7 +878,7 @@ export default function WorkshopsPage() {
                                                     src={workshop.image}
                                                     alt={workshop.title}
                                                     fill
-                                                    className="object-cover grayscale card-image"
+                                                    className="object-cover card-image"
                                                 />
                                                 {/* Smooth gradient blend — extends past image edge to hide seam */}
                                                 <div
