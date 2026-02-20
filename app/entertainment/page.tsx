@@ -219,7 +219,7 @@ const ESPORTS_GAMES: ESportsGame[] = [
         genre: "Action Shooter",
         lineup: "Team of 4",
         entryFee: "₹100 per team",
-        prizePool: "₹2,000",
+        prizePool: "₹1,500",
         image: "/images/mini-militia.png",
         registerHref: "https://snaptiqz.com/event/minimilitia",
     },

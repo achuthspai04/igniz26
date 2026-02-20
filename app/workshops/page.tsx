@@ -48,7 +48,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             description: "Build Your Own Cloud at Home",
             volunteer: "Gayatri B Menon",
             contact: "9746802616",
-            conductedBy: "Jasil",
+            conductedBy: "Jasil Faras",
             registrationUrl: "https://snaptiqz.com/event/homelabbing101",
         },
         {
@@ -72,7 +72,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             description: "Owning Your Place on the Internet",
             volunteer: "Anaya Wilson",
             contact: "8621922968",
-            conductedBy: "Muneer",
+            conductedBy: "Muneer S",
             registrationUrl: "https://snaptiqz.com/event/indieweb101",
         },
         {
