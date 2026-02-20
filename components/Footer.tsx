@@ -168,7 +168,7 @@ export default function Footer() {
                     <div className="mt-0 flex flex-col items-center">
                         {/* Social icons — discoverable but not dominant */}
                         <div className="flex justify-center gap-3 mt-2">
-                            <a href="#" aria-label="Instagram" className="opacity-70 hover:opacity-100 transition-opacity duration-200">
+                            <a href="https://www.instagram.com/igniz.sset/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="opacity-70 hover:opacity-100 transition-opacity duration-200">
                                 <Image
                                     src="/svg/ig-icon.svg"
                                     width={28}
