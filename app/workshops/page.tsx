@@ -627,7 +627,7 @@ const DEPARTMENT_EVENTS: Record<string, WorkshopEvent[]> = {
             prizePool: "₹1,000",
             description: "Crisis Management competition",
             volunteer: "Avinash Cinesh",
-            contact: "8075900586",
+            contact: "8075900386",
             conductedBy: "YUVA",
             registrationUrl: "https://snaptiqz.com/event/crisismanag",
         },
