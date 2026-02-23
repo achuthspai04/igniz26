@@ -169,6 +169,16 @@ const ENTERTAINMENT_EVENTS: EntertainmentItem[] = [
         image: "/images/humansnake.jpg",
         registerHref: "https://snaptiqz.com/event/humansnake",
     },
+    {
+        id: "murder-mystery",
+        name: "Murder Mystery",
+        lineup: "Solo Player",
+        description:
+            "Reality glitches. Fiction bleeds through. Follow the symbols, question everything, and uncover the truth before it rewrites you. Only the sharpest minds make it out.",
+        entryFee: "Free",
+        image: "/images/MurderMystery.jpg",
+        registerHref: "https://snaptiqz.com/event/murder",
+    },
 ];
 
 const ESPORTS_GAMES: ESportsGame[] = [
@@ -308,10 +318,10 @@ function EventCard({ item, index }: { item: EntertainmentItem; index: number }) 
                         src={item.image}
                         alt={item.name}
                         fill
-                        className={`object-cover transition-transform duration-500 group-hover:scale-105 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" ? "grayscale" : ""}`}
+                        className={`object-cover ${item.id === "murder-mystery" ? "object-top" : ""} transition-transform duration-500 group-hover:scale-105 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" || item.id === "murder-mystery" ? "grayscale" : ""}`}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className={`absolute inset-0 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" ? "bg-gradient-to-t from-[#1A0000]/75 via-transparent to-transparent" : "bg-gradient-to-t from-[#1A0000] via-[#1A0000]/20 to-transparent"}`} />
+                    <div className={`absolute inset-0 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" || item.id === "murder-mystery" ? "bg-gradient-to-t from-[#1A0000]/75 via-transparent to-transparent" : "bg-gradient-to-t from-[#1A0000] via-[#1A0000]/20 to-transparent"}`} />
                     {isFree && (
                         <span className="absolute top-3 right-3 bg-[#FFD120] text-black text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1">
                             Free
@@ -324,10 +334,10 @@ function EventCard({ item, index }: { item: EntertainmentItem; index: number }) 
                         src={item.image}
                         alt={item.name}
                         fill
-                        className={`object-cover transition-transform duration-500 group-hover:scale-105 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" ? "grayscale" : ""}`}
+                        className={`object-cover ${item.id === "murder-mystery" ? "object-top" : ""} transition-transform duration-500 group-hover:scale-105 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" || item.id === "murder-mystery" ? "grayscale" : ""}`}
                         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     />
-                    <div className={`absolute inset-0 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" ? "bg-gradient-to-t from-[#1A0000]/75 via-transparent to-transparent" : "bg-gradient-to-t from-[#1A0000] via-[#1A0000]/20 to-transparent"}`} />
+                    <div className={`absolute inset-0 ${item.id === "paintball" || item.id === "mechanical-bull" || item.id === "archery" || item.id === "bumper-balls" || item.id === "escape-room" || item.id === "treasure-hunt" || item.id === "basketball-throw" || item.id === "catch-the-baton" || item.id === "ring-throw" || item.id === "vr-boxing" || item.id === "vr-roller-coaster" || item.id === "human-snake-ladder" || item.id === "murder-mystery" ? "bg-gradient-to-t from-[#1A0000]/75 via-transparent to-transparent" : "bg-gradient-to-t from-[#1A0000] via-[#1A0000]/20 to-transparent"}`} />
                     {isFree && (
                         <span className="absolute top-3 right-3 bg-[#FFD120] text-black text-[9px] font-extrabold uppercase tracking-wider px-2.5 py-1">
                             Free
