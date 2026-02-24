@@ -54,7 +54,7 @@ export default function AureliaRegisterPage() {
                         <li>4. Background music should be cross-checked with the event coordinator prior to the event</li>
                         <li>5. A minimum of 6 and a maximum of 20 models per team are allowed.</li>
                         <li>6. One participant cannot be a part of two teams.</li>
-                        <li>7. Time limit per team: 10 minutes empty to empty.</li>
+                        <li>7. Time limit per team: 15 minutes empty to empty.</li>
                         <li>8. An additional 1 minute, if required, will be provided for narration only. Exceeding the time limit will lead to team disqualification.</li>
                         <li>9. Participating teams can contact one of the coordinators for more details regarding registration.</li>
                         <li>10. Participation without the college ID and the IGNIZ ID will automatically result in team disqualification.</li>
