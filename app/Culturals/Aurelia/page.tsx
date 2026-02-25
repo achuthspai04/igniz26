@@ -48,7 +48,7 @@ export default function AureliaRegisterPage() {
                 <section className="w-full mb-16">
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
-                        <li>1. Participating teams should send the following: ▪ College Name (and Team Name if any) ▪ Name and Contact info of any 2 team members ▪ List of Team Members ▪ Send your background music to stage@igniz.live .</li>
+                        <li>1. Participating teams should send the following: ▪ College Name (and Team Name if any) ▪ Name and Contact info of any 2 team members ▪ List of Team Members ▪ Send your background music to <strong className="text-[#FFD120]">culturalsigniz26@gmail.com</strong>.</li>
                         <li>2. The deadline for the same shall be informed after confirmation of participation.</li>
                         <li>3. Presenting banners, posters, or other materials directly displaying the theme is prohibited.</li>
                         <li>4. Background music should be cross-checked with the event coordinator prior to the event</li>

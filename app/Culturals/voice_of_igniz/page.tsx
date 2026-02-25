@@ -58,7 +58,7 @@ export default function VoiceOfIgnizRegisterPage() {
                         <li>5. Either a backing track (karaoke) or one backing instrumentalist , preferably a guitarist or keyboardist will be permitted (Kindly note that only the performance of the vocalist will be judged in such a circumstance).</li>
                         <li>6. Judge&apos;s decision will be final .</li>
                         <li>7. In case of any conflict, the organizer&apos;s decision will be final.</li>
-                        <li>8. Send your background music to stage@igniz.live before the announced deadline to avoid any delay in the smooth functioning of the event.</li>
+                        <li>8. Send your background music to <strong className="text-[#FFD120]">culturalsigniz26@gmail.com</strong> before the announced deadline to avoid any delay in the smooth functioning of the event.</li>
                     </ul>
                 </section>
                 <section className="w-full mb-16">
