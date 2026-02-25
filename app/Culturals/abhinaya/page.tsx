@@ -49,7 +49,7 @@ export default function AbhinayaRegisterPage() {
                     <h2 className="text-3xl font-akira-expanded text-[#FFD120] mb-6 tracking-wide">RULES</h2>
                     <ul className="list-none space-y-2 text-sm md:text-base font-bold uppercase tracking-tight text-white/90">
                         <li>1. Time Limit: 10 minutes for performance and 2 minutes for setting of the stage.</li>
-                        <li>2. The audio should be mailed to stage@igniz.live in mp3 or mp4 format on or before 24/02/2026, 11:59pm.</li>
+                        <li>2. The audio should be mailed to <strong className="text-[#FFD120]">culturalsigniz26@gmail.com</strong> in mp3 or mp4 format on or before 24/02/2026, 11:59pm.</li>
                         <li>3. Only BHARATHANATYAM dance form is allowed.</li>
                         <li>4. The song can be of any language.</li>
                         <li>5. Participants are required to carry their College Identity card</li>
